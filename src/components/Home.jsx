@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbar from './Navbar';
+// import Navbar from './Navbar';
 // import bg1 from '../components/img/bg.png'
 import face1 from '../components/img/face1.png'
 import face2 from '../components/img/face2.png'
@@ -9,6 +9,7 @@ import {IoIosSearch} from "react-icons/io"
 import { FaLocationDot } from "react-icons/fa6";
 import { GoArrowDownRight } from "react-icons/go";
 import { IoIosStarHalf } from "react-icons/io";
+import omo from './img/bg.png'
 import happyPeople from "../components/img/happyPeople.png"
 
 const jobCategories = [
@@ -22,13 +23,16 @@ const jobCategories = [
     'Project Management',
   ];
 
+const bgImage = {
+    backgroundImage: `url(${omo})`,
+    backgroundPosition: 'center',
+    backgroundSize: 'cover'
+}
 
 const Home = () => {
   return (
-    <div className='overflow-hidden'>
-        <Navbar/>
-
-        <section className='flex flex-col gap-7 h-[400px]  items-center  md:flex md:h-[500px] md:items-center xl:flex xl:items-center xl:h-[800px] justify-center'>
+    <div className='overflow-hidden' >
+        <section style={bgImage} className='flex flex-col gap-5 h-[90vh] items-center md:flex md:h-[700px] md:items-center xl:flex xl:items-center xl:h-[900px] justify-center'>
             {/* <img src={bg1} alt="background1" className='h-[1000px] bg-cover bg-center lg:h-[100px]'/> */}
             <div className='flex md:flex xl:flex flex-col justify-center items-center gap-4'>
                 <span className='py-2 font-semibold w-[200px] px-1 text-[9px] md:text-[13px] md:w-[300px] md:py-2 xl:py-3 xl:px-6 rounded-full bg-[#D7E8FF] text-[#2C69BD] border-[#2C69BD] border-2 flex items-center gap-4 justify-center xl:w-[350px] xl:text-[15px]'>
@@ -63,7 +67,7 @@ const Home = () => {
                     Search
                 </button>
             </div>
-            <div className='flex items-center gap-1 md:gap-3 mt-5 md:mt-8 xl:mt-24'>
+            <div className='flex items-center gap-1 md:gap-3 md:mt-5 xl:mt-24'>
                 <div className="flex -space-x-5">
                     <img
                         src={face1}
@@ -97,7 +101,7 @@ const Home = () => {
             </div>
         </section>
 
-        <section className='flex flex-col gap-7 h-auto items-center md:mt-10 lg:mt-0  md:flex md:h-auto md:items-center xl:flex xl:items-center xl:h-auto xl:py-28 justify-center'>
+        <section className='flex flex-col gap-7 h-auto items-center lg:mt-0  md:flex md:h-auto md:items-center xl:flex xl:items-center xl:h-auto xl:py-28 justify-center'>
             <div className='flex flex-col items-center gap-1 md:gap-3'>
                 <h1 className='flex text-[15px] font-bold text-center md:text-[25px] md:items-center xl:text-[35px] xl:font-semibold'>Choose Your Desired Job Category</h1>
                 <div className="p-6 grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 md:gap-4 md:justify-center lg:grid-cols-4 lg:gap-9">
@@ -119,12 +123,12 @@ const Home = () => {
             </div>
         </section>
 
-        <section className='h-auto flex flex-col gap-7 py-9 md:mt-8 lg:mt-0 md:px-[70px] lg:px-[135px] md:flex md:h-auto xl:flex  xl:h-[800px] justify-center'>
-            <div className='flex flex-col gap-8 items-center md:flex md:flex-col lg:flex-row md:gap-10 lg:gap-0 lg:flex justify-between'>
+        <section className='h-auto flex flex-col gap-7 py-9 md:mt-8 lg:mt-0 md:px-[40px] lg:px-[135px] md:flex md:h-auto xl:flex  xl:h-[800px] justify-center'>
+            <div className='flex flex-col gap-8 items-center md:flex md:flex-col lg:flex-row md:gap-12 lg:gap-0 lg:flex justify-between'>
                 <div>
                     <img src={happyPeople} alt="" className='hidden md:hidden lg:flex lg:w-[550px]' />
                 </div>
-                <div className='flex flex-col gap-8 md:flex md:flex-col lg:flex lg:flex-col lg:items-end justify-center lg:gap-8'>
+                <div className='flex flex-col gap-8 md:gap-3 md:flex md:flex-col lg:items-end justify-center'>
                     <div className='items-center md:items-center flex flex-col lg:items-end gap-2'>
                         <h2 className='font-bold text-[20px] md:text-[25px]'>Why Choose Us?</h2>
                         <p className='flex text-[12px] w-[350px] text-center md:text-center md:text-[15px] lg:text-right lg:text-[13px] md:w-[550px] text-gray-500'>
@@ -133,7 +137,7 @@ const Home = () => {
                             we make finding your next career move easier than ever.
                         </p>
                     </div>
-                    <div className='md:grid grid-cols-1 gap-y-3 flex flex-col items-center md:grid-cols-2 md:gap-y-6 gap-x-6'>
+                    <div className='md:grid grid-cols-1 gap-y-3 flex flex-col items-center md:grid-cols-2 md:gap-y-6 gap-x-10'> 
                         <div className='items-center md:items-center md:px-10 lg:items-start shadow-md shadow-gray-300 px-6 py-8 bg-white flex flex-col gap-1 rounded-md justify-center'>
                             <h3 className='text-[#0149AD] font-bold'>Tailored Job Matches</h3>
                             <p className='w-[300px] text-center md:w-[250px] md:text-center lg:text-left text-[10px] lg:w-[300px] text-gray-700'>
@@ -171,13 +175,18 @@ const Home = () => {
         </section>
 
         <section className='flex flex-col gap-7 h-auto items-center md:mt-10 lg:mt-0  md:flex md:h-auto md:items-center xl:flex xl:items-center xl:h-auto xl:py-28 justify-center'>
-            <div>
-                <h1>Your Path To Financial Freedom In Just Few Steps!</h1>
+            <h1 className='font-semibold text-[30px] '>Your Path To Financial Freedom In Just Few Steps!</h1>
+            <div className='flex flex-col'>
+                <div>hello</div>
+                <div>hello</div>
+                <div>hello</div>
+                <div>hello</div>
+                <div>hello</div>
             </div>
+            <button className='xl:border-2 border-[#013A8A] transition-all duration-500 py-3 px-8 rounded-xl text-[#013A8A] font-semibold hover:text-white hover:border-2 hover:border-[#0149AD] hover:bg-[#0149AD] '>
+                Register Now
+            </button>
         </section>
-
-         
-
 
     </div>
   );

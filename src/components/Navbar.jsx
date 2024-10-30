@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import logo from '../components/img/logo.png'
 import {FaTimes, FaBars} from "react-icons/fa"
-// import {NavLink} from "react-router-dom"
+import {NavLink} from "react-router-dom"
 
 const Navbar = () => {
 const [show, setShow] = useState(false)
@@ -11,21 +11,61 @@ setShow(!show)
 }
 
   return (
-    <nav className='flex px-[20px] h-[80px] md:flex md:justify-between md:px-[50px] md:py-[60px] xl:flex justify-between xl:py-7 xl:px-[150px] xl:h-[130px] items-center bg-white'>
+    <nav className='flex px-[20px] fixed h-[80px] z-50  w-full md:flex md:justify-between md:px-[50px] md:py-[60px] xl:flex justify-between xl:py-7 xl:px-[150px] xl:h-[130px] items-center bg-white'>
         <div>
             <img src={logo} alt="logo" className='w-[120px] md:w-[150px] lg:w-[170px]'/> 
         </div>
-        <div className='hidden md:hidden xl:flex gap-[60px] font-medium text-[15px] text-[#2b2b2b]'>
-            <div>Home</div>
-            <div>Find Jobs</div>
-            <div>Blog</div>
-            <div>For Employers</div>
+        <div className='hidden md:hidden xl:flex gap-[60px] text-[15px]'>
+            <NavLink
+            to='/'
+            className={({isActive}) =>
+            isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
+            
+            >Home</NavLink>
+            <NavLink
+            to='/findjobs'
+            className={({isActive}) =>
+            isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
+            
+            >Find Jobs</NavLink>
+            <NavLink
+            to='/blog'
+            className={({isActive}) =>
+            isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
+            
+            >Blog</NavLink>
+            <NavLink
+            to='/foremployers'
+            className={({isActive}) =>
+            isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
+            
+            >For Employers</NavLink>
         </div>
-        {show ?   <div className=' md:hidden flex flex-col absolute top-0 gap-[60px] font-medium text-[15px] text-[#2b2b2b]'>
-            <div>Home</div>
-            <div>Find Jobs</div>
-            <div>Blog</div>
-            <div>For Employers</div>
+        {show ? <div className='lg:hidden flex flex-col absolute top-20 md:top-24 left-0 gap-[40px] py-7 md:py-10 px-7 md:px-14 bg-white w-full h-screen transition-all duration-500 font-medium text-[15px] text-[#2b2b2b] '>
+            <NavLink
+            to='/'
+            className={({isActive}) =>
+            isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
+            
+            >Home</NavLink>
+            <NavLink
+            to='/findjobs'
+            className={({isActive}) =>
+            isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
+            
+            >Find Jobs</NavLink>
+            <NavLink
+            to='/blog'
+            className={({isActive}) =>
+            isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
+            
+            >Blog</NavLink>
+            <NavLink
+            to='/foremployers'
+            className={({isActive}) =>
+            isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
+            
+            >For Employers</NavLink>
         </div> : ""}
         <div className="flex items-center relative gap-6 xl:hidden">
           <div onClick={HandleShow} className="flex items-center">
