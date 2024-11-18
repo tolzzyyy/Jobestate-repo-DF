@@ -8,9 +8,12 @@ import { BiSolidStar } from "react-icons/bi";
 import {IoIosSearch} from "react-icons/io"
 import { FaLocationDot } from "react-icons/fa6";
 import { GoArrowDownRight } from "react-icons/go";
-import { IoIosStarHalf } from "react-icons/io";
+import { IoIosStarHalf, IoIosPaperPlane } from "react-icons/io";
+import { IoPerson, IoCloudUploadSharp } from "react-icons/io5";
 import omo from './img/bg.png'
 import happyPeople from "../components/img/happyPeople.png"
+import manwithlaptop from "../components/img/manwithlaptop.png"
+import Footer from './Footer';
 
 const jobCategories = [
     'Engineering',
@@ -20,7 +23,7 @@ const jobCategories = [
     'Product Management',
     'Human Resources',
     'IT & Software',
-    'Project Management',
+    'And Many More...',
   ];
 
 const bgImage = {
@@ -103,16 +106,16 @@ const Home = () => {
 
         <section className='flex flex-col gap-7 h-auto items-center lg:mt-0  md:flex md:h-auto md:items-center xl:flex xl:items-center xl:h-auto xl:py-28 justify-center'>
             <div className='flex flex-col items-center gap-1 md:gap-3'>
-                <h1 className='flex text-[15px] font-bold text-center md:text-[25px] md:items-center xl:text-[35px] xl:font-semibold'>Choose Your Desired Job Category</h1>
+                <h1 className='flex text-[15px] font-bold text-center md:text-[25px] md:items-center xl:text-[35px] xl:font-semibold'>Job Categories</h1>
                 <div className="p-6 grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 md:gap-4 md:justify-center lg:grid-cols-4 lg:gap-9">
                     {jobCategories.map((category, index) => (
                     <div
                         key={index}
-                        className="px-16 bg-blue-50 rounded-lg shadow-sm py-7 md:px-6 lg:px-8 font-medium text-[20px] flex gap-3 items-center justify-center text-center hover:bg-[#D7E8FF] hover:border-2 hover:border-[#013A8A] transition duration-200"
+                        className="px-16 bg-blue-50 rounded-lg shadow-sm py-7 lg:py-12 md:px-6 lg:px-8 font-medium text-[20px] flex gap-3 items-center justify-center text-center hover:bg-[#D7E8FF] border-2 border-[#013A8A] transition duration-200"
                     >
                         <div className='flex flex-col items-center'>
                             {category}
-                            <p className='text-[10px] md:text-[12px] lg:text-[8px] text-gray-500'>View All Available Job Openings</p>
+                            {/* <p className='text-[10px] md:text-[12px] lg:text-[8px] text-gray-500'>View All Available Job Openings</p> */}
                         </div>
                     </div>
                     ))}
@@ -174,20 +177,84 @@ const Home = () => {
             </div>
         </section>
 
-        <section className='flex flex-col gap-7 h-auto items-center md:mt-10 lg:mt-0  md:flex md:h-auto md:items-center xl:flex xl:items-center xl:h-auto xl:py-28 justify-center'>
-            <h1 className='font-semibold text-[30px] '>Your Path To Financial Freedom In Just Few Steps!</h1>
-            <div className='flex flex-col'>
-                <div>hello</div>
-                <div>hello</div>
-                <div>hello</div>
-                <div>hello</div>
-                <div>hello</div>
+        <section style={bgImage} className='flex flex-col gap-8 md:gap-12 lg:gap-14 h-auto items-center py-16 lg:py-0 lg:mt-0  md:flex md:h-auto md:items-center xl:flex xl:items-center xl:h-auto xl:py-32 justify-center'>
+            <h1 className='font-bold text-[13px] md:text-[20px] lg:text-[30px] '>Your Path To Financial Freedom In Just Few Steps!</h1>
+            <div className="flex flex-col gap-7 md:gap-0 md:flex md:flex-row items-center justify-center md:space-x-2 lg:space-x-6">
+                {/* Step 1 */}
+                <div className="flex flex-col items-center text-center gap-2 md:gap-3">
+                    <div className="flex items-center justify-center w-20 md:w-24 h-20 md:h-24 rounded-full border border-dashed border-[#013A8A]">
+                    {/* <UserIcon className="w-8 h-8 text-[#013A8A]" /> */}
+                    <IoPerson className="w-8 h-8 text-[#013A8A]" />
+                    </div>
+                    <h1 className="text-sm md:text-base font-semibold text-[#2b2b2b]">Register Your Account</h1>
+                </div>
+
+                {/* Arrow */}
+                <div className="flex items-center rotate-90 md:rotate-0">
+                    <div className="w-1 h-1 md:w-2 md:h-2 border border-black bg-black rounded-full"></div>
+                    <div className="border border-black flex-grow w-4 md:w-20 lg:w-48"></div>
+                    <div className="w-1 h-1 md:w-2 md:h-2 border border-black bg-black rounded-full"></div>
+                </div>
+
+                {/* Step 2 */}
+                <div className="flex flex-col items-center text-center gap-2 md:gap-3">
+                    <div className="flex items-center justify-center w-20 md:w-24 h-20 md:h-24 rounded-full border border-dashed border-[#013A8A]">
+                    {/* <UserIcon className="w-8 h-8 text-[#013A8A]" /> */}
+                    <IoCloudUploadSharp className="w-8 h-8 text-[#013A8A]" />
+                    </div>
+                    <h1 className="text-sm md:text-base font-semibold text-[#2b2b2b]">Upload Your Resume</h1>
+                </div>
+
+                {/* Arrow */}
+                <div className="flex items-center rotate-90 md:rotate-0">
+                    <div className="w-1 h-1 md:w-2 md:h-2 border border-black bg-black rounded-full"></div>
+                    <div className="border border-black flex-grow w-4 md:w-20 lg:w-48"></div>
+                    <div className="w-1 h-1 md:w-2 md:h-2 border border-black bg-black rounded-full"></div>
+                </div>
+
+                {/* Step 3 */}
+                <div className="flex flex-col items-center text-center gap-2 md:gap-3">
+                    <div className="flex items-center justify-center w-20 md:w-24 h-20 md:h-24 rounded-full border border-dashed border-[#013A8A]">
+                    {/* <UserIcon className="w-8 h-8 text-[#013A8A]" /> */}
+                    <IoIosPaperPlane className="w-8 h-8 text-[#013A8A]" />
+                    </div>
+                    <h1 className="text-sm md:text-base font-semibold text-[#2b2b2b]">Find Your Dream Job</h1>
+                </div>
             </div>
-            <button className='xl:border-2 border-[#013A8A] transition-all duration-500 py-3 px-8 rounded-xl text-[#013A8A] font-semibold hover:text-white hover:border-2 hover:border-[#0149AD] hover:bg-[#0149AD] '>
+            <button className='text-white bg-[#0149AD] lg:bg-white lg:border-2 border-[#013A8A] transition-all duration-500 py-5 lg:py-3 px-8 rounded-xl lg:text-[#013A8A] font-semibold hover:text-white lg:hover:border-2 hover:border-[#0149AD] hover:bg-[#0149AD] '>
                 Register Now
             </button>
         </section>
 
+        <section className='h-auto flex flex-col gap-7 py-9 md:mt-8 lg:mt-0 md:px-[40px] lg:px-[135px] md:flex md:h-auto xl:flex  xl:h-[800px] justify-center'>
+            <div className='flex flex-col gap-5 items-center md:flex md:flex-col lg:flex-row md:gap-5 lg:gap-0 lg:flex justify-between'>
+                <div className='flex flex-col gap-8 md:gap-3 md:flex md:flex-col lg:items-start justify-center lg:w-1/2'>
+                    <div className='items-center md:items-center flex flex-col lg:items-start gap-4'>
+                        <div className='flex flex-col items-center lg:items-start'>
+                            <h5 className='text-[14px] text-[#013A8A]'>Testimonials</h5>
+                            <h2 className='font-bold text-[20px] md:text-[25px]'>What Our Clients Are Saying</h2>
+                        </div>
+                        <p className='flex leading-7 text-[12px] w-[350px] text-center md:text-center md:text-[15px] lg:text-left lg:text-[13px] md:w-[700px] lg:w-[600px] text-gray-700'>
+                            "I couldn't believe how efficient and user-friendly this platform is. 
+                            From the moment I signed up, the job recommendations were perfectly tailored to my experience and career goals. 
+                            The one-click apply feature made it so simple to send out applications without the usual hassle, saving me hours of time. 
+                            What really impressed me was the real-time alerts—I never missed a new job posting, and within just a week, 
+                            I had several interviews lined up. The employers on this site are top-notch, and the verification process gave me peace of mind. 
+                            If you're looking for a job search platform that genuinely works for you, this is it!"
+                        </p>
+                        <h2 className='font-medium'>Samuel Johnson</h2>
+                    </div>
+                </div>
+                <div className=' lg:w-1/2'>
+                    <img src={manwithlaptop} alt="" className='hidden md:hidden lg:flex lg:w-full lg:h-[650px]' />
+                </div>
+                <div className='lg:hidden'>
+                    <img src={manwithlaptop} alt="" className='h-[350px] flex items-center justify-center md:w-full md:h-[800px] lg:hidden lg:w-[550px]' />
+                </div>
+            </div>
+        </section>
+
+        <Footer/>
     </div>
   );
 };

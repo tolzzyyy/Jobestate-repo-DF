@@ -11,7 +11,7 @@ setShow(!show)
 }
 
   return (
-    <nav className='flex px-[20px] fixed h-[80px] z-50  w-full md:flex md:justify-between md:px-[50px] md:py-[60px] xl:flex justify-between xl:py-7 xl:px-[150px] xl:h-[130px] items-center bg-white'>
+    <nav className='flex px-[20px] fixed h-[80px] z-50  w-full md:flex md:justify-between md:px-[50px] md:py-[60px] xl:flex justify-between xl:py-7 xl:px-[135px] xl:h-[130px] items-center bg-white'>
         <div>
             <img src={logo} alt="logo" className='w-[120px] md:w-[150px] lg:w-[170px]'/> 
         </div>
@@ -41,7 +41,7 @@ setShow(!show)
             
             >For Employers</NavLink>
         </div>
-        {show ? <div className='lg:hidden flex flex-col absolute top-20 md:top-24 left-0 gap-[40px] py-7 md:py-10 px-7 md:px-14 bg-white w-full h-screen transition-all duration-500 font-medium text-[15px] text-[#2b2b2b] '>
+        {show ? <div className='lg:hidden flex flex-col absolute top-20 md:top-24 left-0 gap-[40px] py-7 md:py-10 px-7 md:px-14 bg-white w-full h-screen transition-all duration-500 font-medium text-[15px] md:text-[20px] text-[#2b2b2b] '>
             <NavLink
             to='/'
             className={({isActive}) =>
