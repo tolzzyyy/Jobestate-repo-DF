@@ -8,6 +8,8 @@ import google from "../Assets/Rectangle 6.png";
 import { FaTwitter } from "react-icons/fa";
 import { BiPhone } from "react-icons/bi";
 import phone from "../Assets/smartphone-device.png";
+
+
 const SignIn = () => {
   const bgimage = {
     backgroundImage: `url(${bg})`,
