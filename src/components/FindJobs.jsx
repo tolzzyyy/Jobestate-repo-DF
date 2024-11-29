@@ -132,11 +132,11 @@ const FindJobs = () => {
 
           <h1 className='font-semibold text-[20px] md:text-[30px]'>Featured Jobs</h1>
 
-          <div className="grid items-center gap-y-6 lg:items-start md:grid-cols-2 lg:grid-cols-4 md:gap-x-20 md:gap-y-10  lg:gap-x-8 lg:gap-y-6">
+          <div className="grid items-center w-full justify-center  mx-auto gap-y-6 lg:items-start md:grid-cols-2 xl:grid-cols-3 md:gap-x-20 md:gap-y-10  lg: lg:gap-y-6">
             {jobCards.map((job) => (
               <div
                 key={job.id}
-                className={`pt-6 pb-9 px-5 flex flex-col gap-6 border border-gray-800 rounded-[20px] w-[320px] shadow-sm ${
+                className={`pt-6 pb-9 px-5 flex flex-col gap-6 border border-gray-800 w-[300px]  rounded-[20px] md:w-full shadow-sm ${
                   job.isActive ? 'bg-green-100' : 'bg-white'
                 }`}
               >
