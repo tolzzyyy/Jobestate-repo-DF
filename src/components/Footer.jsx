@@ -9,7 +9,7 @@ const Footer = () => {
     <footer className='flex flex-col gap-10 px-[20px] py-5 w-full md:flex md:justify-between md:px-[50px] md:py-[60px] xl:flex justify-between xl:py-16 xl:px-[135px] xl:h-full items-center bg-white'>
         <div className='flex flex-col gap-5 md:gap-0 md:flex-row justify-between w-full items-center'>
             <div className='flex flex-col items-center md:items-start'>
-                <h2 className='font-bold md:text-[20px] lg:text-[23px]'>Join Our Newsletter</h2>
+                <h2 className='font-bold text-[16px] md:text-[20px] lg:text-[23px]'>Join Our Newsletter</h2>
                 <p className='md:w-[270px] lg:w-[300px] text-gray-500 text-sm'>Get all the latest blog news delivered to your inbox.</p>
             </div>
             <div className='flex flex-col w-full md:w-auto md:flex-row gap-2'>
