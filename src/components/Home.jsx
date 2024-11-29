@@ -37,7 +37,7 @@ const Home = () => {
     <div className="overflow-hidden ">
       <section
         style={bgImage}
-        className="flex flex-col gap-5  h-[90vh] items-center md:flex md:h-[700px] md:items-center xl:flex xl:items-center xl:h-[900px] px-[40px] justify-center"
+        className="flex flex-col gap-5  h-[80vh] items-center md:flex md:h-[700px] mx-auto md:items-center xl:flex xl:items-center xl:h-[900px] px-[20px] justify-center"
       >
         {/* <img src={bg1} alt="background1" className='h-[1000px] bg-cover bg-center lg:h-[100px]'/> */}
         <div className="flex md:flex xl:flex flex-col justify-center items-center gap-4">
@@ -58,7 +58,7 @@ const Home = () => {
             </p>
           </div>
         </div>
-        <div className="flex py-2 px-3 border-2 border-gray-100 w-[350px] md:flex md:py-5 md:px-7 md:w-full xl:flex items-center justify-between bg-white xl:shadow-xl shadow-[#a8a8a8] rounded-full xl:w-full xl:py-6 xl:px-10 max-w-3xl mx-auto">
+        <div className="flex py-2 px-3 border-2 border-gray-100   md:flex md:py-5 md:px-7 md:w-full xl:flex items-center justify-between bg-white xl:shadow-xl shadow-[#a8a8a8] rounded-full xl:max-w-3xl xl:py-6 xl:px-10 w-full mx-auto">
           <div className="flex md:flex items-center space-x-4 flex-1 px-1">
             <IoIosSearch size={30} />
             <input
