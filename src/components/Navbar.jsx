@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import logo from '../components/img/logo.png'
 import {FaTimes, FaBars} from "react-icons/fa"
-import {NavLink} from "react-router-dom"
+import {Link, NavLink} from "react-router-dom"
 
 const Navbar = () => {
 const [show, setShow] = useState(false)
@@ -72,13 +72,13 @@ setShow(!show)
             {show ? <FaTimes size={26} className="z-50 left-0 md:left-[70px]" /> : <FaBars size={26} />}
           </div>
         </div>
-        <div className='hidden md:hidden xl:flex gap-[40px] font-semibold'>
-            <button>
+        <div className='hidden md:hidden xl:flex gap-[40px] items-center font-semibold'>
+            <Link to='/signin'>
                 Login
-            </button>
-            <button className='xl: border-2 border-[#013A8A] transition-all duration-500 py-3 px-8 rounded-xl text-[#013A8A] font-semibold hover:text-white hover:border-2 hover:border-[#0149AD] hover:bg-[#0149AD] '>
+            </Link>
+            <Link to='/signup' className='xl: border-2 border-[#013A8A] transition-all duration-500 py-3 px-8 rounded-xl text-[#013A8A] font-semibold hover:text-white hover:border-2 hover:border-[#0149AD] hover:bg-[#0149AD] '>
                 Register Now
-            </button>
+            </Link>
         </div>
     </nav>
   )
