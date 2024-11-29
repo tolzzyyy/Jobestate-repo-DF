@@ -66,6 +66,18 @@ setShow(!show)
             isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
             
             >For Employers</NavLink>
+            <NavLink
+            to='/signin'
+            className={({isActive}) =>
+            isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
+            
+            >Login</NavLink>
+            <NavLink
+            to='/signup'
+            className={({isActive}) =>
+            isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
+            
+            >Sign Up</NavLink>
         </div> : ""}
         <div className="flex items-center relative gap-6 xl:hidden">
           <div onClick={HandleShow} className="flex items-center">

@@ -22,9 +22,9 @@ const SignUp = () => {
         style={bgimage}
       >
         <div className=" flex gap-4 it h-full flex-col">
-          <div className=" w-[150px] md:w-[200px]">
-            <img src={logo} alt="" />
-          </div>
+        <Link to='/' className=" w-[150px] md:w-[200px]">
+              <img src={logo} alt="" />
+            </Link>
           <div className="mx-auto  mt-5 md:mt-0 flex flex-col  overflow-auto scrollbar-hide w-full     md:w-[400px] h-full md:h-screen">
             <div className=" text-left w-full md:text-center">
               <h1 className="font-sans text-[40px] font-[600]">Create Account</h1>
@@ -101,6 +101,7 @@ const SignUp = () => {
               <Link className="text-[#667185] text-center text-[14px] font-[400]">
                 Already have an account?{" "}
                 <span className="font-[500] text-[#0149AD]">
+ 
                     <Link to='/signup'>
                  Sign in
                  </Link>
