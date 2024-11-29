@@ -101,7 +101,7 @@ const SignUp = () => {
               <Link className="text-[#667185] text-center text-[14px] font-[400]">
                 Already have an account?{" "}
                 <span className="font-[500] text-[#0149AD]">
-                    <Link to='/'>
+                    <Link to='/signup'>
                  Sign in
                  </Link>
                 </span>

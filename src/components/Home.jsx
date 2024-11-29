@@ -139,7 +139,7 @@ const Home = () => {
       </section>
 
       <section className="h-auto flex flex-col px-6 gap-7 py-9 md:mt-8 lg:mt-0 md:px-[40px] xl:px-[135px] w-full md:flex md:h-full xl:flex xl:h-[800px] justify-center">
-        <div className="flex flex-col gap-8 lg:flex-row md:gap-12 w-full lg:flex items-center">
+        <div className="flex flex-col gap-8 lg:flex-row md:gap-12 w-full justify-between lg:flex items-center">
           <div className="w-full lg:w-[550px]  ">
             <img
               src={happyPeople}

@@ -13,6 +13,7 @@ import { IoIosSearch, IoIosSettings } from 'react-icons/io';
 import { CiBookmark } from 'react-icons/ci';
 import { IoFilterCircleOutline } from "react-icons/io5";
 import { FaArrowLeftLong } from "react-icons/fa6";
+import { GoShareAndroid } from "react-icons/go";
 
 const jobCards = [
     {
@@ -196,14 +197,46 @@ const UserJobDetails = () => {
                   <div
                   key={job.id}
                   className='flex justify-between gap-2 w-full'>
-                    <div className='flex flex-col'>
+                    <div className='flex flex-col gap-4'>
                       <div className='flex flex-col gap-1'>
                         <span className='text-xs font-normal'>{job.date}</span>
-                        <h2 className='text-4xl font-semibold'>{job.title}</h2>
+                        <h2 className='text-3xl font-semibold'>{job.title}</h2>
                       </div>
-                      <div></div>
+                      <div className='flex flex-col gap-2'>
+                        <div className='flex items-center gap-2'>
+                          <span className='text-lg font-medium'>{job.company}</span>
+                          <div className='text-5xl flex items-center w-1 h-1 bg-black rounded-full'></div>
+                          <span className='text-md font-normal'>{job.location}</span>
+                        </div>
+                        <div className="flex gap-2">
+                          {job.jobTypes.map((type, index) => (
+                          <span
+                          key={index}
+                          className="px-3 py-2 flex items-center text-xs border-2 border-gray-400 rounded-lg text-gray-900"
+                          >
+                          {type}
+                          </span>
+                          ))}
+                        </div>
+                      </div>
                     </div>
-                    <div>hello</div>
+                    <div className='flex flex-col gap-4 items-end'>
+                      <div className='flex flex-col gap-1 items-end'>
+                        <span className='text-xs font-normal'>{job.currencyType}</span>
+                        <h2 className='text-3xl font-semibold'>{job.salary}</h2>
+                      </div>
+                      <div className='flex items-center gap-2 mt-5'>
+                        <button className='hidden md:flex border-2 border-[#013A8A] transition-all duration-500 py-3 px-8 rounded-xl text-[#013A8A] font-semibold hover:text-white hover:border-2 hover:border-[#0149AD] hover:bg-[#0149AD] '>
+                          Search
+                        </button>
+                        <button className='flex items-center px-3 py-3 border-2 border-gray-400 rounded-lg'>
+                          <CiBookmark size={22}/>
+                        </button>
+                        <button className='flex items-center px-3 py-3 border-2 border-gray-400 rounded-lg'>
+                          <GoShareAndroid size={22}/>
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 ))}
 
