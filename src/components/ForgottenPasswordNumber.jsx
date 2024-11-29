@@ -51,7 +51,7 @@ const ForgottenPasswordNumber = () => {
               <img className="" src={email} alt="" /> Use Email Instead
             </Link>
 
-            <Link to='/' className="text-[#0149AD] text-center">
+            <Link to='/signin' className="text-[#0149AD] text-center">
               Back to sign in
             </Link>
           </div>
