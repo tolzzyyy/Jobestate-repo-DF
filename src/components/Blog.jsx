@@ -75,7 +75,7 @@ const blogPosts = [
 const Blog = () => {
   return (
     <div style={bgImage} className='mt-[70px] md:mt-[100px] lg:mt-[130px] overflow-hidden'>
-        <section className='h-auto flex flex-col gap-7 py-12 md:px-[50px] md:flex md:h-[700px] items-center lg:items-start lg:px-[135px] lg:py-16 lg:flex lg:h-screen'>
+        <section className='h-auto flex flex-col gap-7 py-10 md:px-[50px] md:flex md:h-[700px] items-center lg:items-start lg:px-[135px] lg:py-16 lg:flex lg:h-screen'>
           <div className='flex flex-col gap-7 md:gap-0 md:flex-row w-full justify-between items-center'>
             <div className='flex flex-col gap-1 items-center md:items-start'>
               <span className='text-[#013A8A] font-semibold'>Trending</span>
@@ -91,20 +91,20 @@ const Blog = () => {
           </div>
           <div style={bgImageBlog} className='w-full h-full rounded-xl'></div>
         </section>
-        <section className='h-auto flex flex-col gap-7 py-12 md:px-[50px] md:flex md:h-[700px] items-center lg:items-start lg:px-[135px] lg:py-14 lg:flex lg:h-full'>
+        <section className='h-auto flex flex-col gap-7 py-10 md:px-[50px] md:flex md:h-full items-center lg:items-start lg:px-[135px] lg:py-14 lg:flex lg:h-full'>
           <div className='flex flex-col gap-7 md:gap-0 md:flex-row w-full justify-between items-center'>
             <div className='flex flex-col gap-1 items-center md:items-start'>
-              <h1 className='font-semibold text-[13px] md:text-[22px] lg:text-[30px]'>Tech Trends</h1>
+              <h1 className='font-semibold text-[17px] md:text-[22px] lg:text-[30px]'>Tech Trends</h1>
             </div>
-            <button className='w-[70px] h-[70px] rounded-full border border-black flex items-center justify-center hover:w-[80px] hover:h-[80px] transition-all duration-500'>
+            <button className='hidden md:flex w-[70px] h-[70px] rounded-full border border-black items-center justify-center hover:w-[80px] hover:h-[80px] transition-all duration-500'>
               <MdOutlineArrowOutward size={24}/>
             </button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-7 md:p-0 ">
             {blogPosts.map((post) => (
               <div key={post.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
                 <img src={post.image} alt={post.title} className="w-full h-56 object-cover" />
-                <div className="p-6 flex flex-col ">
+                <div className="p-6 flex flex-col gap-1">
                   <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
                   <p className="text-gray-600 mb-4">{post.description}</p>
                   <div className="flex items-center">
@@ -119,20 +119,20 @@ const Blog = () => {
             ))}
           </div>
         </section>
-        <section className='h-auto flex flex-col gap-7 py-12 md:px-[50px] md:flex md:h-[700px] items-center lg:items-start lg:px-[135px] lg:py-14 lg:flex lg:h-full'>
+        <section className='h-auto flex flex-col gap-7 py-10 md:px-[50px] md:flex md:h-full items-center lg:items-start lg:px-[135px] lg:py-14 lg:flex lg:h-full'>
           <div className='flex flex-col gap-7 md:gap-0 md:flex-row w-full justify-between items-center'>
             <div className='flex flex-col gap-1 items-center md:items-start'>
-              <h1 className='font-semibold text-[13px] md:text-[22px] lg:text-[30px]'>Tech Trends</h1>
+              <h1 className='font-semibold text-[17px] md:text-[22px] lg:text-[30px]'>Tech Trends</h1>
             </div>
-            <button className='w-[70px] h-[70px] rounded-full border border-black flex items-center justify-center hover:w-[80px] hover:h-[80px] transition-all duration-500'>
+            <button className='hidden md:flex w-[70px] h-[70px] rounded-full border border-black items-center justify-center hover:w-[80px] hover:h-[80px] transition-all duration-500'>
               <MdOutlineArrowOutward size={24}/>
             </button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-7 md:p-0 ">
             {blogPosts.map((post) => (
               <div key={post.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
                 <img src={post.image} alt={post.title} className="w-full h-56 object-cover" />
-                <div className="p-6 flex flex-col ">
+                <div className="p-6 flex flex-col gap-1">
                   <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
                   <p className="text-gray-600 mb-4">{post.description}</p>
                   <div className="flex items-center">
