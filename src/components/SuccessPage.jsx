@@ -21,7 +21,7 @@ const SuccessPage = () => {
         </div>
         <h1 className='text-[30px] font-[600]'>Successful!</h1>
         <p className='text-[#6B6B6B] text-center font-[600]'>Your password has been successfully changed</p>
-        <Link className="text-center text-[#0149AD]" to='/'>
+        <Link className="text-center text-[#0149AD]" to='/signin'>
          Back to sign in
            </Link>
 
