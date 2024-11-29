@@ -15,42 +15,33 @@ import UserNotification from './components/UserNotification';
 import UserProfile from './components/UserProfile';
 import UserSettings from './components/UserSettings';
 import UserJobDetails from './components/UserJobDetails';
+import SignUp from './components/SignUp';
+import SignIn from './components/SignIn'; // Example for Sign In
 // import Footer from './components/Footer'
 
-
 const App = () => {
-
   const location = useLocation();
 
   const renderNavbar = () => {
-    if (location.pathname === '/userdashboard') {
-      return <UserNavbar />;
+    const noNavbarRoutes = ['/signup', '/signin', '/register']; // Add all routes where navbar should be hidden
+    const userNavbarRoutes = [
+      '/userdashboard',
+      '/userjobs',
+      '/userjobs/details',
+      '/userapplicationstatus',
+      '/usersavedjobs',
+      '/userblog',
+      '/usernotification',
+      '/userprofile',
+      '/usersettings',
+    ];
+
+    if (noNavbarRoutes.includes(location.pathname)) {
+      return null; // No navbar for these routes
+    } else if (userNavbarRoutes.includes(location.pathname)) {
+      return <UserNavbar />; // Show UserNavbar for specific routes
     }
-    else if (location.pathname === '/userjobs') {
-      return <UserNavbar />;
-    }
-    else if (location.pathname === '/userjobs/details') {
-      return <UserNavbar />;
-    }
-    else if (location.pathname === '/userapplicationstatus') {
-      return <UserNavbar />;
-    }
-    else if (location.pathname === '/usersavedjobs') {
-      return <UserNavbar />;
-    }
-    else if (location.pathname === '/userblog') {
-      return <UserNavbar />;
-    }
-    else if (location.pathname === '/usernotification') {
-      return <UserNavbar />;
-    }
-    else if (location.pathname === '/userprofile') {
-      return <UserNavbar />;
-    }
-    else if (location.pathname === '/usersettings') {
-      return <UserNavbar />;
-    }
-    return <Navbar />;
+    return <Navbar />; // Default Navbar for other routes
   };
 
   return (
@@ -58,28 +49,29 @@ const App = () => {
       <div className='flex'>
         {renderNavbar()}
         <Routes>
-          <Route path='/userdashboard' element={<UserDashboard/>}/> 
-          <Route path='/userjobs' element={<UserJobs/>}/> 
-          <Route path='/userjobs/details' element={<UserJobDetails/>}/> 
-          <Route path='/userapplicationstatus' element={<UserApplicationStatus/>}/>
-          <Route path='/usersavedjobs' element={<UserSavedJobs/>}/>
-          <Route path='/userblog' element={<UserBlog/>}/>
-          <Route path='/usernotification' element={<UserNotification/>}/>
-          <Route path='/userprofile' element={<UserProfile/>}/>
-          <Route path='/usersettings' element={<UserSettings/>}/>
+          {/* User-specific routes */}
+          <Route path='/userdashboard' element={<UserDashboard />} />
+          <Route path='/userjobs' element={<UserJobs />} />
+          <Route path='/userjobs/details' element={<UserJobDetails />} />
+          <Route path='/userapplicationstatus' element={<UserApplicationStatus />} />
+          <Route path='/usersavedjobs' element={<UserSavedJobs />} />
+          <Route path='/userblog' element={<UserBlog />} />
+          <Route path='/usernotification' element={<UserNotification />} />
+          <Route path='/userprofile' element={<UserProfile />} />
+          <Route path='/usersettings' element={<UserSettings />} />
         </Routes>
       </div>
-      
 
+      {/* Other routes */}
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/findjobs' element={<FindJobs/>}/> 
-        <Route path='/blog' element={<Blog/>}/> 
-     </Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/findjobs' element={<FindJobs />} />
+        <Route path='/blog' element={<Blog />} />
+        <Route path='/signup' element={<SignUp />} />
+        <Route path='/signin' element={<SignIn />} /> {/* Example for Sign In */}
+      </Routes>
     </div>
-  )
-}
+  );
+};
 
-
-
-export default App
+export default App;

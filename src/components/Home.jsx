@@ -126,8 +126,8 @@ const Home = () => {
             </div>
         </section>
 
-        <section className='h-auto flex flex-col gap-7 py-9 md:mt-8 lg:mt-0 md:px-[40px] lg:px-[135px] md:flex md:h-auto xl:flex  xl:h-[800px] justify-center'>
-            <div className='flex flex-col gap-8 items-center md:flex md:flex-col lg:flex-row md:gap-12 lg:gap-0 lg:flex justify-between'>
+        <section className='h-auto flex flex-col gap-7 py-9 md:mt-8 lg:mt-0 md:px-[40px] lg:px-[135px] md:flex md:h-auto xl:flex   xl:h-[800px] justify-center'>
+            <div className='flex flex-col gap-8 items-center  lg:flex-row md:gap-12  lg:flex '>
                 <div>
                     <img src={happyPeople} alt="" className='hidden md:hidden lg:flex lg:w-[550px]' />
                 </div>
@@ -143,28 +143,28 @@ const Home = () => {
                     <div className='md:grid grid-cols-1 gap-y-3 flex flex-col items-center md:grid-cols-2 md:gap-y-6 gap-x-10'> 
                         <div className='items-center md:items-center md:px-10 lg:items-start shadow-md shadow-gray-300 px-6 py-8 bg-white flex flex-col gap-1 rounded-md justify-center'>
                             <h3 className='text-[#0149AD] font-bold'>Tailored Job Matches</h3>
-                            <p className='w-[300px] text-center md:w-[250px] md:text-center lg:text-left text-[10px] lg:w-[300px] text-gray-700'>
+                            <p className='max-w-[300px] text-center md:w-[250px] md:text-center lg:text-left text-[10px] lg:max-w-[300px] text-gray-700'>
                                 We connect users with jobs that align perfectly with their skills, 
                                 location, and career goals using advanced filtering and recommendation algorithms.
                             </p>
                         </div>
                         <div className='items-center md:items-center md:px-10 lg:items-start shadow-md shadow-gray-300 px-6 py-8 bg-white flex flex-col gap-1 rounded-md justify-center'>
                             <h3 className='text-[#0149AD] font-bold'>Verified Employers</h3>
-                            <p className='w-[300px] text-center md:w-[250px] md:text-center lg:text-left text-[10px] lg:w-[300px] text-gray-700'>
+                            <p className='w-[300px] text-center md:w-[250px] md:text-center lg:text-left text-[10px] lg:max-w-[300px] text-gray-700'>
                                 All employers on our platform are thoroughly vetted, 
                                 ensuring that job seekers only connect with trusted, high-quality companies.
                             </p>
                         </div>
                         <div className='items-center md:items-center md:px-10 lg:items-start shadow-md shadow-gray-300 px-6 py-8 bg-white flex flex-col gap-1 rounded-md justify-center'>
                             <h3 className='text-[#0149AD] font-bold'>One-Click Applications</h3>
-                            <p className='w-[300px] text-center md:w-[250px] md:text-center lg:text-left text-[10px] lg:w-[300px] text-gray-700'>
+                            <p className='w-[300px] text-center md:w-[250px] md:text-center lg:text-left text-[10px] lg:max-w-[300px] text-gray-700'>
                                 Our platform allows users to apply to jobs quickly and efficiently, 
                                 reducing the hassle of filling out multiple forms.
                             </p>
                         </div>
                         <div className='items-center md:items-center md:px-10 lg:items-start shadow-md shadow-gray-300 px-6 py-8 bg-white flex flex-col gap-1 rounded-md justify-center'>
                             <h3 className='text-[#0149AD] font-bold'>Real-Time Alerts</h3>
-                            <p className='w-[300px] text-center md:w-[250px] md:text-center lg:text-left text-[10px] lg:w-[300px] text-gray-700'>
+                            <p className='w-[300px] text-center md:w-[250px] md:text-center lg:text-left text-[10px] lg:max-w-[300px] text-gray-700'>
                                 Job seekers receive instant notifications when new positions match their profiles, 
                                 ensuring they never miss an opportunity.
                             </p>
