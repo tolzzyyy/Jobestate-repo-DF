@@ -75,9 +75,9 @@ const SignUp = () => {
                 </div>
               </div>
               </div>
-              <button className="w-full bg-[#0149AD] text-white rounded-[6px] h-[50px]">
+              <Link to='/register/personal' className="w-full bg-[#0149AD] flex items-center justify-center text-white rounded-[6px] h-[50px]">
                 Sign Up
-              </button>
+              </Link>
               <div className=" flex items-center justify-center w-full">
                 {" "}
                 <div className="border-t-[1px] w-full flex border-[#E4E8EC]"></div>
