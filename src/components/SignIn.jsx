@@ -27,7 +27,7 @@ const SignIn = () => {
             <Link to='/' className=" w-[150px] md:w-[200px]">
               <img src={logo} alt="" />
             </Link>
-            <div className="mx-auto py-1 mt-5 md:mt-0 flex flex-col  w-full overflow-auto scrollbar-hide justify-center      md:w-[400px] h-full md:h-screen">
+            <div className="mx-auto py-1 mt-5 md:mt-0 flex flex-col  w-full overflow-auto scrollbar-hide      md:w-[400px] h-full md:h-screen">
               <div className= "text-left md:text-center">
                 <h1 className="font-sans text-[40px] font-[600]">Log In</h1>
                 <p className="text-[#6B6B6B] font-[600]">
