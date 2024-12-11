@@ -35,7 +35,7 @@ setShow(!show)
             
             >Blog</NavLink>
             <NavLink
-            to='/foremployers'
+            to='/Employersignup'
             className={({isActive}) =>
             isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
             
@@ -61,7 +61,7 @@ setShow(!show)
             
             >Blog</NavLink>
             <NavLink
-            to='/foremployers'
+            to='/Employersignup'
             className={({isActive}) =>
             isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
             
