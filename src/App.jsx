@@ -28,9 +28,6 @@ import Experience from "./components/Experience";
 import Education from "./components/Education";
 import Resume from "./components/Resume";
 import RegisteredSuccess from "./components/RegisteredSuccess";
-import AdminNavbar from "./components/AdminNavbar";
-import AdminDashboard from "./components/AdminDashboard";
-
 // import Footer from './components/Footer'
 
 const App = () => {
@@ -40,6 +37,8 @@ const App = () => {
     const noNavbarRoutes = [
       "/signup",
       "/signin",
+      "/Employersignup",
+      "/Employersignin",
       "/register",
       "/forgotpassword",
       "/forgotpasswordnumber",
@@ -48,10 +47,12 @@ const App = () => {
       "/changepasswords",
       "/register/personal",
       "/success",
+      "/Employersreg",
       "/register/experience",
       "/register/education",
       "/register/resume",
-      "/register/success"
+      "/register/success",
+      "/Employersuccess"
     ]; // Add all routes where navbar should be hidden
     const userNavbarRoutes = [
       "/userdashboard",
@@ -112,6 +113,10 @@ const App = () => {
         <Route path="/blog" element={<Blog />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/Employersignup" element={<EmployerSignUp />} />
+        <Route path="/Employersignin" element={<EmployerLogin />} />
+        <Route path="/Employersreg" element={<EmployerReg />} />
+        <Route path="/Employersuccess" element={<EmployerSuccess />} />
 
 
         {/* Example for Sign In */}

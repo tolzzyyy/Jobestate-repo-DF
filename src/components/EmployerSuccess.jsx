@@ -4,7 +4,7 @@ import logo from "../Assets/Logo - Horizontal.png";
 import { FaCheck } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 
-const RegisteredSuccess = () => {
+const EmployerSuccess = () => {
     const bgimage = {
         backgroundImage: `url(${bg})`,
         backgroundPosition: "center",
@@ -21,7 +21,7 @@ const RegisteredSuccess = () => {
             <FaCheck className='' size={40}/>
         </div>
         <h1 className='text-[30px] font-[600]'>Welcome to Jobestate!</h1>
-        <p className='text-[#6B6B6B] text-center font-[600]'>Let's complete your profile to get started with job applications.</p>
+        <p className='text-[#6B6B6B] text-center font-[600]'>Let’s complete your company profile so you can start posting jobs and finding talent.</p>
        <div className='flex items-center justify-center gap-6 mt-5'>
         <Link className="text-center no-underline text-[#0149AD]" to='/signin'>
        Go to Dashboard
@@ -36,4 +36,4 @@ const RegisteredSuccess = () => {
   )
 }
 
-export default RegisteredSuccess
+export default EmployerSuccess
