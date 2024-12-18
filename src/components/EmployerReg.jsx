@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import RegistrationProgress from "./RegistrationProgress";
+import { useNavigate } from "react-router-dom";
+// import RegistrationProgress from "./RegistrationProgress";
 import bg from "../Assets/bg.png";
 import logo from "../Assets/Logo - Horizontal.png";
 import { FaPlus } from "react-icons/fa6";

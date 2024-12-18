@@ -3,17 +3,21 @@ import image from "../Assets/Rectangle 3576 (1).png";
 import bg from "../Assets/bg.png";
 import logo from "../Assets/Logo - Horizontal.png";
 import { Link } from 'react-router-dom';
-import { GrGoogle } from "react-icons/gr";
+// import { GrGoogle } from "react-icons/gr";
 import google from "../Assets/Rectangle 6.png";
 import { FaTwitter } from "react-icons/fa";
-import { BiCheck, BiPhone } from "react-icons/bi";
+import { BiCheck } from "react-icons/bi";
 import phone from "../Assets/smartphone-device.png";
+
+
 const EmployerSignUp = () => {
+
     const bgimage = {
         backgroundImage: `url(${bg})`,
         backgroundPosition: "center",
         backgroundSize: "cover",
       };
+      
   return (
     <div className="w-full mx-auto h-full md:h-screen  flex items-center justify-center">
     <div className="xl:flex h-full items-center  w-full">

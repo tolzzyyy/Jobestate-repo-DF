@@ -28,6 +28,12 @@ import Experience from "./components/Experience";
 import Education from "./components/Education";
 import Resume from "./components/Resume";
 import RegisteredSuccess from "./components/RegisteredSuccess";
+import AdminNavbar from "./components/AdminNavbar"
+import AdminDashboard from "./components/AdminDashboard"
+import EmployerLogin from "./components/EmployerLogin"
+import EmployerSignUp from "./components/EmployerSignUp"
+import EmployerReg from "./components/EmployerReg"
+import EmployerSuccess from "./components/EmployerSuccess"
 // import Footer from './components/Footer'
 
 const App = () => {
