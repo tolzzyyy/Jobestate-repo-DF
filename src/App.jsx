@@ -34,6 +34,13 @@ import EmployerLogin from "./components/EmployerLogin"
 import EmployerSignUp from "./components/EmployerSignUp"
 import EmployerReg from "./components/EmployerReg"
 import EmployerSuccess from "./components/EmployerSuccess"
+import AdminJobDetails from "./components/AdminJobDetails";
+import AdminBlog from "./components/AdminBlog";
+import EmployerNavbar from "./components/EmployerNavbar";
+import EmployerDashboard from "./components/EmployerDashboard";
+import EmployerJobForm from "./components/EmployerJobForm";
+import EmployerJobs from "./components/EmployerJobs";
+import EmployerApplicants from "./components/EmployerApplicants";
 // import Footer from './components/Footer'
 
 const App = () => {
@@ -73,6 +80,14 @@ const App = () => {
     ];
     const adminNavbarRoutes = [
       "/admindashboard",
+      "/adminjobdetails",
+      "/adminblog",
+    ];
+    const employerNavbarRoutes = [
+      "/employerdashboard",
+      "/employerjobform",
+      "/employerjobs",
+      "/employerapplicants",
     ];
 
     if (noNavbarRoutes.includes(location.pathname)) {
@@ -80,6 +95,9 @@ const App = () => {
     } 
       else if (userNavbarRoutes.includes(location.pathname)) {
       return <UserNavbar />; // Show UserNavbar for specific routes
+    }
+      else if (employerNavbarRoutes.includes(location.pathname)) {
+      return <EmployerNavbar />; // Show UserNavbar for specific routes
     }
      else if (adminNavbarRoutes.includes(location.pathname)) {
       return <AdminNavbar />; // Show UserNavbar for specific routes
@@ -104,11 +122,17 @@ const App = () => {
           <Route path="/usersettings" element={<UserSettings />} />
 
           {/* Employer-specific routes */}
+          <Route path="/employerdashboard" element={<EmployerDashboard />} />
+          <Route path="/employerjobform" element={<EmployerJobForm />} />
+          <Route path="/employerjobs" element={<EmployerJobs />} />
+          <Route path="/employerapplicants" element={<EmployerApplicants />} />
 
 
 
           {/* Admin-specific routes */}
           <Route path="/admindashboard" element={<AdminDashboard />} />
+          <Route path="/adminjobdetails" element={<AdminJobDetails />} />
+          <Route path="/adminblog" element={<AdminBlog />} />
         </Routes>
       </div>
 

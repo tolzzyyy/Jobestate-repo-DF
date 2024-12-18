@@ -162,12 +162,11 @@ const jobCards = [
 
 const AdminDashboard = () => {
   return (
-    <div className='mt-24 md:mt-32'>
-        <section className="h-auto flex flex-col px-6 gap-7 py-9 md:mt-8 lg:mt-0 md:px-[40px] xl:px-[135px] w-full md:flex md:h-full xl:flex xl:h-full">
-        
+    <div className='w-full h-full lg:px-[100px] mt-24 md:mt-32'>
+        <div className='p-10 h-[2000px] md:h-[1000px] lg:h-auto overflow-y-auto'>
         <h1 className='font-semibold text-[20px] mb-5 md:text-[30px]'>All Jobs</h1>
 
-        <div className="grid w-full h-auto items-center gap-y-6 lg:items-start md:grid-cols-2 lg:grid-cols-4 md:gap-x-20 md:gap-y-10  lg:w-full lg:gap-y-6">
+        <div className="grid w-full h-auto items-center gap-y-6 lg:items-start md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-x-20 md:gap-y-10  lg:gap-x-8 lg:gap-y-6">
           {jobCards.map((job) => (
             <div
               key={job.id}
@@ -221,15 +220,14 @@ const AdminDashboard = () => {
                   <p className="text-xl font-bold">{job.salary}</p>
                   <p className="text-sm text-gray-500">{job.currencyType}</p>
                 </div>
-                <NavLink to='/userjobs/details' className="px-2 py-2 md:border-2 border-[#013A8A] md:text-[12px] md:px-6 md:py-3 md:rounded-full text-[#013A8A] font-semibold xl:hover:text-white xl:hover:border-2 xl:hover:border-[#0149AD] xl:hover:bg-[#0149AD] xl:transition-all xl:duration-200">
+                <NavLink to='/adminjobdetails' className="px-2 py-2 md:border-2 border-[#013A8A] md:text-[12px] md:px-6 md:py-3 md:rounded-full text-[#013A8A] font-semibold xl:hover:text-white xl:hover:border-2 xl:hover:border-[#0149AD] xl:hover:bg-[#0149AD] xl:transition-all xl:duration-200">
                   See More
                 </NavLink>
               </div>
             </div>
           ))}
         </div>
-
-        </section>
+      </div>
     </div>
   )
 }

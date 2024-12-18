@@ -3,7 +3,7 @@ import logo from '../components/img/logo.png'
 import {FaTimes, FaBars} from "react-icons/fa"
 import {Link, NavLink} from "react-router-dom"
 
-const AdminNavbar = () => {
+const EmployerNavbar = () => {
     const [show, setShow] = useState(false)
 
     const HandleShow  = () => {
@@ -16,24 +16,24 @@ const AdminNavbar = () => {
                 <img src={logo} alt="logo" className='w-[120px] md:w-[150px] lg:w-[170px]'/> 
             </div>
             <div className='hidden md:hidden xl:flex gap-[60px] text-[15px]'>
-                {/* <NavLink
-                to='/admindashboard'
-                className={({isActive}) =>
-                isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
-                
-                >Dashboard</NavLink> */}
                 <NavLink
-                to='/admindashboard'
+                to='/employerdashboard'
                 className={({isActive}) =>
                 isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
                 
-                >Approve Jobs</NavLink>
+                >Dashboard</NavLink>
                 <NavLink
-                to='/adminblog'
+                to='/employerjobs'
                 className={({isActive}) =>
                 isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
                 
-                >Blog</NavLink>
+                >Jobs</NavLink>
+                <NavLink
+                to='/employerapplicants'
+                className={({isActive}) =>
+                isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
+                
+                >Applicants</NavLink>
                 {/* <NavLink
                 to='/foremployers'
                 className={({isActive}) =>
@@ -42,35 +42,32 @@ const AdminNavbar = () => {
                 >For Employers</NavLink> */}
             </div>
             {show ? <div className='lg:hidden flex flex-col absolute top-20 md:top-24 left-0 gap-[40px] py-7 md:py-10 px-7 md:px-14 bg-white w-full h-screen transition-all duration-500 font-medium text-[15px] md:text-[20px] text-[#2b2b2b] '>
-                {/* <NavLink
-                to='/admindashboard'
-                className={({isActive}) =>
-                isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
-                
-                >Dashboard</NavLink> */}
                 <NavLink
-                to='/admindashboard'
+                to='/employerdashboard'
                 className={({isActive}) =>
                 isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
                 
-                >Approve Jobs</NavLink>
+                >Dashboard</NavLink>
                 <NavLink
-                to='/adminblog'
+                to='/employerjobs'
                 className={({isActive}) =>
                 isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
                 
-                >Blog</NavLink>
+                >Jobs</NavLink>
+                <NavLink
+                to='/employerapplicants'
+                className={({isActive}) =>
+                isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
+                
+                >Applicants</NavLink>
                 {/* <NavLink
                 to='/foremployers'
                 className={({isActive}) =>
                 isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
                 
                 >For Employers</NavLink> */}
-                {/* <Link to='/signin'>
-                    Dashboard
-                </Link> */}
-                <Link to='/signup' className='text-center border-2 border-[#013A8A] transition-all duration-500 py-3 px-8 rounded-xl text-[#013A8A] font-semibold hover:text-white hover:border-2 hover:border-[#0149AD] hover:bg-[#0149AD] '>
-                    Post An Article
+                <Link to='/employerjobform' className='text-center border-2 border-[#013A8A] transition-all duration-500 py-3 px-8 rounded-xl text-[#013A8A] font-semibold hover:text-white hover:border-2 hover:border-[#0149AD] hover:bg-[#0149AD] '>
+                    Post A Job
                 </Link>
             </div> : ""}
             <div className="flex items-center relative gap-6 xl:hidden">
@@ -82,12 +79,12 @@ const AdminNavbar = () => {
                 {/* <Link to='/signin'>
                     Dashboard
                 </Link> */}
-                <Link to='/fd' className='xl: border-2 border-[#013A8A] transition-all duration-500 py-3 px-8 rounded-xl text-[#013A8A] font-semibold hover:text-white hover:border-2 hover:border-[#0149AD] hover:bg-[#0149AD] '>
-                    Post An Article
+                <Link to='/employerjobform' className='xl: border-2 border-[#013A8A] transition-all duration-500 py-3 px-8 rounded-xl text-[#013A8A] font-semibold hover:text-white hover:border-2 hover:border-[#0149AD] hover:bg-[#0149AD] '>
+                    Post A Job
                 </Link>
             </div>
         </nav>
       )
 }
 
-export default AdminNavbar
+export default EmployerNavbar
