@@ -3,10 +3,10 @@ import image from "../Assets/Rectangle 3576 (1).png";
 import bg from "../Assets/bg.png";
 import logo from "../Assets/Logo - Horizontal.png";
 import { Link } from "react-router-dom";
-import { GrGoogle } from "react-icons/gr";
+// import { GrGoogle } from "react-icons/gr";
 import google from "../Assets/Rectangle 6.png";
 import { FaTwitter } from "react-icons/fa";
-import { BiPhone } from "react-icons/bi";
+// import { BiPhone } from "react-icons/bi";
 import phone from "../Assets/smartphone-device.png";
 
 

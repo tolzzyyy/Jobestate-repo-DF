@@ -28,6 +28,9 @@ import Experience from "./components/Experience";
 import Education from "./components/Education";
 import Resume from "./components/Resume";
 import RegisteredSuccess from "./components/RegisteredSuccess";
+import AdminNavbar from "./components/AdminNavbar";
+import AdminDashboard from "./components/AdminDashboard";
+
 // import Footer from './components/Footer'
 
 const App = () => {
@@ -61,11 +64,18 @@ const App = () => {
       "/userprofile",
       "/usersettings",
     ];
+    const adminNavbarRoutes = [
+      "/admindashboard",
+    ];
 
     if (noNavbarRoutes.includes(location.pathname)) {
       return null; // No navbar for these routes
-    } else if (userNavbarRoutes.includes(location.pathname)) {
+    } 
+      else if (userNavbarRoutes.includes(location.pathname)) {
       return <UserNavbar />; // Show UserNavbar for specific routes
+    }
+     else if (adminNavbarRoutes.includes(location.pathname)) {
+      return <AdminNavbar />; // Show UserNavbar for specific routes
     }
     return <Navbar />; // Default Navbar for other routes
   };
@@ -85,7 +95,13 @@ const App = () => {
           <Route path="/usernotification" element={<UserNotification />} />
           <Route path="/userprofile" element={<UserProfile />} />
           <Route path="/usersettings" element={<UserSettings />} />
-          <Route path="/usersettings" element={<UserSettings />} />
+
+          {/* Employer-specific routes */}
+
+
+
+          {/* Admin-specific routes */}
+          <Route path="/admindashboard" element={<AdminDashboard />} />
         </Routes>
       </div>
 
@@ -95,12 +111,12 @@ const App = () => {
         <Route path="/findjobs" element={<FindJobs />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/forgotpassword" element={<ForgottenPassword />} />
-        <Route path="/forgotpasswordnumber" element={<ForgottenPasswordNumber />}/>
         <Route path="/signin" element={<SignIn />} />
 
 
         {/* Example for Sign In */}
+        <Route path="/forgotpassword" element={<ForgottenPassword />} />
+        <Route path="/forgotpasswordnumber" element={<ForgottenPasswordNumber />}/>
         <Route path="/forgotpasswordcodesemail" element={<ForgotPasswordCodes />} />
         <Route path="/forgotpasswordcodesnumber"  element={<ForgotPasswordCodesNumber />} />
         <Route path="/changepasswords" element={<ChangePassword />} />

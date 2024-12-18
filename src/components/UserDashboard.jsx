@@ -169,7 +169,7 @@ const UserDashboard = () => {
   
 
   return (
-    <div className='bg-[#EEF0F2] w-full h-screen lg:ml-72 '>
+    <div className='bg-[#EEF0F2] w-full h-[930px] overflow-y-hidden lg:ml-72 '>
       <div className='bg-white w-auto h-auto px-10 py-9 flex items-center justify-between shadow-sm'>
       {show ? <div className='lg:hidden overflow-auto flex flex-col absolute top-16 md:top-16 left-0 gap-[40px] py-7 md:py-10 px-7 md:px-14 bg-white w-full h-auto md:h-screen transition-all duration-500 font-medium text-[15px] md:text-[20px] text-[#2b2b2b] '>
           <div className='flex flex-col gap-10'>

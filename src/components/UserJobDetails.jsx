@@ -71,7 +71,7 @@ const UserJobDetails = () => {
 
 
   return (
-    <div className='bg-[#EEF0F2] w-full h-full lg:ml-72'>
+    <div className='bg-[#EEF0F2] w-full sm:h-[1000px] md:h-[1500px] lg:ml-72'>
 
 
       <div className='bg-white w-auto h-auto px-10 py-6 flex items-center justify-between shadow-sm'>
@@ -191,7 +191,7 @@ const UserJobDetails = () => {
                     Back
                 </NavLink>
             </div>
-            <div className='flex w-full h-auto'>
+            <div className='flex w-full h-auto'> 
 
                   {jobCardsDetails.map((job) => (
                     <div

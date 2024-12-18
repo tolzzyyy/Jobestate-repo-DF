@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BiChevronRight } from "react-icons/bi";
+// import { BiChevronRight } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import RegistrationProgress from "./RegistrationProgress";
 import bg from "../Assets/bg.png";

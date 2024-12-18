@@ -7,7 +7,7 @@ import { GrStatusGood } from "react-icons/gr";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
 import { TfiWrite } from "react-icons/tfi";
 import { FaBell } from "react-icons/fa";
-import { IoPersonCircle } from "react-icons/io5";
+import { IoLogOut, IoPersonCircle } from "react-icons/io5";
 import { IoIosSettings } from "react-icons/io";
 
 const UserNavbar = () => {
@@ -66,11 +66,11 @@ const UserNavbar = () => {
               
               ><IoPersonCircle size={30}/> Profile</NavLink>
               <NavLink
-              to='/usersettings'
+              to='/'
               className={({isActive}) =>
               isActive ? 'bg-[#E8F1FD] text-[#1366D9] text-sm  font-medium px-4 py-6 flex items-center gap-3 rounded-md' : 'bg-white text-[#5D6679] text-sm font-medium px-4 py-6 flex items-center gap-3 rounded-md'}
               
-              ><IoIosSettings size={30}/> Settings</NavLink>
+              ><IoLogOut size={30}/> Logout</NavLink>
           </div>
         </div>
     </div>

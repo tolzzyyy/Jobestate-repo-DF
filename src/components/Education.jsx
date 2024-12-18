@@ -4,7 +4,7 @@ import RegistrationProgress from "./RegistrationProgress";
 import bg from "../Assets/bg.png";
 import logo from "../Assets/Logo - Horizontal.png";
 
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Education = () => {
     const navigate = useNavigate();
     const handleSubmit = (e) => {
