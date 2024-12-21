@@ -27,7 +27,7 @@ const EmployerJobForm = () => {
       className="w-full flex justify-center h-screen mt-24 md:mt-32 md:h-screen p-6 bg-white shadow-lg rounded-lg"
     //   style={bgimage}
     >
-      {/* <div className="flex justify-between items-center mb-8">
+     <div className="flex justify-between items-center mb-8">
         <div className="flex-1">
           <img src={logo} className="w-[150px] md:w-[200px]" alt="Logo" />
         </div>
@@ -45,7 +45,7 @@ const EmployerJobForm = () => {
             Skip
           </button>
         </div>
-      </div> */}
+      </div> 
 
       <form
         onSubmit={handleSubmit}
