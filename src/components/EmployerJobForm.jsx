@@ -24,10 +24,10 @@ const EmployerJobForm = () => {
   
   return (
     <div
-      className="w-full flex justify-center h-screen mt-24 md:mt-32 md:h-screen p-6 bg-white shadow-lg rounded-lg"
+      className="w-full flex justify-center h-full mt-24 md:mt-32 md:h-screen p-6 bg-white shadow-lg rounded-lg"
     //   style={bgimage}
     >
-     <div className="flex justify-between items-center mb-8">
+     {/* <div className="flex justify-between items-center mb-8">
         <div className="flex-1">
           <img src={logo} className="w-[150px] md:w-[200px]" alt="Logo" />
         </div>
@@ -45,14 +45,30 @@ const EmployerJobForm = () => {
             Skip
           </button>
         </div>
-      </div> 
+      </div>  */}
 
       <form
         onSubmit={handleSubmit}
-        className="max-w-[674px] md:h-full overflow-auto flex-col gap-5 mt-6 md:mt-[70px] w-full"
+        className="max-w-[674px] md:h-screen overflow-auto flex-col gap-5 mt-6 md:mt-[70px] w-full"
       >
         <div className="w-full flex overflow-auto scrollbar-hide  flex-col gap-5 ">
         <h1 className="text-2xl font-bold mb-4">Post a New Job</h1>
+          {/* Company Name */}
+          <div className="w-full flex flex-col gap-1">
+            <h1 className="text-[14px] text-[#012C68]">COMPANY NAME</h1>
+            <input
+              type="text"
+              //   name="fullName"
+              //   value={formData.fullName}
+              //   onChange={handleChange}
+              placeholder="Enter Company Name"
+              className={`
+                w-full outline-none rounded-[6px] border-[1px] text-[14px] p-3 text-[#98A2B3] font-[300] border-[#E1E1E1] h-[50px]
+           
+              `}
+            />
+          </div>
+
           {/* First Name */}
           <div className="w-full flex flex-col gap-1">
             <h1 className="text-[14px] text-[#012C68]">JOB TITLE</h1>
@@ -72,17 +88,22 @@ const EmployerJobForm = () => {
           {/* Last Name */}
           <div className="w-full flex flex-col gap-1">
             <h1 className="text-[14px] text-[#012C68]">Job Description</h1>
-            <input
+            <textarea name="" id="" placeholder="Enter Job Description" 
+                          className={`
+                            w-full outline-none rounded-[6px] border-[1px] text-[14px] p-3 text-[#98A2B3] font-[300] border-[#E1E1E1] h-[100px]
+                      
+                          `}></textarea>
+            {/* <input
               type="text"
               //   name="fullName"
               //   value={formData.fullName}
               //   onChange={handleChange}
               placeholder="Enter Job Description"
               className={`
-                w-full outline-none rounded-[6px] border-[1px] text-[14px] p-3 text-[#98A2B3] font-[300] border-[#E1E1E1] h-[150px]
+                w-full outline-none rounded-[6px] border-[1px] text-[14px] p-3 text-[#98A2B3] font-[300] border-[#E1E1E1] h-[100px]
           
               `}
-            />
+            /> */}
           </div>
 
 
@@ -94,6 +115,18 @@ const EmployerJobForm = () => {
                     <option>IT</option>
                     <option>Healthcare</option>
                     <option>Education</option>
+                </select>
+            </div>
+
+            {/* Job Type */}
+            <div className="w-full flex flex-col gap-1">
+                <h1 className="text-[14px] text-[#012C68]">Job Type</h1>
+                <select className="w-full px-4 py-2 border rounded-md focus:ring focus:ring-blue-300 mb-4">
+                    <option>Select a category</option>
+                    <option>On-Site</option>
+                    <option>Part-Time</option>
+                    <option>Remote</option>
+                    <option>Hybrid</option>
                 </select>
             </div>
 
@@ -115,6 +148,14 @@ const EmployerJobForm = () => {
                     className="w-full px-4 py-2 border rounded-md focus:ring focus:ring-blue-300"
                 />
                 </div>
+            </div>
+
+            {/* Job Type */}
+            <div className="w-full flex flex-col gap-1">
+                <select className="w-full px-4 py-2 border rounded-md focus:ring focus:ring-blue-300 mb-4">
+                    <option>Annually</option>
+                    <option>Monthly</option>
+                </select>
             </div>
 
             {/* Submit */}

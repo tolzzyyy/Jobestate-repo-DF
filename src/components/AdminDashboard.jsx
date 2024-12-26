@@ -200,7 +200,7 @@ const AdminDashboard = () => {
                 <div className='flex justify-between items-center'>
                   <div className='flex flex-col'>
                     <h2 className="text-sm font-medium mb-1">{job.company}</h2>
-                    <h3 className="text-xl font-semibold mb-2 text-[31px] leading-9 w-56">{job.title}</h3>
+                    <h3 className="text-xl font-semibold mb-2 text-[31px] leading-9 w-auto">{job.title}</h3>
                   </div>
                   {/* <FaAmazon size={34}/> */}
                 </div>
