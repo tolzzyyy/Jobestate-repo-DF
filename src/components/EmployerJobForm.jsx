@@ -1,8 +1,8 @@
 import React from "react";
-// import RegistrationProgress from "./RegistrationProgress";
-// import bg from "../Assets/bg.png";
-// import logo from "../Assets/Logo - Horizontal.png";
-// import { FaPlus } from "react-icons/fa6";
+import RegistrationProgress from "./RegistrationProgress";
+import bg from "../Assets/bg.png";
+import logo from "../Assets/Logo - Horizontal.png";
+import { FaPlus } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
 
 
