@@ -16,12 +16,12 @@ const EmployerNavbar = () => {
                 <img src={logo} alt="logo" className='w-[120px] md:w-[150px] lg:w-[170px]'/> 
             </div>
             <div className='hidden md:hidden xl:flex gap-[60px] text-[15px]'>
-                <NavLink
+                {/* <NavLink
                 to='/employerdashboard'
                 className={({isActive}) =>
                 isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
                 
-                >Dashboard</NavLink>
+                >Dashboard</NavLink> */}
                 <NavLink
                 to='/employerjobs'
                 className={({isActive}) =>
@@ -42,12 +42,12 @@ const EmployerNavbar = () => {
                 >For Employers</NavLink> */}
             </div>
             {show ? <div className='lg:hidden flex flex-col absolute top-20 md:top-24 left-0 gap-[40px] py-7 md:py-10 px-7 md:px-14 bg-white w-full h-screen transition-all duration-500 font-medium text-[15px] md:text-[20px] text-[#2b2b2b] '>
-                <NavLink
+                {/* <NavLink
                 to='/employerdashboard'
                 className={({isActive}) =>
                 isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
                 
-                >Dashboard</NavLink>
+                >Dashboard</NavLink> */}
                 <NavLink
                 to='/employerjobs'
                 className={({isActive}) =>
