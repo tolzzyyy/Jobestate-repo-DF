@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { FaBars, FaBell, FaTimes } from 'react-icons/fa';
 // import { FaAmazon } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import logo from '../components/img/logo.png'
 import { RiDashboardFill } from 'react-icons/ri';
 import { BiSolidBriefcase } from 'react-icons/bi';
@@ -176,8 +178,9 @@ const UserJobs = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get("/jobs"); // Axios will automatically proxy this
-        setJobs(response.data);
+        const response = await axios.get("https://jobestate-backend-repo-df.onrender.com/api/jobs"); // Axios will automatically proxy this
+        console.log(response.data.data)
+        setJobs(response.data.data);
       } catch (error) {
         setError("Failed to fetch jobs. Please try again.");
       } finally {
@@ -341,12 +344,12 @@ const UserJobs = () => {
                 </div>
                 <div className='flex justify-between items-center'>
                   <div className='flex flex-col'>
-                    <h2 className="text-sm font-medium mb-1">{job.company}</h2>
+                    <h2 className="text-sm font-medium mb-1">{job.company_name}</h2>
                     <h3 className="text-xl font-semibold mb-2 text-[31px] leading-9 w-56">{job.title}</h3>
                   </div>
                   {/* <FaAmazon size={34}/> */}
                 </div>
-                <div className="flex gap-2 mb-2">
+                {/* <div className="flex gap-2 mb-2">
                   {job.jobTypes.map((type, index) => (
                     <span
                       key={index}
@@ -355,16 +358,25 @@ const UserJobs = () => {
                       {type}
                     </span>
                   ))}
-                </div>
+                </div> */}
+                  <div className="flex gap-2 mb-2">
+                    {jobs.map((index) => (
+                      <span
+                      key={index}
+                      className='px-2 py-1 flex items-center text-xs border rounded-full text-gray-900'>
+                        {job.job_type}
+                      </span>
+                    ))}
+                  </div>
               </div>
               <div className="flex justify-between items-center px-4">
                 <div>
-                  <p className="text-xl font-bold">{job.salary}</p>
-                  <p className="text-sm text-gray-500">{job.currencyType}</p>
+                  <p className="text-xl font-bold">{job.maximum_salary}</p>
+                  <p className="text-sm text-gray-500">{job.salary_period}</p>
                 </div>
-                <NavLink to='/userjobs/details' className="px-2 py-2 md:border-2 border-[#013A8A] md:text-[12px] md:px-6 md:py-3 md:rounded-full text-[#013A8A] font-semibold xl:hover:text-white xl:hover:border-2 xl:hover:border-[#0149AD] xl:hover:bg-[#0149AD] xl:transition-all xl:duration-200">
-                  Details
-                </NavLink>
+                    <Link to={`/userjobs/details/${job.id_}`} className="px-2 py-2 md:border-2 border-[#013A8A] md:text-[12px] md:px-6 md:py-3 md:rounded-full text-[#013A8A] font-semibold xl:hover:text-white xl:hover:border-2 xl:hover:border-[#0149AD] xl:hover:bg-[#0149AD] xl:transition-all xl:duration-200">
+                      Details
+                    </Link>
               </div>
             </div>
           ))}

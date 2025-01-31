@@ -10,8 +10,9 @@ import { BsFillBookmarkCheckFill } from 'react-icons/bs';
 import { TfiWrite } from 'react-icons/tfi';
 import { IoPersonCircle } from 'react-icons/io5';
 import { IoIosSettings } from 'react-icons/io';
-import { GoBookmarkFill } from "react-icons/go";
-import axios from "axios"
+// import { IoBookmarkOutline, IoBookmark } from "react-icons/io5"; // Import Save icons
+// import axios from "axios"
+import UserDashboard from './UserDashboard';
 
 
 // const jobCards = [
@@ -96,30 +97,38 @@ import axios from "axios"
 
 const UserSavedJobs = () => {
 
+  const [savedJobs, setSavedJobs] = useState([]);
   const [show, setShow] = useState(false)
 
-    const [jobs, setJobs] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    // const [jobs, setJobs] = useState([]);
+    // const [loading, setLoading] = useState(true);
+    // const [error, setError] = useState(null);
 
+
+    // useEffect(() => {
+    //   const fetchJobs = async () => {
+    //     try {
+    //       const response = await axios.get("https://jobestate-backend-repo-df.onrender.com/api/jobs"); // Axios will automatically proxy this
+    //       setJobs(response.data);
+    //     } catch (error) {
+    //       setError("Failed to fetch jobs. Please try again.");
+    //     } finally {
+    //       setLoading(false);
+    //     }
+    //   };
+  
+    //   fetchJobs();
+    // }, []);
 
     useEffect(() => {
-      const fetchJobs = async () => {
-        try {
-          const response = await axios.get("/jobs"); // Axios will automatically proxy this
-          setJobs(response.data);
-        } catch (error) {
-          setError("Failed to fetch jobs. Please try again.");
-        } finally {
-          setLoading(false);
-        }
-      };
-  
-      fetchJobs();
+      const storedJobs = JSON.parse(localStorage.getItem("savedJobs")) || [];
+      setSavedJobs(storedJobs);
     }, []);
   
-    if (loading) return <p className='ml-72 text-blue-500'>Loading jobs...</p>;
-    if (error) return <p className='ml-72 text-red-500'>{error}</p>;
+    // if (loading) return <p className='ml-72 text-blue-500'>Loading jobs...</p>;
+    // if (error) return <p className='ml-72 text-red-500'>{error}</p>;
+
+    
 
   const HandleShow  = () => {
   setShow(!show)
@@ -209,7 +218,7 @@ const UserSavedJobs = () => {
       <div className='p-10 h-[2000px] md:h-[1000px] lg:h-[800px] overflow-y-auto'>
 
         <div className="grid w-full h-auto items-center gap-y-6 lg:items-start md:grid-cols-2 lg:grid-cols-4 md:gap-x-20 md:gap-y-10  lg:gap-x-8 lg:gap-y-6">
-          {jobs.map((job) => (
+          {/* {jobs.map((job) => (
             <div
               key={job.id}
               className={`pt-8 pb-11 px-5 flex flex-col gap-6 border border-gray-800 rounded-[20px] w-auto shadow-sm ${
@@ -222,9 +231,10 @@ const UserSavedJobs = () => {
                     <span className="text-gray-500 text-sm">{job.date}</span>
                     <button>
                       <GoBookmarkFill size={23} className='text-[#013A8A]'/>
+                      {isSaved ? <IoBookmark className="text-blue-500" /> : <IoBookmarkOutline />}
                     </button>
                   </div>
-                  {/* <svg
+                  <svg
                     className="w-5 h-5 text-gray-400 cursor-pointer"
                     fill="none"
                     stroke="currentColor"
@@ -237,14 +247,14 @@ const UserSavedJobs = () => {
                       strokeWidth="2"
                       d="M5 13l4 4L19 7"
                     ></path>
-                  </svg> */}
+                  </svg>
                 </div>
                 <div className='flex justify-between items-center'>
                   <div className='flex flex-col'>
                     <h2 className="text-sm font-medium mb-1">{job.company}</h2>
                     <h3 className="text-xl font-semibold mb-2 text-[31px] leading-9 w-56">{job.title}</h3>
                   </div>
-                  {/* <FaAmazon size={34}/> */}
+                  <FaAmazon size={34}/>
                 </div>
                 <div className="flex gap-2 mb-2">
                   {job.jobTypes.map((type, index) => (
@@ -267,7 +277,17 @@ const UserSavedJobs = () => {
                 </NavLink>
               </div>
             </div>
-          ))}
+          ))} */}
+
+            {savedJobs.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {savedJobs.map((job) => (
+                <UserDashboard key={job.id} job={job} />
+              ))}
+            </div>
+          ) : (
+            <p>No saved jobs yet.</p>
+          )}
         </div>
       </div>
     </div>

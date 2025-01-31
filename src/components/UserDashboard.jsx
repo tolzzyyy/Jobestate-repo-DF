@@ -11,7 +11,7 @@ import { BsFillBookmarkCheckFill } from 'react-icons/bs';
 import { TfiWrite } from 'react-icons/tfi';
 import { IoPersonCircle } from 'react-icons/io5';
 import { IoIosSettings } from 'react-icons/io';
-import { CiBookmark } from "react-icons/ci";
+import { IoBookmarkOutline, IoBookmark } from "react-icons/io5"; // Import Save icon
 // import { fetchJobs } from "../jobService";
 import axios from "axios"
 
@@ -163,8 +163,10 @@ import axios from "axios"
 //   },
 // ];
 
-const UserDashboard = () => {
+const UserDashboard = ({ job }) => {
 
+
+  const [savedJobs, setSavedJobs] = useState([]);
   const [show, setShow] = useState(false)
 
   const [jobs, setJobs] = useState([]);
@@ -186,6 +188,31 @@ const UserDashboard = () => {
 
     fetchJobs();
   }, []);
+
+  useEffect(() => {
+    const storedJobs = JSON.parse(localStorage.getItem("savedJobs")) || [];
+    setSavedJobs(storedJobs);
+  }, []);
+
+  // Check if job is already saved
+  const isSaved = savedJobs.some((savedJob) => savedJob?.id === job?.id);
+
+
+  // Handle Save Job
+  const handleSaveJob = () => {
+    let updatedJobs;
+    if (isSaved) {
+      // Remove job if already saved
+      updatedJobs = savedJobs.filter((savedJob) => savedJob.id !== job.id);
+    } else {
+      // Add job to saved list
+      updatedJobs = [...savedJobs, job];
+    }
+
+    setSavedJobs(updatedJobs);
+    localStorage.setItem("savedJobs", JSON.stringify(updatedJobs)); // Persist to localStorage
+  };
+
 
   if (loading) return <p className='ml-72 text-blue-500'>Loading jobs...</p>;
   if (error) return <p className='ml-72 text-red-500'>{error}</p>;
@@ -293,8 +320,8 @@ const UserDashboard = () => {
                     <div className="flex justify-between items-center mb-2">
                       <div className='w-full flex justify-between'>
                         <span className="text-gray-500 text-sm">{job.date}</span>
-                        <button>
-                          <CiBookmark size={23} />
+                        <button onClick={handleSaveJob} className='text-xl'>
+                          {isSaved ? <IoBookmark className="text-blue-900" /> : <IoBookmarkOutline />}
                         </button>
                       </div>
                       {/* <svg
