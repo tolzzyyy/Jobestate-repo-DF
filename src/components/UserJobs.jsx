@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FaBars, FaBell, FaTimes } from 'react-icons/fa';
 // import { FaAmazon } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
@@ -12,164 +12,189 @@ import { IoPersonCircle } from 'react-icons/io5';
 import { IoIosSearch, IoIosSettings } from 'react-icons/io';
 import { CiBookmark } from 'react-icons/ci';
 import { IoFilterCircleOutline } from "react-icons/io5";
+import axios from "axios"
 
 
 
-const jobCards = [
-  {
-    id: 1,
-    date: '20th May, 2024',
-    company: 'Amazon',
-    title: 'Senior UI/UX Designer',
-    jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-    salary: '$5,000',
-    currencyType: 'Annually',
-    logoUrl: 'path/to/logo', // Replace with your logo path or URL
-    isActive: false,
-  },
-  {
-    id: 2,
-    date: '20th May, 2024',
-    company: 'Google',
-    title: 'Senior Product Manager',
-    jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-    salary: '$5,000',
-    currencyType: 'Annually',
-    logoUrl: 'path/to/logo',
-    isActive: false, // Mark this card as active for the highlighted background
-  },
-  {
-    id: 3,
-    date: '20th May, 2024',
-    company: 'Google',
-    title: 'Front-End Development',
-    jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-    salary: '$5,000',
-    currencyType: 'Annually',
-    logoUrl: 'path/to/logo',
-    isActive: false, // Mark this card as active for the highlighted background
-  },
-  {
-    id: 4,
-    date: '20th May, 2024',
-    company: 'Google',
-    title: 'Senior Product Manager',
-    jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-    salary: '$5,000',
-    currencyType: 'Annually',
-    logoUrl: 'path/to/logo',
-    isActive: false, // Mark this card as active for the highlighted background
-  },
-  {
-    id: 5,
-    date: '20th May, 2024',
-    company: 'Google',
-    title: 'Senior Product Manager',
-    jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-    salary: '$5,000',
-    currencyType: 'Annually',
-    logoUrl: 'path/to/logo',
-    isActive: false, // Mark this card as active for the highlighted background
-  },
-  {
-    id: 6,
-    date: '20th May, 2024',
-    company: 'Google',
-    title: 'Senior Product Manager',
-    jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-    salary: '$5,000',
-    currencyType: 'Annually',
-    logoUrl: 'path/to/logo',
-    isActive: false, // Mark this card as active for the highlighted background
-  },
-  {
-    id: 6,
-    date: '20th May, 2024',
-    company: 'Google',
-    title: 'Senior Product Manager',
-    jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-    salary: '$5,000',
-    currencyType: 'Annually',
-    logoUrl: 'path/to/logo',
-    isActive: false, // Mark this card as active for the highlighted background
-  },
-  {
-    id: 6,
-    date: '20th May, 2024',
-    company: 'Google',
-    title: 'Senior Product Manager',
-    jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-    salary: '$5,000',
-    currencyType: 'Annually',
-    logoUrl: 'path/to/logo',
-    isActive: false, // Mark this card as active for the highlighted background
-  },
-  {
-    id: 6,
-    date: '20th May, 2024',
-    company: 'Google',
-    title: 'Senior Product Manager',
-    jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-    salary: '$5,000',
-    currencyType: 'Annually',
-    logoUrl: 'path/to/logo',
-    isActive: false, // Mark this card as active for the highlighted background
-  },
-  {
-    id: 6,
-    date: '20th May, 2024',
-    company: 'Google',
-    title: 'Senior Product Manager',
-    jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-    salary: '$5,000',
-    currencyType: 'Annually',
-    logoUrl: 'path/to/logo',
-    isActive: false, // Mark this card as active for the highlighted background
-  },
-  {
-    id: 6,
-    date: '20th May, 2024',
-    company: 'Google',
-    title: 'Senior Product Manager',
-    jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-    salary: '$5,000',
-    currencyType: 'Annually',
-    logoUrl: 'path/to/logo',
-    isActive: false, // Mark this card as active for the highlighted background
-  },
-  {
-    id: 6,
-    date: '20th May, 2024',
-    company: 'Google',
-    title: 'Senior Product Manager',
-    jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-    salary: '$5,000',
-    currencyType: 'Annually',
-    logoUrl: 'path/to/logo',
-    isActive: false, // Mark this card as active for the highlighted background
-  },
-  {
-    id: 6,
-    date: '20th May, 2024',
-    company: 'Google',
-    title: 'Senior Product Manager',
-    jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-    salary: '$5,000',
-    currencyType: 'Annually',
-    logoUrl: 'path/to/logo',
-    isActive: false, // Mark this card as active for the highlighted background
-  },
-];
+
+// const jobCards = [
+//   {
+//     id: 1,
+//     date: '20th May, 2024',
+//     company: 'Amazon',
+//     title: 'Senior UI/UX Designer',
+//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
+//     salary: '$5,000',
+//     currencyType: 'Annually',
+//     logoUrl: 'path/to/logo', // Replace with your logo path or URL
+//     isActive: false,
+//   },
+//   {
+//     id: 2,
+//     date: '20th May, 2024',
+//     company: 'Google',
+//     title: 'Senior Product Manager',
+//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
+//     salary: '$5,000',
+//     currencyType: 'Annually',
+//     logoUrl: 'path/to/logo',
+//     isActive: false, // Mark this card as active for the highlighted background
+//   },
+//   {
+//     id: 3,
+//     date: '20th May, 2024',
+//     company: 'Google',
+//     title: 'Front-End Development',
+//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
+//     salary: '$5,000',
+//     currencyType: 'Annually',
+//     logoUrl: 'path/to/logo',
+//     isActive: false, // Mark this card as active for the highlighted background
+//   },
+//   {
+//     id: 4,
+//     date: '20th May, 2024',
+//     company: 'Google',
+//     title: 'Senior Product Manager',
+//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
+//     salary: '$5,000',
+//     currencyType: 'Annually',
+//     logoUrl: 'path/to/logo',
+//     isActive: false, // Mark this card as active for the highlighted background
+//   },
+//   {
+//     id: 5,
+//     date: '20th May, 2024',
+//     company: 'Google',
+//     title: 'Senior Product Manager',
+//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
+//     salary: '$5,000',
+//     currencyType: 'Annually',
+//     logoUrl: 'path/to/logo',
+//     isActive: false, // Mark this card as active for the highlighted background
+//   },
+//   {
+//     id: 6,
+//     date: '20th May, 2024',
+//     company: 'Google',
+//     title: 'Senior Product Manager',
+//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
+//     salary: '$5,000',
+//     currencyType: 'Annually',
+//     logoUrl: 'path/to/logo',
+//     isActive: false, // Mark this card as active for the highlighted background
+//   },
+//   {
+//     id: 6,
+//     date: '20th May, 2024',
+//     company: 'Google',
+//     title: 'Senior Product Manager',
+//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
+//     salary: '$5,000',
+//     currencyType: 'Annually',
+//     logoUrl: 'path/to/logo',
+//     isActive: false, // Mark this card as active for the highlighted background
+//   },
+//   {
+//     id: 6,
+//     date: '20th May, 2024',
+//     company: 'Google',
+//     title: 'Senior Product Manager',
+//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
+//     salary: '$5,000',
+//     currencyType: 'Annually',
+//     logoUrl: 'path/to/logo',
+//     isActive: false, // Mark this card as active for the highlighted background
+//   },
+//   {
+//     id: 6,
+//     date: '20th May, 2024',
+//     company: 'Google',
+//     title: 'Senior Product Manager',
+//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
+//     salary: '$5,000',
+//     currencyType: 'Annually',
+//     logoUrl: 'path/to/logo',
+//     isActive: false, // Mark this card as active for the highlighted background
+//   },
+//   {
+//     id: 6,
+//     date: '20th May, 2024',
+//     company: 'Google',
+//     title: 'Senior Product Manager',
+//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
+//     salary: '$5,000',
+//     currencyType: 'Annually',
+//     logoUrl: 'path/to/logo',
+//     isActive: false, // Mark this card as active for the highlighted background
+//   },
+//   {
+//     id: 6,
+//     date: '20th May, 2024',
+//     company: 'Google',
+//     title: 'Senior Product Manager',
+//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
+//     salary: '$5,000',
+//     currencyType: 'Annually',
+//     logoUrl: 'path/to/logo',
+//     isActive: false, // Mark this card as active for the highlighted background
+//   },
+//   {
+//     id: 6,
+//     date: '20th May, 2024',
+//     company: 'Google',
+//     title: 'Senior Product Manager',
+//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
+//     salary: '$5,000',
+//     currencyType: 'Annually',
+//     logoUrl: 'path/to/logo',
+//     isActive: false, // Mark this card as active for the highlighted background
+//   },
+//   {
+//     id: 6,
+//     date: '20th May, 2024',
+//     company: 'Google',
+//     title: 'Senior Product Manager',
+//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
+//     salary: '$5,000',
+//     currencyType: 'Annually',
+//     logoUrl: 'path/to/logo',
+//     isActive: false, // Mark this card as active for the highlighted background
+//   },
+// ];
 
 const UserJobs = () => {
 
   const [show, setShow] = useState(false)
 
+  const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const response = await axios.get("/jobs"); // Axios will automatically proxy this
+        setJobs(response.data);
+      } catch (error) {
+        setError("Failed to fetch jobs. Please try again.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchJobs();
+  }, []);
+
+  if (loading) return <p className='ml-72 text-blue-500'>Loading jobs...</p>;
+  if (error) return <p className='ml-72 text-red-500'>{error}</p>;
+
   const HandleShow  = () => {
   setShow(!show)
   }
 
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -284,7 +309,7 @@ const UserJobs = () => {
 
       <div className='p-10 h-[1000px] lg:h-[800px] overflow-y-auto'>
         <div className="grid w-full h-auto items-center gap-y-6 lg:items-start md:grid-cols-2 lg:grid-cols-4 md:gap-x-20 md:gap-y-10  lg:gap-x-8 lg:gap-y-6">
-          {jobCards.map((job) => (
+          {jobs.map((job) => (
             <div
               key={job.id}
               className={`pt-8 pb-11 px-5 flex flex-col gap-6 border border-gray-800 rounded-[20px] w-auto shadow-sm ${

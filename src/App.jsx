@@ -70,7 +70,7 @@ const App = () => {
     const userNavbarRoutes = [
       "/userdashboard",
       "/userjobs",
-      "/userjobs/details",
+      "/userjobs/details/:id",
       "/userapplicationstatus",
       "/usersavedjobs",
       "/userblog",
@@ -113,8 +113,8 @@ const App = () => {
           {/* User-specific routes */}
           <Route path="/userdashboard" element={<UserDashboard />} />
           <Route path="/userjobs" element={<UserJobs />} />
-          <Route path="/userjobs/details" element={<UserJobDetails />} />
-          <Route  path="/userapplicationstatus" element={<UserApplicationStatus />} />
+          <Route path="/userjobs/details/:id" element={<UserJobDetails />} />
+          <Route path="/userapplicationstatus" element={<UserApplicationStatus />} />
           <Route path="/usersavedjobs" element={<UserSavedJobs />} />
           <Route path="/userblog" element={<UserBlog />} />
           <Route path="/usernotification" element={<UserNotification />} />
@@ -126,8 +126,6 @@ const App = () => {
           <Route path="/employerjobform" element={<EmployerJobForm />} />
           <Route path="/employerjobs" element={<EmployerJobs />} />
           <Route path="/employerapplicants" element={<EmployerApplicants />} />
-
-
 
           {/* Admin-specific routes */}
           <Route path="/admindashboard" element={<AdminDashboard />} />

@@ -13,8 +13,8 @@ import { IoIosSearch, IoIosSettings } from 'react-icons/io';
 // import { CiBookmark } from 'react-icons/ci';
 import { IoFilterCircleOutline } from "react-icons/io5";
 import { MdOutlineArrowOutward } from 'react-icons/md';
-import nawa from './img/bg.png'
-import damn from './img/techtalkbg.jpg'
+// import nawa from './img/bg.png'
+// import damn from './img/techtalkbg.jpg'
 import blogimg1 from './img/blogimg1.jpg'
 import blogimg2 from './img/blogimg2.jpg'
 import blogimg3 from './img/blogimg3.jpg'
@@ -24,17 +24,17 @@ import face1 from '../components/img/face1.png'
 import face2 from '../components/img/face2.png'
 import face3 from '../components/img/face3.png'
 
-const bgImage = {
-    backgroundImage: `url(${nawa})`,
-    backgroundPosition: 'center',
-    backgroundSize: 'cover'
-}
+// const bgImage = {
+//     backgroundImage: `url(${nawa})`,
+//     backgroundPosition: 'center',
+//     backgroundSize: 'cover'
+// }
 
-const bgImageBlog = {
-    backgroundImage: `url(${damn})`,
-    backgroundPosition: 'center',
-    backgroundSize: 'cover'
-}
+// const bgImageBlog = {
+//     backgroundImage: `url(${damn})`,
+//     backgroundPosition: 'center',
+//     backgroundSize: 'cover'
+// }
 
 const blogPosts = [
   {
