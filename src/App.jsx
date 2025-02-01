@@ -28,12 +28,12 @@ import Experience from "./components/Experience";
 import Education from "./components/Education";
 import Resume from "./components/Resume";
 import RegisteredSuccess from "./components/RegisteredSuccess";
-import AdminNavbar from "./components/AdminNavbar"
-import AdminDashboard from "./components/AdminDashboard"
-import EmployerLogin from "./components/EmployerLogin"
-import EmployerSignUp from "./components/EmployerSignUp"
-import EmployerReg from "./components/EmployerReg"
-import EmployerSuccess from "./components/EmployerSuccess"
+import AdminNavbar from "./components/AdminNavbar";
+import AdminDashboard from "./components/AdminDashboard";
+import EmployerLogin from "./components/EmployerLogin";
+import EmployerSignUp from "./components/EmployerSignUp";
+import EmployerReg from "./components/EmployerReg";
+import EmployerSuccess from "./components/EmployerSuccess";
 import AdminJobDetails from "./components/AdminJobDetails";
 import AdminBlog from "./components/AdminBlog";
 import EmployerNavbar from "./components/EmployerNavbar";
@@ -41,7 +41,6 @@ import EmployerDashboard from "./components/EmployerDashboard";
 import EmployerJobForm from "./components/EmployerJobForm";
 import EmployerJobs from "./components/EmployerJobs";
 import EmployerApplicants from "./components/EmployerApplicants";
-// import Footer from './components/Footer'
 
 const App = () => {
   const location = useLocation();
@@ -67,10 +66,10 @@ const App = () => {
       "/register/success",
       "/Employersuccess"
     ]; // Add all routes where navbar should be hidden
+
     const userNavbarRoutes = [
       "/userdashboard",
       "/userjobs",
-      "/userjobs/details/:id",
       "/userapplicationstatus",
       "/usersavedjobs",
       "/userblog",
@@ -78,11 +77,13 @@ const App = () => {
       "/userprofile",
       "/usersettings",
     ];
+
     const adminNavbarRoutes = [
       "/admindashboard",
       "/adminjobdetails",
       "/adminblog",
     ];
+
     const employerNavbarRoutes = [
       "/employerdashboard",
       "/employerjobform",
@@ -90,18 +91,29 @@ const App = () => {
       "/employerapplicants",
     ];
 
+    // Check if the current route is in the noNavbarRoutes array
     if (noNavbarRoutes.includes(location.pathname)) {
       return null; // No navbar for these routes
-    } 
-      else if (userNavbarRoutes.includes(location.pathname)) {
-      return <UserNavbar />; // Show UserNavbar for specific routes
     }
-      else if (employerNavbarRoutes.includes(location.pathname)) {
-      return <EmployerNavbar />; // Show UserNavbar for specific routes
+
+    // Check if the current route starts with any user-specific route
+    if (
+      userNavbarRoutes.includes(location.pathname) ||
+      location.pathname.startsWith("/userjobsdetails")
+    ) {
+      return <UserNavbar />; // Show UserNavbar for user-specific routes
     }
-     else if (adminNavbarRoutes.includes(location.pathname)) {
-      return <AdminNavbar />; // Show UserNavbar for specific routes
+
+    // Check if the current route is in the employerNavbarRoutes array
+    if (employerNavbarRoutes.includes(location.pathname)) {
+      return <EmployerNavbar />; // Show EmployerNavbar for employer-specific routes
     }
+
+    // Check if the current route is in the adminNavbarRoutes array
+    if (adminNavbarRoutes.includes(location.pathname)) {
+      return <AdminNavbar />; // Show AdminNavbar for admin-specific routes
+    }
+
     return <Navbar />; // Default Navbar for other routes
   };
 
@@ -113,7 +125,7 @@ const App = () => {
           {/* User-specific routes */}
           <Route path="/userdashboard" element={<UserDashboard />} />
           <Route path="/userjobs" element={<UserJobs />} />
-          <Route path="/userjobs/details/:id" element={<UserJobDetails />} />
+          <Route path="/userjobsdetails/:id" element={<UserJobDetails />} />
           <Route path="/userapplicationstatus" element={<UserApplicationStatus />} />
           <Route path="/usersavedjobs" element={<UserSavedJobs />} />
           <Route path="/userblog" element={<UserBlog />} />
@@ -146,12 +158,11 @@ const App = () => {
         <Route path="/Employersreg" element={<EmployerReg />} />
         <Route path="/Employersuccess" element={<EmployerSuccess />} />
 
-
         {/* Example for Sign In */}
         <Route path="/forgotpassword" element={<ForgottenPassword />} />
-        <Route path="/forgotpasswordnumber" element={<ForgottenPasswordNumber />}/>
+        <Route path="/forgotpasswordnumber" element={<ForgottenPasswordNumber />} />
         <Route path="/forgotpasswordcodesemail" element={<ForgotPasswordCodes />} />
-        <Route path="/forgotpasswordcodesnumber"  element={<ForgotPasswordCodesNumber />} />
+        <Route path="/forgotpasswordcodesnumber" element={<ForgotPasswordCodesNumber />} />
         <Route path="/changepasswords" element={<ChangePassword />} />
         <Route path="/register/personal" element={<PersonalInfoPage />} />
         <Route path="/success" element={<SuccessPage />} />
@@ -159,7 +170,7 @@ const App = () => {
         <Route path="/register/education" element={<Education />} />
         <Route path="/register/resume" element={<Resume />} />
         <Route path="/register/success" element={<RegisteredSuccess />} />
-      </Routes>      
+      </Routes>
     </div>
   );
 };
