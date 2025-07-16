@@ -1,29 +1,52 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createJob } from "../jobService";
+import axios from "axios";
 
 const EmployerJobForm = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
+    responsibility: "", // Added
+    qualifications: [], // Added
     minimum_salary: "",
     maximum_salary: "",
     company_name: "",
-    job_type: "Full-time", // Default value
-    salary_period: "Monthly", // Default value
-    job_category_ids: [], // Example: [1, 3]
+    job_type: "Full-time",
+    salary_period: "Monthly",
+    job_category_ids: [],
   });
 
-  const [categories] = useState([ // Example categories
+  const [categories] = useState([
     { id: 1, name: "Engineering" },
     { id: 2, name: "Marketing" },
     { id: 3, name: "Finance" },
   ]);
 
-  const [statusMessage, setStatusMessage] = useState(""); // To store the success/error message
-  const [statusType, setStatusType] = useState(""); // To track the status type (success, failure, error)
+  const [statusMessage, setStatusMessage] = useState("");
+  const [statusType, setStatusType] = useState("");
+  const navigate = useNavigate();
 
-  const navigate = useNavigate(); // for redirecting
+  const createJob = async (jobData) => {
+    const token = localStorage.getItem('authToken');
+    if (!token) throw new Error('No authentication token found');
+
+    try {
+      const response = await axios.post(
+        "https://jobestate-backend-repo-df.onrender.com/api/jobs",
+        jobData,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          }
+        }
+      );
+      return response.data;
+    } catch (error) {
+      const message = error.response?.data?.message || error.message;
+      throw new Error(message);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,241 +56,238 @@ const EmployerJobForm = () => {
   const handleCategoryChange = (e) => {
     const value = parseInt(e.target.value, 10);
     const selectedCategories = [...formData.job_category_ids];
+    setFormData({
+      ...formData,
+      job_category_ids: selectedCategories.includes(value)
+        ? selectedCategories.filter((id) => id !== value)
+        : [...selectedCategories, value],
+    });
+  };
 
-    if (selectedCategories.includes(value)) {
-      setFormData({
-        ...formData,
-        job_category_ids: selectedCategories.filter((id) => id !== value),
-      });
-    } else {
-      setFormData({
-        ...formData,
-        job_category_ids: [...selectedCategories, value],
-      });
-    }
+  const handleQualificationsChange = (e) => {
+    const quals = e.target.value
+      .split("\n")
+      .map((q) => q.trim())
+      .filter((q) => q !== "");
+    setFormData({ ...formData, qualifications: quals });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Data Submitted:", formData); // Debug log
+    setStatusMessage("");
+    setStatusType("");
+
+    // Validate required fields
+    if (
+      !formData.title ||
+      !formData.description ||
+      !formData.responsibility ||
+      !formData.company_name ||
+      formData.qualifications.length === 0
+    ) {
+      setStatusMessage("Please fill in all required fields");
+      setStatusType("error");
+      return;
+    }
+
+    // Validate salary
+    if (
+      (formData.minimum_salary && !formData.maximum_salary) ||
+      (!formData.minimum_salary && formData.maximum_salary)
+    ) {
+      setStatusMessage("Please provide both minimum and maximum salary or leave both empty");
+      setStatusType("error");
+      return;
+    }
 
     try {
       const jobData = {
         ...formData,
-        minimum_salary: Number(formData.minimum_salary),
-        maximum_salary: Number(formData.maximum_salary),
+        minimum_salary: formData.minimum_salary ? Number(formData.minimum_salary) : null,
+        maximum_salary: formData.maximum_salary ? Number(formData.maximum_salary) : null,
       };
-      const newJob = await createJob(jobData);
-      console.log("Job created successfully:", newJob); // Debug log
 
+      const newJob = await createJob(jobData);
+      
       setStatusMessage("Job created successfully!");
       setStatusType("success");
 
-      // Redirect after 3 seconds
-      setTimeout(() => {
-        // Redirect to EmployerJobs page (or AdminDashboard, depending on user role)
-        navigate("/employerjobs", {
-          state: { job: newJob }, // passing job data as state to the next page
-        });
-      }, 3000);
-
+      setTimeout(() => navigate("/userjobs", { state: { job: newJob } }), 2000);
     } catch (error) {
-      console.error("Failed to create job:", error); // Debug log
-      setStatusMessage("Failed to create job. Please try again.");
+      setStatusMessage(error.message || "Failed to create job");
       setStatusType("error");
     }
   };
 
-
-  
   return (
-    <div
-      className="w-full flex justify-center h-full mt-24 md:mt-32 md:h-full p-6 bg-white shadow-lg rounded-lg"
-    //   style={bgimage}
-    >
+    <div className="w-full flex justify-center h-full mt-24 md:mt-32 p-6 bg-white shadow-lg rounded-lg">
+      <form onSubmit={handleSubmit} className="max-w-[674px] w-full">
+        <div className="w-full flex flex-col gap-5">
+          <h1 className="text-2xl font-bold mb-4">Post a New Job</h1>
 
-      <form
-        onSubmit={handleSubmit}
-        className="max-w-[674px] md:h-screen overflow-auto flex-col gap-5 mt-6 md:mt-[70px] w-full"
-      >
-        <div className="w-full flex overflow-auto scrollbar-hide  flex-col gap-5 ">
-
-          {/* Status Message */}
           {statusMessage && (
-            <div
-              className={`mb-4 p-3 rounded-md text-center ${
-                statusType === "success"
-                  ? "bg-green-200 text-green-800"
-                  : statusType === "error"
-                  ? "bg-red-200 text-red-800"
-                  : "bg-yellow-200 text-yellow-800"
-              }`}
-            >
+            <div className={`p-3 rounded-md text-center ${
+              statusType === "success" ? "bg-green-200 text-green-800" 
+              : "bg-red-200 text-red-800"
+            }`}>
               {statusMessage}
             </div>
           )}
 
-        <h1 className="text-2xl font-bold mb-4">Post a New Job</h1>
-
+          {/* Company Name */}
           <div className="w-full flex flex-col gap-1">
-            <h1 className="text-[14px] text-[#012C68]">COMPANY NAME</h1>
+            <label className="text-[14px] text-[#012C68]">COMPANY NAME</label>
             <input
-         type="text"
-         name="company_name"
-         value={formData.company_name}
-         onChange={handleChange}
+              type="text"
+              name="company_name"
+              value={formData.company_name}
+              onChange={handleChange}
               placeholder="Enter Company Name"
-              className={`
-                w-full outline-none rounded-[6px] border-[1px] text-[14px] p-3 text-black font-[300] border-[#E1E1E1] h-[50px]
-           
-              `}
+              className="w-full p-3 h-[50px] border rounded-[6px]"
+              required
             />
           </div>
 
-          
+          {/* Job Title */}
           <div className="w-full flex flex-col gap-1">
-            <h1 className="text-[14px] text-[#012C68]">JOB TITLE</h1>
+            <label className="text-[14px] text-[#012C68]">JOB TITLE</label>
             <input
               type="text"
-                name="title"
-                value={formData.title}
-                onChange={handleChange}
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
               placeholder="Enter Job Title"
-              className={`
-                w-full outline-none rounded-[6px] border-[1px] text-[14px] p-3 text-black font-[300] border-[#E1E1E1] h-[50px]
-           
-              `}
+              className="w-full p-3 h-[50px] border rounded-[6px]"
+              required
             />
           </div>
 
-         
+          {/* Job Description */}
           <div className="w-full flex flex-col gap-1">
-            <h1 className="text-[14px] text-[#012C68]">Job Description</h1>
-            <textarea type="text" id=""
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-             placeholder="Enter Job Description" 
-                          className={`
-                            w-full outline-none rounded-[6px] border-[1px] text-[14px] p-3 text-black font-[300] border-[#E1E1E1] h-[100px]
-                      
-                          `}></textarea>
-            {/* <input
-              type="text"
-              //   name="fullName"
-              //   value={formData.fullName}
-              //   onChange={handleChange}
+            <label className="text-[14px] text-[#012C68]">DESCRIPTION</label>
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
               placeholder="Enter Job Description"
-              className={`
-                w-full outline-none rounded-[6px] border-[1px] text-[14px] p-3 text-[#98A2B3] font-[300] border-[#E1E1E1] h-[100px]
-          
-              `}
-            /> */}
+              className="w-full p-3 h-[100px] border rounded-[6px]"
+              required
+            />
           </div>
 
+          {/* Responsibilities */}
+          <div className="w-full flex flex-col gap-1">
+            <label className="text-[14px] text-[#012C68]">RESPONSIBILITIES</label>
+            <textarea
+              name="responsibility"
+              value={formData.responsibility}
+              onChange={handleChange}
+              placeholder="Describe job responsibilities"
+              className="w-full p-3 h-[100px] border rounded-[6px]"
+              required
+            />
+          </div>
 
-
-      {/* Job Categories */}
-      <div className="mb-4">
-      <h1 className="text-[14px] text-[#012C68]">Job Category</h1>
-        <div className="flex flex-wrap gap-2">
-          {categories.map((category) => (
-            <label key={category.id} className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                value={category.id}
-                checked={formData.job_category_ids.includes(category.id)}
-                onChange={handleCategoryChange}
-              />
-                  {category.name}
+          {/* Qualifications */}
+          <div className="w-full flex flex-col gap-1">
+            <label className="text-[14px] text-[#012C68]">
+              QUALIFICATIONS (one per line)
             </label>
-          ))}
-        </div>
-      </div>
+            <textarea
+              name="qualifications"
+              value={formData.qualifications.join("\n")}
+              onChange={handleQualificationsChange}
+              placeholder="Example:
+- Bachelor's Degree
+- 2+ years experience"
+              className="w-full p-3 h-[100px] border rounded-[6px]"
+              required
+            />
+          </div>
 
-            {/* Salary */}
-            <div className="flex gap-4 mb-4">
-                <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Minimum Salary</label>
-                <input 
-                    type="number"
-                    name="minimum_salary"
-                    value={formData.minimum_salary}
-                    onChange={handleChange}
-                    placeholder="e.g. 50,000" 
-                    className="w-full px-4 py-2 border rounded-md focus:ring focus:ring-blue-300"
-                />
-                </div>
-                <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Maximum Salary</label>
-                <input 
-               type="number"
-               name="maximum_salary"
-               value={formData.maximum_salary}
-               onChange={handleChange}
-                    placeholder="e.g. 80,000" 
-                    className="w-full px-4 py-2 border rounded-md focus:ring focus:ring-blue-300"
-                />
-                </div>
+          {/* Job Categories */}
+          <div className="w-full flex flex-col gap-1">
+            <label className="text-[14px] text-[#012C68]">CATEGORIES</label>
+            <div className="flex flex-wrap gap-4">
+              {categories.map((category) => (
+                <label key={category.id} className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    value={category.id}
+                    checked={formData.job_category_ids.includes(category.id)}
+                    onChange={handleCategoryChange}
+                  />
+                  {category.name}
+                </label>
+              ))}
             </div>
+          </div>
 
+          {/* Salary Fields */}
+          <div className="flex gap-4">
+            <div className="flex-1">
+              <label className="text-[14px] text-[#012C68]">MIN SALARY</label>
+              <input
+                type="number"
+                name="minimum_salary"
+                value={formData.minimum_salary}
+                onChange={handleChange}
+                placeholder="e.g., 50000"
+                className="w-full p-3 h-[50px] border rounded-[6px]"
+              />
+            </div>
+            <div className="flex-1">
+              <label className="text-[14px] text-[#012C68]">MAX SALARY</label>
+              <input
+                type="number"
+                name="maximum_salary"
+                value={formData.maximum_salary}
+                onChange={handleChange}
+                placeholder="e.g., 80000"
+                className="w-full p-3 h-[50px] border rounded-[6px]"
+              />
+            </div>
+          </div>
 
-                  {/* Salary Period */}
-      <div className="mb-4">
-        <label className="block text-sm font-medium mb-1">Salary Period</label>
-        <select
-          name="salary_period"
-          value={formData.salary_period}
-          onChange={handleChange}
-          className="w-full border px-3 py-2 rounded"
-        >
-          <option value="Annual">Annual</option>
-          <option value="Monthly">Monthly</option>
-        </select>
-      </div>
+          {/* Salary Period */}
+          <div className="w-full flex flex-col gap-1">
+            <label className="text-[14px] text-[#012C68]">SALARY PERIOD</label>
+            <select
+              name="salary_period"
+              value={formData.salary_period}
+              onChange={handleChange}
+              className="w-full p-3 h-[50px] border rounded-[6px]"
+            >
+              <option value="Annual">Annual</option>
+              <option value="Monthly">Monthly</option>
+            </select>
+          </div>
 
+          {/* Job Type */}
+          <div className="w-full flex flex-col gap-1">
+            <label className="text-[14px] text-[#012C68]">JOB TYPE</label>
+            <select
+              name="job_type"
+              value={formData.job_type}
+              onChange={handleChange}
+              className="w-full p-3 h-[50px] border rounded-[6px]"
+            >
+              <option value="Full-time">Full-time</option>
+              <option value="Part-time">Part-time</option>
+              <option value="Contract">Contract</option>
+              <option value="Remote">Remote</option>
+              <option value="Hybrid">Hybrid</option>
+              <option value="On-Site">On-Site</option>
+            </select>
+          </div>
 
-      {/* Job Type */}
-      <div className="mb-4">
-        <label className="block text-sm font-medium mb-1">Job Type</label>
-        <select
-          name="job_type"
-          value={formData.job_type}
-          onChange={handleChange}
-          className="w-full border px-3 py-2 rounded"
-        >
-          <option value="Full-time">Full-time</option>
-          <option value="Part-time">Part-time</option>
-          <option value="Contract">Contract</option>
-          <option value="Remote">Remote</option>
-          <option value="Hybrid">Hybrid</option>
-          <option value="On-Site">On-Site</option>
-        </select>
-      </div>
-
-
-
-            {/* Submit
-            <Link to='/employerjobs'>
-                Publish Job
-            </Link > */}
-
-        <button
-        type="submit"
-        className="w-full flex justify-center bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"      
-        >
-                Publish Job
-
-            {/* <Link to='/employerjobs'>
-                Publish Job
-            </Link >  */}
-      </button>
-
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 mt-4"
+          >
+            Publish Job
+          </button>
         </div>
-
-
-
-
       </form>
     </div>
   );

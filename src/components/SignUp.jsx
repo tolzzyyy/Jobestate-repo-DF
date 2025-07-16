@@ -107,7 +107,7 @@ const SignUp = () => {
       localStorage.setItem('userToken', response.data.token);
       
       // Navigate to next step or dashboard
-      navigate('/userDashboard');
+      navigate('/userdashboard');
     } catch (error) {
       // Handle API errors
       if (error.response) {

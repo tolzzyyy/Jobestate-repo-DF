@@ -85,7 +85,7 @@ const App = () => {
     ];
 
     const employerNavbarRoutes = [
-      "/employerdashboard",
+      "/employerprofile",
       "/employerjobform",
       "/employerjobs",
       "/employerapplicants",
@@ -134,7 +134,7 @@ const App = () => {
           <Route path="/usersettings" element={<UserSettings />} />
 
           {/* Employer-specific routes */}
-          <Route path="/employerdashboard" element={<EmployerDashboard />} />
+          <Route path="/employerprofile" element={<EmployerDashboard />} />
           <Route path="/employerjobform" element={<EmployerJobForm />} />
           <Route path="/employerjobs" element={<EmployerJobs />} />
           <Route path="/employerapplicants" element={<EmployerApplicants />} />
