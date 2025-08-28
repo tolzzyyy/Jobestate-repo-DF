@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../components/img/logo.png'
+import logo from '../Assets/img/logo.png'
 import {NavLink} from "react-router-dom"
 import { RiDashboardFill } from "react-icons/ri";
 import { BiSolidBriefcase } from "react-icons/bi";

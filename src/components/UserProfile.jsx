@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { FaBars, FaBell, FaTimes } from 'react-icons/fa';
 // import { FaAmazon } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
-import logo from '../components/img/logo.png'
+import logo from '../Assets/img/logo.png'
 import { RiDashboardFill } from 'react-icons/ri';
 import { BiSolidBriefcase } from 'react-icons/bi';
 // import { GrStatusGood } from 'react-icons/gr';
@@ -10,7 +10,7 @@ import { BsFillBookmarkCheckFill } from 'react-icons/bs';
 import { TfiWrite } from 'react-icons/tfi';
 import { IoPersonCircle } from 'react-icons/io5';
 import { IoIosSettings } from 'react-icons/io';
-import profileface from '../components/img/profile-JB.png'
+import profileface from '../Assets/img/profile-JB.png'
 import { CiEdit } from "react-icons/ci";
 // import { MdOutlineArrowOutward } from 'react-icons/md';
 // import { CiBookmark } from "react-icons/ci";
