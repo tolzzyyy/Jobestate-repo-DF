@@ -3,7 +3,7 @@ import { FaBars, FaBell, FaTimes } from 'react-icons/fa';
 // import { FaAmazon } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import logo from '../components/img/logo.png'
+import logo from '../Assets/img/logo.png'
 import { RiDashboardFill } from 'react-icons/ri';
 import { BiSolidBriefcase } from 'react-icons/bi';
 import { GrStatusGood } from 'react-icons/gr';
@@ -11,7 +11,7 @@ import { BsFillBookmarkCheckFill } from 'react-icons/bs';
 import { TfiWrite } from 'react-icons/tfi';
 import { IoPersonCircle } from 'react-icons/io5';
 import { IoIosSettings } from 'react-icons/io';
-import { IoBookmarkOutline, IoBookmark } from "react-icons/io5"; // Import Save icon
+// import { IoBookmarkOutline, IoBookmark } from "react-icons/io5"; // Import Save icon
 // import { fetchJobs } from "../jobService";
 import axios from "axios"
 import { CiBookmark } from 'react-icons/ci';
@@ -200,19 +200,19 @@ const UserDashboard = ({ job }) => {
 
 
   // Handle Save Job
-  const handleSaveJob = () => {
-    let updatedJobs;
-    if (isSaved) {
-      // Remove job if already saved
-      updatedJobs = savedJobs.filter((savedJob) => savedJob.id !== job.id);
-    } else {
-      // Add job to saved list
-      updatedJobs = [...savedJobs, job];
-    }
+  // const handleSaveJob = () => {
+  //   let updatedJobs;
+  //   if (isSaved) {
+  //     // Remove job if already saved
+  //     updatedJobs = savedJobs.filter((savedJob) => savedJob.id !== job.id);
+  //   } else {
+  //     // Add job to saved list
+  //     updatedJobs = [...savedJobs, job];
+  //   }
 
-    setSavedJobs(updatedJobs);
-    localStorage.setItem("savedJobs", JSON.stringify(updatedJobs)); // Persist to localStorage
-  };
+  //   setSavedJobs(updatedJobs);
+  //   localStorage.setItem("savedJobs", JSON.stringify(updatedJobs)); // Persist to localStorage
+  // };
 
 
   if (loading) return <p className='ml-72 text-blue-500'>Loading jobs...</p>;

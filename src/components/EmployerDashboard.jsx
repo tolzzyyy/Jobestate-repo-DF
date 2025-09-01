@@ -10,7 +10,7 @@ import React from 'react'
 // import { TfiWrite } from 'react-icons/tfi';
 // import { IoPersonCircle } from 'react-icons/io5';
 // import { IoIosSettings } from 'react-icons/io';
-import profileface from '../components/img/profile-JB.png'
+import profileface from '../Assets/img/profile-JB.png'
 // import { CiEdit } from "react-icons/ci";
 // import { MdOutlineArrowOutward } from 'react-icons/md';
 // import { CiBookmark } from "react-icons/ci";

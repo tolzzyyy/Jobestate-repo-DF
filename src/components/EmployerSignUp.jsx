@@ -1,13 +1,13 @@
 import React from 'react'
-import image from "../Assets/Rectangle 3576 (1).png";
-import bg from "../Assets/bg.png";
-import logo from "../Assets/Logo - Horizontal.png";
+// import image from "../Assets/Rectangle 3576 (1).png";
+import bg from "../Assets/img/bg.png";
+import logo from "../Assets/img/Logo - Horizontal.png";
 import { Link } from 'react-router-dom';
 // import { GrGoogle } from "react-icons/gr";
-import google from "../Assets/Rectangle 6.png";
+// import google from "../Assets/img/Rectangle 6.png";
 import { FaTwitter } from "react-icons/fa";
 import { BiCheck } from "react-icons/bi";
-import phone from "../Assets/smartphone-device.png";
+import phone from "../Assets/img/smartphone-device.png";
 
 
 const EmployerSignUp = () => {
@@ -89,7 +89,7 @@ const EmployerSignUp = () => {
                 <div className="border-t-[1px] w-full flex border-[#E4E8EC]"></div>
               </div>
               <button className="w-full bg-white flex items-center justify-center gap-4 border-[#D3D8E0] border-[1px] text-black rounded-[6px] h-[50px]">
-                <img className="w-[20px]" src={google} alt="" /> Continue with
+                <img className="w-[20px]"  alt="" /> Continue with
                 Google
               </button>
 
@@ -117,7 +117,7 @@ const EmployerSignUp = () => {
       <div className="w-full">
         <img
           className="w-full hidden xl:flex bg-center object-cover h-screen"
-          src={image}
+          // src={image}
           alt=""
         />
       </div>

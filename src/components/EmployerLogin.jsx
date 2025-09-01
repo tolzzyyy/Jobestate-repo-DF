@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import image from "../Assets/Rectangle 3576 (1).png";
-import bg from "../Assets/bg.png";
-import logo from "../Assets/Logo - Horizontal.png";
-import google from "../Assets/Rectangle 6.png";
+// import image from "../Assets/img/Rectangle 3576.png";
+import bg from "../Assets/img/bg.png";
+import logo from "../Assets/img/Logo - Horizontal.png";
+import google from "../Assets/img/Rectangle 6.png";
 import { FaTwitter } from "react-icons/fa";
-import phone from "../Assets/smartphone-device.png";
+import phone from "../Assets/img/smartphone-device.png";
 
 const EmployerLogin = () => {
   const navigate = useNavigate();
@@ -183,7 +183,7 @@ const EmployerLogin = () => {
         <div className="w-full">
           <img
             className="w-full hidden xl:flex bg-center object-cover h-screen"
-            src={image}
+            // src={image}
             alt="Login illustration"
           />
         </div>

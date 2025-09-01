@@ -1,14 +1,14 @@
 import React from 'react'
-import nawa from './img/bg.png'
-import damn from './img/techtalkbg.jpg'
-import blogimg1 from './img/blogimg1.jpg'
-import blogimg2 from './img/blogimg2.jpg'
-import blogimg3 from './img/blogimg3.jpg'
-import blogimg4 from './img/blogimg4.jpg'
-import blogimg5 from './img/blogimg5.jpg'
-import face1 from '../components/img/face1.png'
-import face2 from '../components/img/face2.png'
-import face3 from '../components/img/face3.png'
+import nawa from '../Assets/img/bg.png'
+// import damn from '../Assets/img/techtalkbg.jpg'
+import blogimg1 from '../Assets/img/blogimg1.jpg'
+// import blogimg2 from './img/blogimg2.jpg'
+// import blogimg3 from './img/blogimg3.jpg'
+// import blogimg4 from './img/blogimg4.jpg'
+import blogimg5 from '../Assets/img/blogimg5.jpg'
+import face1 from '../Assets/img/face1.png'
+import face2 from '../Assets/img/face2.png'
+// import face3 from '../Assets/img/face3.png'
 import Footer from './Footer';
 import { MdOutlineArrowOutward } from "react-icons/md";
 
@@ -18,11 +18,11 @@ const bgImage = {
     backgroundSize: 'cover'
 }
 
-const bgImageBlog = {
-    backgroundImage: `url(${damn})`,
-    backgroundPosition: 'center',
-    backgroundSize: 'cover'
-}
+// const bgImageBlog = {
+//     backgroundImage: `url(${damn})`,
+//     backgroundPosition: 'center',
+//     backgroundSize: 'cover'
+// }
 
 const blogPosts = [
   {
@@ -34,33 +34,33 @@ const blogPosts = [
     description: 'Lorem ipsum dolor sit amet consectetur. Porta et enim mus auctor nunc diam...',
     authorImage: face1,
   },
-  {
-    id: 1,
-    title: 'How AI is Revolutionizing Industries and Shaping Our World',
-    image: blogimg3,
-    author: 'Samuel Giggs',
-    date: '13 October, 2024',
-    description: 'Lorem ipsum dolor sit amet consectetur. Porta et enim mus auctor nunc diam...',
-    authorImage: face2,
-  },
-  {
-    id: 1,
-    title: 'How AI is Revolutionizing Industries and Shaping Our World',
-    image: blogimg4,
-    author: 'John Doe',
-    date: '13 October, 2024',
-    description: 'Lorem ipsum dolor sit amet consectetur. Porta et enim mus auctor nunc diam...',
-    authorImage: face1,
-  },
-  {
-    id: 1,
-    title: 'How AI is Revolutionizing Industries and Shaping Our World',
-    image: blogimg2,
-    author: 'Elizabeth Williams',
-    date: '13 October, 2024',
-    description: 'Lorem ipsum dolor sit amet consectetur. Porta et enim mus auctor nunc diam...',
-    authorImage: face3,
-  },
+  // {
+  //   id: 1,
+  //   title: 'How AI is Revolutionizing Industries and Shaping Our World',
+  //   image: blogimg3,
+  //   author: 'Samuel Giggs',
+  //   date: '13 October, 2024',
+  //   description: 'Lorem ipsum dolor sit amet consectetur. Porta et enim mus auctor nunc diam...',
+  //   authorImage: face2,
+  // },
+  // {
+  //   id: 1,
+  //   title: 'How AI is Revolutionizing Industries and Shaping Our World',
+  //   image: blogimg4,
+  //   author: 'John Doe',
+  //   date: '13 October, 2024',
+  //   description: 'Lorem ipsum dolor sit amet consectetur. Porta et enim mus auctor nunc diam...',
+  //   authorImage: face1,
+  // },
+  // {
+  //   id: 1,
+  //   title: 'How AI is Revolutionizing Industries and Shaping Our World',
+  //   image: blogimg2,
+  //   author: 'Elizabeth Williams',
+  //   date: '13 October, 2024',
+  //   description: 'Lorem ipsum dolor sit amet consectetur. Porta et enim mus auctor nunc diam...',
+  //   authorImage: face3,
+  // },
   {
     id: 1,
     title: 'How AI is Revolutionizing Industries and Shaping Our World',
@@ -89,7 +89,7 @@ const Blog = () => {
               <MdOutlineArrowOutward size={24}/>
             </button>
           </div>
-          <div style={bgImageBlog} className='w-full h-full rounded-xl'></div>
+          {/* <div style={bgImageBlog} className='w-full h-full rounded-xl'></div> */}
         </section>
         <section className='h-auto flex flex-col gap-7 py-10 md:px-[50px] md:flex md:h-full items-center lg:items-start lg:px-[135px] lg:py-14 lg:flex lg:h-full'>
           <div className='flex flex-col gap-7 md:gap-0 md:flex-row w-full justify-between items-center'>

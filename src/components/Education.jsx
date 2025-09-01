@@ -1,8 +1,8 @@
 import React from 'react'
 import { FaPlus } from 'react-icons/fa6';
 import RegistrationProgress from "./RegistrationProgress";
-import bg from "../Assets/bg.png";
-import logo from "../Assets/Logo - Horizontal.png";
+import bg from "../Assets/img/bg.png";
+import logo from "../Assets/img/Logo - Horizontal.png";
 
 import { Link, useNavigate } from "react-router-dom";
 const Education = () => {
