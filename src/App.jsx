@@ -89,6 +89,7 @@ const App = () => {
       "/employerjobform",
       "/employerjobs",
       "/employerapplicants",
+      "/employerdashboard",
     ];
 
     // Check if the current route is in the noNavbarRoutes array
