@@ -29,18 +29,21 @@ import Education from "./components/Education";
 import Resume from "./components/Resume";
 import RegisteredSuccess from "./components/RegisteredSuccess";
 import AdminNavbar from "./components/AdminNavbar";
-import AdminDashboard from "./components/AdminDashboard";
+// import AdminDashboard from "./components/AdminDashboard";
 import EmployerLogin from "./components/EmployerLogin";
 import EmployerSignUp from "./components/EmployerSignUp";
 import EmployerReg from "./components/EmployerReg";
 import EmployerSuccess from "./components/EmployerSuccess";
-import AdminJobDetails from "./components/AdminJobDetails";
-import AdminBlog from "./components/AdminBlog";
+// import AdminJobDetails from "./components/AdminJobDetails";
+// import AdminBlog from "./components/AdminBlog";
 import EmployerNavbar from "./components/EmployerNavbar";
 import EmployerDashboard from "./components/EmployerDashboard";
 import EmployerJobForm from "./components/EmployerJobForm";
-import EmployerJobs from "./components/EmployerJobs";
+// import EmployerJobs from "./components/EmployerJobs";
 import EmployerApplicants from "./components/EmployerApplicants";
+import AdminJobSeekers from "./components/AdminJobSeekers";
+import AdminEmployers from "./components/AdminEmployers";
+import ApproveJobs from "./components/ApproveJobs";
 
 const App = () => {
   const location = useLocation();
@@ -82,6 +85,9 @@ const App = () => {
       "/admindashboard",
       "/adminjobdetails",
       "/adminblog",
+      "/adminjobseekers",
+      "/adminemployers",  
+      "/approvejobs", 
     ];
 
     const employerNavbarRoutes = [
@@ -137,13 +143,16 @@ const App = () => {
           {/* Employer-specific routes */}
           <Route path="/employerprofile" element={<EmployerDashboard />} />
           <Route path="/employerjobform" element={<EmployerJobForm />} />
-          <Route path="/employerjobs" element={<EmployerJobs />} />
+          {/* <Route path="/employerjobs" element={<EmployerJobs />} /> */}
           <Route path="/employerapplicants" element={<EmployerApplicants />} />
+          <Route path="/employerdashboard" element={<EmployerDashboard />} />
 
           {/* Admin-specific routes */}
-          <Route path="/admindashboard" element={<AdminDashboard />} />
-          <Route path="/adminjobdetails" element={<AdminJobDetails />} />
-          <Route path="/adminblog" element={<AdminBlog />} />
+          <Route path="/adminjobseekers" element={<AdminJobSeekers />} />
+          <Route path="/adminemployers" element={<AdminEmployers />} />
+          <Route path="/approvejobs" element={<ApproveJobs />} />
+          {/* <Route path="/adminjobdetails" element={<AdminJobDetails />} /> */}
+          {/* <Route path="/adminblog" element={<AdminBlog />} /> */}
         </Routes>
       </div>
 

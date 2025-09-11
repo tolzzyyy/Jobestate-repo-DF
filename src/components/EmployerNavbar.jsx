@@ -80,23 +80,23 @@ setOpen(!open)
                     
                     >Find Jobs</NavLink> */}
                     <NavLink
-                    to='/'
+                    to='/employerapplicants'
                     className={({isActive}) =>
                     isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
                     
                     >Applications</NavLink>
                     <NavLink
-                    to='/'
+                    to='/employerjobform'
                     className={({isActive}) =>
                     isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
                     
                     >Create Jobs</NavLink>
-                    <NavLink
-                    to='/'
+                    {/* <NavLink
+                    to='/employerjobstatus'
                     className={({isActive}) =>
                     isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
                     
-                    >Job Status</NavLink>
+                    >Job Status</NavLink> */}
                 </div>
                 <div className="flex items-center relative gap-6 xl:hidden">
                   <div onClick={HandleShow} className="flex items-center">

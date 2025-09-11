@@ -63,14 +63,14 @@ setOpen(!open)
                             <img src={logo} alt="logo" className='w-[120px] md:w-[150px] lg:w-[170px]'/> 
                         </div>
                         <div className='hidden md:hidden xl:flex gap-[60px] text-[15px]'>
-                            <NavLink
+                            {/* <NavLink
                             to='/admindashboard'
                             className={({isActive}) =>
                             isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
                             
-                            >Home</NavLink>
+                            >Home</NavLink> */}
                             <NavLink
-                            to='/'
+                            to='/adminjobseekers'
                             className={({isActive}) =>
                             isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
                             
@@ -82,13 +82,13 @@ setOpen(!open)
                             
                             >Find Jobs</NavLink> */}
                             <NavLink
-                            to='/'
+                            to='/adminemployers'
                             className={({isActive}) =>
                             isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
                             
                             >Employers</NavLink>
                             <NavLink
-                            to='/'
+                            to='/approvejobs'
                             className={({isActive}) =>
                             isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
                             
@@ -132,16 +132,16 @@ setOpen(!open)
                             ${open ? "translate-y-0" : "-translate-y-full"}
                           `}
                         >
-                          <NavLink
+                          {/* <NavLink
                             to="/userdashboard"
                             className={({isActive}) =>
                             isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
                             onClick={() => setOpen(false)}
                           >
                             Home
-                          </NavLink>
+                          </NavLink> */}
                           <NavLink
-                            to="/"
+                            to="/adminjobseekers"
                             className={({isActive}) =>
                             isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
                             onClick={() => setOpen(false)}
