@@ -78,7 +78,7 @@ const ApproveJobs = () => {
             <img src={donut} alt="" className='hidden md:flex'/>
           </div>
           <div className='flex justify-between mt-10 gap-8 w-full items-start'>
-            <div className='w-full lg:w-5/12'>
+            <div className='w-full lg:w-5/12 '>
               <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-6 lg:max-h-[600px] lg:overflow-y-auto lg:pr-4'>
                 {jobs.map((job) => (
                   <div 
