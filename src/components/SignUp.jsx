@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import image from "../Assets/Rectangle 3576 (1).png";
-import bg from "../Assets/bg.png";
-import logo from "../Assets/Logo - Horizontal.png";
+// import image from "../Assets/Rectangle 3576 (1).png";
+import bg from "../Assets/img/bg.png";
+import logo from "../Assets/img/Logo - Horizontal.png";
 import { Link } from 'react-router-dom';
-import google from "../Assets/Rectangle 6.png";
-import { FaTwitter } from "react-icons/fa";
+// import google from "../Assets/img/Rectangle 6.png";
+// import { FaTwitter } from "react-icons/fa";
 import { BiCheck } from "react-icons/bi";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import phone from "../Assets/smartphone-device.png";
+import { FaEye, FaEyeSlash, FaPlus } from "react-icons/fa";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi"; 
+// import phone from "../Assets/img/smartphone-device.png";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -142,9 +143,40 @@ const SignUp = () => {
                 </p>
               </div>
               <form onSubmit={handleSubmit} className="w-full flex flex-col gap-5 py-5">
+
+                <div className="md:flex-row flex-col flex md:items-center gap-6 mt-6">
+                          <div className="md:w-[100px] w-full h-[300px] flex items-center justify-center border-[1px] border-[#1155B2] md:h-[100px]">
+                            <FaPlus className="text-[#1155B2]" size={25} />
+                          </div>
+                          <div className="flex flex-col gap-4">
+                            <div>
+                              <h1 className="text-[14px] font-[300]">
+                                Please upload square image, size less than 100KB
+                              </h1>
+                            </div>
+                            <div className="flex items-center gap-6">
+                              <input
+                                type="file"
+                                id="fileInput"
+                                className="hidden"
+                                // onChange={handleFileChange}
+                              />
+                              <label
+                                htmlFor="fileInput"
+                                className="w-[133px] h-[42px] border-[#0149AD] text-[#0149AD] rounded-[5px] flex items-center justify-center border-[1px] cursor-pointer hover:bg-blue-50 transition-colors"
+                              >
+                                Choose File
+                              </label>
+                              <p className="text-[#A4A4A4] text-[14px] font-[300]">
+                                {/* {fileName} */}
+                              </p>
+                            </div>
+                          </div>
+                </div>
+
                 {/* First Name */}
                 <div className="w-full flex flex-col gap-1">
-                  <h1 className="text-[14px] text-[#012C68]">FIRST NAME</h1>
+                  <h1 className="text-[14px] text-[#012C68]">FULL NAME</h1>
                   <input
                     className={`w-full outline-none rounded-[6px] border-[1px] text-[14px] p-3 text-[#98A2B3] font-[400] ${
                       errors.first_name ? 'border-red-500' : 'border-[#E1E1E1]'
@@ -153,14 +185,30 @@ const SignUp = () => {
                     name="first_name"
                     value={formData.first_name}
                     onChange={handleInputChange}
-                    placeholder="Enter First Name"
+                    placeholder="Enter Full Name"
                   />
                   {errors.first_name && <p className="text-red-500 text-[10px] mt-1">{errors.first_name}</p>}
                 </div>
 
-                {/* Last Name */}
+                {/* Email Address */}
                 <div className="w-full flex flex-col gap-1">
-                  <h1 className="text-[14px] text-[#012C68]">LAST NAME</h1>
+                  <h1 className="text-[14px] text-[#012C68]">EMAIL ADDRESS</h1>
+                  <input
+                    className={`w-full outline-none rounded-[6px] border-[1px] text-[14px] p-3 text-[#98A2B3] font-[400] ${
+                      errors.first_name ? 'border-red-500' : 'border-[#E1E1E1]'
+                    } h-[50px]`}
+                    type="text"
+                    name="first_name"
+                    value={formData.first_name}
+                    onChange={handleInputChange}
+                    placeholder="Enter Email Address"
+                  />
+                  {errors.first_name && <p className="text-red-500 text-[10px] mt-1">{errors.first_name}</p>}
+                </div>
+
+                {/* BIO */}
+                <div className="w-full flex flex-col gap-1">
+                  <h1 className="text-[14px] text-[#012C68]">BIO</h1>
                   <input
                     className={`w-full outline-none rounded-[6px] border-[1px] text-[14px] p-3 text-[#98A2B3] font-[400] ${
                       errors.last_name ? 'border-red-500' : 'border-[#E1E1E1]'
@@ -169,30 +217,56 @@ const SignUp = () => {
                     name="last_name"
                     value={formData.last_name}
                     onChange={handleInputChange}
-                    placeholder="Enter Last Name"
+                    placeholder="Enter Bio"
                   />
+                  <p className='text-xs text-gray-500'>Less Than 30 Words</p>
                   {errors.last_name && <p className="text-red-500 text-[10px] mt-1">{errors.last_name}</p>}
                 </div>
 
-                {/* Email Input */}
+                {/* Job Category Input */}
                 <div className="w-full flex flex-col gap-1">
-                  <h1 className="text-[14px] text-[#012C68]">EMAIL ADDRESS</h1>
-                  <input
-                    className={`w-full outline-none rounded-[6px] border-[1px] text-[14px] p-3 text-[#98A2B3] font-[400] ${
-                      errors.email ? 'border-red-500' : 'border-[#E1E1E1]'
-                    } h-[50px]`}
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="Enter Email Address"
-                  />
-                  {errors.email && <p className="text-red-500 text-[10px] mt-1">{errors.email}</p>}
+                  <h1 className="text-[14px] text-[#012C68]">JOB CATEGORY</h1>
+                  <div className="relative">
+                    <input
+                      className={`w-full outline-none rounded-[6px] border-[1px] text-[14px] p-3 text-[#98A2B3] font-[400] ${
+                        errors.password ? 'border-red-500' : 'border-[#E1E1E1]'
+                      } h-[50px] pr-10`}
+                      type={showPassword ? "text" : "password"}
+                      name="password"
+                      value={formData.password}
+                      onChange={handleInputChange}
+                      placeholder="Select Job Category"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#98A2B3]"
+                    >
+                      {showPassword ? <FiChevronDown /> : <FiChevronUp />}
+                    </button>
+                  </div>
+                  {errors.password && <p className="text-red-500 text-[10px] mt-1">{errors.password}</p>}
+                  
+                  {/* Password Requirements
+                  <div className="mt-2">
+                    <p className='text-[14px]'>Create a Password that:</p>
+                    <div className='mt-1'>
+                      <p className='flex gap-2 text-[9px] items-center'>
+                        <BiCheck className='text-green-300' size={20}/> Contains at least 8 characters
+                      </p>
+                      <p className='flex gap-2 text-[9px] items-center'>
+                        <BiCheck className='text-green-300' size={20}/> Contains both lowercase and uppercase letters
+                      </p>
+                      <p className='flex gap-2 text-[9px] items-center'>
+                        <BiCheck className='text-green-300' size={20}/> Contains at least one number
+                      </p>
+                    </div>
+                  </div> */}
                 </div>
 
-                {/* Phone Number */}
+                {/* Job Description */}
                 <div className="w-full flex flex-col gap-1">
-                  <h1 className="text-[14px] text-[#012C68]">PHONE NUMBER</h1>
+                  <h1 className="text-[14px] text-[#012C68]">JOB DESCRIPTION</h1>
                   <input
                     className={`w-full outline-none rounded-[6px] border-[1px] text-[14px] p-3 text-[#98A2B3] font-[400] ${
                       errors.phone_number ? 'border-red-500' : 'border-[#E1E1E1]'
@@ -201,7 +275,39 @@ const SignUp = () => {
                     name="phone_number"
                     value={formData.phone_number}
                     onChange={handleInputChange}
-                    placeholder="Enter Phone Number"
+                    placeholder="e.g Graphic Designer, Web Developer etc"
+                  />
+                  {errors.phone_number && <p className="text-red-500 text-[10px] mt-1">{errors.phone_number}</p>}
+                </div>
+
+                {/* Skills */}
+                <div className="w-full flex flex-col gap-1">
+                  <h1 className="text-[14px] text-[#012C68]">SKILLS</h1>
+                  <input
+                    className={`w-full outline-none rounded-[6px] border-[1px] text-[14px] p-3 text-[#98A2B3] font-[400] ${
+                      errors.phone_number ? 'border-red-500' : 'border-[#E1E1E1]'
+                    } h-[50px]`}
+                    type="tel"
+                    name="phone_number"
+                    value={formData.phone_number}
+                    onChange={handleInputChange}
+                    placeholder="e.g Figma, React etc"
+                  />
+                  {errors.phone_number && <p className="text-red-500 text-[10px] mt-1">{errors.phone_number}</p>}
+                </div>
+
+                {/* Location */}
+                <div className="w-full flex flex-col gap-1">
+                  <h1 className="text-[14px] text-[#012C68]">LOCATION</h1>
+                  <input
+                    className={`w-full outline-none rounded-[6px] border-[1px] text-[14px] p-3 text-[#98A2B3] font-[400] ${
+                      errors.phone_number ? 'border-red-500' : 'border-[#E1E1E1]'
+                    } h-[50px]`}
+                    type="tel"
+                    name="phone_number"
+                    value={formData.phone_number}
+                    onChange={handleInputChange}
+                    placeholder="Enter Location"
                   />
                   {errors.phone_number && <p className="text-red-500 text-[10px] mt-1">{errors.phone_number}</p>}
                 </div>
@@ -273,7 +379,7 @@ const SignUp = () => {
                 </div>
 
                 <button className="w-full bg-white flex items-center justify-center gap-4 border-[#D3D8E0] border-[1px] text-black rounded-[6px] h-[50px]">
-                  <img className="w-[20px]" src={google} alt="" /> Continue with Google
+                  <img className="w-[20px]"  alt="" /> Continue with Google
                 </button>
 
                 <div className="text-[#667185] text-center text-[14px] font-[400] mt-4">
@@ -289,7 +395,7 @@ const SignUp = () => {
         <div className="w-full">
           <img
             className="w-full hidden xl:flex bg-center object-cover h-screen"
-            src={image}
+            // src={image}
             alt=""
           />
         </div>

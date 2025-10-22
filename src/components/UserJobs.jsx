@@ -4,7 +4,7 @@ import { FaBars, FaBell, FaTimes } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
-import logo from '../components/img/logo.png'
+import logo from '../Assets/img/logo.png'
 import { RiDashboardFill } from 'react-icons/ri';
 import { BiSolidBriefcase } from 'react-icons/bi';
 import { GrStatusGood } from 'react-icons/gr';

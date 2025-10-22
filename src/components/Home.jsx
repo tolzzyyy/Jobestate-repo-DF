@@ -1,18 +1,18 @@
 import React from "react";
 // import Navbar from './Navbar';
 // import bg1 from '../components/img/bg.png'
-import face1 from "../components/img/face1.png";
-import face2 from "../components/img/face2.png";
-import face3 from "../components/img/face3.png";
+import face1 from "../Assets/img/face1.png";
+import face2 from "../Assets/img/face2.png";
+import face3 from "../Assets/img/face3.png";
 import { BiSolidStar } from "react-icons/bi";
 import { IoIosSearch } from "react-icons/io";
 import { FaLocationDot } from "react-icons/fa6";
 import { GoArrowDownRight } from "react-icons/go";
 import { IoIosStarHalf, IoIosPaperPlane } from "react-icons/io";
 import { IoPerson, IoCloudUploadSharp } from "react-icons/io5";
-import omo from "./img/bg.png";
-import happyPeople from "../components/img/happyPeople.png";
-import manwithlaptop from "../components/img/manwithlaptop.png";
+import omo from "../Assets/img/bg.png";
+import happyPeople from "../Assets/img/happyPeople.png";
+import manwithlaptop from "../Assets/img/manwithlaptop.png";
 import Footer from "./Footer";
 
 const jobCategories = [

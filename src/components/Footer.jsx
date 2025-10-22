@@ -1,13 +1,13 @@
 import React from 'react'
-import logo from '../components/img/logo.png'
+import logo from '../Assets/img/logo.png'
 import { NavLink } from 'react-router-dom'
 import { MdFacebook } from "react-icons/md";
 import { FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className='flex flex-col gap-10 px-[20px] py-5 w-full md:flex md:justify-between md:px-[50px] md:py-[60px] xl:flex justify-between xl:py-16 xl:px-[135px] xl:h-full items-center bg-white'>
-        <div className='flex flex-col gap-5 md:gap-0 md:flex-row justify-between w-full items-center'>
+    <footer className='flex flex-col gap-10 px-[20px] py-5 w-full md:flex md:justify-between md:px-[50px] md:py-[60px] lg:flex justify-between lg:pb-16 lg:px-[135px] lg:h-full items-center bg-white'>
+        {/* <div className='flex flex-col gap-5 md:gap-0 md:flex-row justify-between w-full items-center'>
             <div className='flex flex-col items-center md:items-start'>
                 <h2 className='font-bold text-[16px] md:text-[20px] lg:text-[23px]'>Join Our Newsletter</h2>
                 <p className='md:w-[270px] lg:w-[300px] text-gray-500 text-sm'>Get all the latest blog news delivered to your inbox.</p>
@@ -24,7 +24,7 @@ const Footer = () => {
                     Subscribe
                 </button>
             </div>
-        </div> 
+        </div>  */}
         <div className='border border-gray-200 w-full opacity-40'></div>
         <div className='flex flex-col md:flex-row gap-10 md:gap-o justify-between w-full justify-items-start'>
             <div className='flex flex-col gap-4 lg:gap-5 text-gray-500'>

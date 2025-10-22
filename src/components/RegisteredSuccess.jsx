@@ -1,6 +1,6 @@
 import React from 'react'
-import bg from "../Assets/bg.png";
-import logo from "../Assets/Logo - Horizontal.png";
+import bg from "../Assets/img/bg.png";
+import logo from "../Assets/img/Logo - Horizontal.png";
 import { FaCheck } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 

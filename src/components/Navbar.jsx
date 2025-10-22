@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import logo from '../components/img/logo.png'
+import logo from '../Assets/img/logo.png'
 import {FaTimes, FaBars} from "react-icons/fa"
 import {Link, NavLink} from "react-router-dom"
 
@@ -22,12 +22,12 @@ setShow(!show)
             isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
             
             >Home</NavLink>
-            <NavLink
+            {/* <NavLink
             to='/findjobs'
             className={({isActive}) =>
             isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
             
-            >Find Jobs</NavLink>
+            >Find Jobs</NavLink> */}
             <NavLink
             to='/blog'
             className={({isActive}) =>

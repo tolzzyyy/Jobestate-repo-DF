@@ -5,7 +5,7 @@ import { FaLocationDot, FaAmazon } from "react-icons/fa6";
 // import { GoArrowDownRight } from "react-icons/go";
 // import { IoIosStarHalf, IoIosPaperPlane } from "react-icons/io";
 // import { IoPerson, IoCloudUploadSharp } from "react-icons/io5";
-import omo from './img/bg.png'
+import omo from '../Assets/img/bg.png'
 import Footer from './Footer';
 // import happyPeople from "../components/img/happyPeople.png"
 // import manwithlaptop from "../components/img/manwithlaptop.png"

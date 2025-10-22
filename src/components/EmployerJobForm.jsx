@@ -123,7 +123,10 @@ const EmployerJobForm = () => {
     <div className="w-full flex justify-center h-full mt-24 md:mt-32 p-6 bg-white shadow-lg rounded-lg">
       <form onSubmit={handleSubmit} className="max-w-[674px] w-full">
         <div className="w-full flex flex-col gap-5">
-          <h1 className="text-2xl font-bold mb-4">Post a New Job</h1>
+          <div className="flex justify-between w-full">
+            <h1 className="text-2xl font-bold mb-4">Post a New Job</h1>
+            <h1 className="text-2xl font-bold mb-4">Company Name</h1>
+          </div>
 
           {statusMessage && (
             <div className={`p-3 rounded-md text-center ${
@@ -135,18 +138,18 @@ const EmployerJobForm = () => {
           )}
 
           {/* Company Name */}
-          <div className="w-full flex flex-col gap-1">
-            <label className="text-[14px] text-[#012C68]">COMPANY NAME</label>
+          {/* <div className="w-full flex flex-col gap-1">
+            <label className="text-[14px] text-[#012C68]">USER NAME</label>
             <input
               type="text"
               name="company_name"
               value={formData.company_name}
               onChange={handleChange}
-              placeholder="Enter Company Name"
+              placeholder="Enter UserName"
               className="w-full p-3 h-[50px] border rounded-[6px]"
               required
             />
-          </div>
+          </div> */}
 
           {/* Job Title */}
           <div className="w-full flex flex-col gap-1">
@@ -182,7 +185,7 @@ const EmployerJobForm = () => {
               name="responsibility"
               value={formData.responsibility}
               onChange={handleChange}
-              placeholder="Describe job responsibilities"
+              placeholder="Describe Job Responsibilities"
               className="w-full p-3 h-[100px] border rounded-[6px]"
               required
             />
@@ -226,17 +229,17 @@ const EmployerJobForm = () => {
           {/* Salary Fields */}
           <div className="flex gap-4">
             <div className="flex-1">
-              <label className="text-[14px] text-[#012C68]">MIN SALARY</label>
+              <label className="text-[14px] text-[#012C68]">SALARY</label>
               <input
                 type="number"
-                name="minimum_salary"
+                name="salary"
                 value={formData.minimum_salary}
                 onChange={handleChange}
                 placeholder="e.g., 50000"
                 className="w-full p-3 h-[50px] border rounded-[6px]"
               />
             </div>
-            <div className="flex-1">
+            {/* <div className="flex-1">
               <label className="text-[14px] text-[#012C68]">MAX SALARY</label>
               <input
                 type="number"
@@ -246,7 +249,7 @@ const EmployerJobForm = () => {
                 placeholder="e.g., 80000"
                 className="w-full p-3 h-[50px] border rounded-[6px]"
               />
-            </div>
+            </div> */}
           </div>
 
           {/* Salary Period */}

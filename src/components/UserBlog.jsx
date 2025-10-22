@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { FaBars, FaBell, FaTimes } from 'react-icons/fa';
 // import { FaAmazon } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
-import logo from '../components/img/logo.png'
+import logo from '../Assets/img/logo.png'
 import { RiDashboardFill } from 'react-icons/ri';
 import { BiSolidBriefcase } from 'react-icons/bi';
 import { GrStatusGood } from 'react-icons/gr';
@@ -15,14 +15,14 @@ import { IoFilterCircleOutline } from "react-icons/io5";
 import { MdOutlineArrowOutward } from 'react-icons/md';
 // import nawa from './img/bg.png'
 // import damn from './img/techtalkbg.jpg'
-import blogimg1 from './img/blogimg1.jpg'
-import blogimg2 from './img/blogimg2.jpg'
-import blogimg3 from './img/blogimg3.jpg'
-import blogimg4 from './img/blogimg4.jpg'
-import blogimg5 from './img/blogimg5.jpg'
-import face1 from '../components/img/face1.png'
-import face2 from '../components/img/face2.png'
-import face3 from '../components/img/face3.png'
+import blogimg1 from '../Assets/img/blogimg1.jpg'
+// import blogimg2 from './img/blogimg2.jpg'
+// import blogimg3 from './img/blogimg3.jpg'
+// import blogimg4 from './img/blogimg4.jpg'
+import blogimg5 from '../Assets/img/blogimg5.jpg'
+import face1 from '../Assets/img/face1.png'
+import face2 from '../Assets/img/face2.png'
+// import face3 from '../Assets/img/face3.png'
 
 // const bgImage = {
 //     backgroundImage: `url(${nawa})`,
@@ -46,33 +46,33 @@ const blogPosts = [
     description: 'Lorem ipsum dolor sit amet consectetur. Porta et enim mus auctor nunc diam...',
     authorImage: face1,
   },
-  {
-    id: 1,
-    title: 'How AI is Revolutionizing Industries and Shaping Our World',
-    image: blogimg3,
-    author: 'Samuel Giggs',
-    date: '13 October, 2024',
-    description: 'Lorem ipsum dolor sit amet consectetur. Porta et enim mus auctor nunc diam...',
-    authorImage: face2,
-  },
-  {
-    id: 1,
-    title: 'How AI is Revolutionizing Industries and Shaping Our World',
-    image: blogimg4,
-    author: 'John Doe',
-    date: '13 October, 2024',
-    description: 'Lorem ipsum dolor sit amet consectetur. Porta et enim mus auctor nunc diam...',
-    authorImage: face1,
-  },
-  {
-    id: 1,
-    title: 'How AI is Revolutionizing Industries and Shaping Our World',
-    image: blogimg2,
-    author: 'Elizabeth Williams',
-    date: '13 October, 2024',
-    description: 'Lorem ipsum dolor sit amet consectetur. Porta et enim mus auctor nunc diam...',
-    authorImage: face3,
-  },
+  // {
+  //   id: 1,
+  //   title: 'How AI is Revolutionizing Industries and Shaping Our World',
+  //   image: blogimg3,
+  //   author: 'Samuel Giggs',
+  //   date: '13 October, 2024',
+  //   description: 'Lorem ipsum dolor sit amet consectetur. Porta et enim mus auctor nunc diam...',
+  //   authorImage: face2,
+  // },
+  // {
+  //   id: 1,
+  //   title: 'How AI is Revolutionizing Industries and Shaping Our World',
+  //   image: blogimg4,
+  //   author: 'John Doe',
+  //   date: '13 October, 2024',
+  //   description: 'Lorem ipsum dolor sit amet consectetur. Porta et enim mus auctor nunc diam...',
+  //   authorImage: face1,
+  // },
+  // {
+  //   id: 1,
+  //   title: 'How AI is Revolutionizing Industries and Shaping Our World',
+  //   image: blogimg2,
+  //   author: 'Elizabeth Williams',
+  //   date: '13 October, 2024',
+  //   description: 'Lorem ipsum dolor sit amet consectetur. Porta et enim mus auctor nunc diam...',
+  //   authorImage: face3,
+  // },
   {
     id: 1,
     title: 'How AI is Revolutionizing Industries and Shaping Our World',

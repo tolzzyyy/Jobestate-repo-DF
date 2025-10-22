@@ -1,7 +1,7 @@
 import React from 'react'
-import bg from "../Assets/bg.png";
-import logo from "../Assets/Logo - Horizontal.png";
-import email from "../Assets/Right Content.png";
+import bg from "../Assets/img/bg.png";
+import logo from "../Assets/img/Logo - Horizontal.png";
+import email from "../Assets/img/Right Content.png";
 import { Link } from "react-router-dom";
 const ForgottenPasswordNumber = () => {
     const bgimage = {

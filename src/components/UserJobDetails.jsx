@@ -8,12 +8,12 @@ import { GrStatusGood } from 'react-icons/gr';
 import { BsFillBookmarkCheckFill } from 'react-icons/bs';
 import { TfiWrite } from 'react-icons/tfi';
 import { IoPersonCircle } from 'react-icons/io5';
-import { IoIosSearch, IoIosSettings } from 'react-icons/io';
+import { IoIosSettings } from 'react-icons/io';
 import { CiBookmark } from 'react-icons/ci';
-import { IoFilterCircleOutline } from "react-icons/io5";
+// import { IoFilterCircleOutline } from "react-icons/io5";
 import { GoShareAndroid } from 'react-icons/go';
 import axios from 'axios';
-import logo from '../components/img/logo.png'
+import logo from '../Assets/img/logo.png'
 
 const UserJobDetails = () => {
   const { id } = useParams(); // Get the job ID from the URL

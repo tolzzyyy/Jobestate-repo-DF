@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Base API URL
-const API_URL = "https://jobestate-backend-repo-df.onrender.com";
+const API_URL = "https://jobestate-backen d-repo-df.onrender.com";
 
 // Create an Axios instance
 const apiClient = axios.create({
