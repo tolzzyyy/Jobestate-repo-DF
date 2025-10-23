@@ -1,364 +1,222 @@
 import React, { useState, useEffect } from 'react'
-import { FaBars, FaBell, FaTimes } from 'react-icons/fa';
-// import { FaAmazon } from 'react-icons/fa';
-import { NavLink } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import logo from '../Assets/img/logo.png'
-import { RiDashboardFill } from 'react-icons/ri';
-import { BiSolidBriefcase } from 'react-icons/bi';
-import { GrStatusGood } from 'react-icons/gr';
-import { BsFillBookmarkCheckFill } from 'react-icons/bs';
-import { TfiWrite } from 'react-icons/tfi';
-import { IoPersonCircle } from 'react-icons/io5';
-import { IoIosSettings } from 'react-icons/io';
-// import { IoBookmarkOutline, IoBookmark } from "react-icons/io5"; // Import Save icon
-// import { fetchJobs } from "../jobService";
-import axios from "axios"
-import { CiBookmark } from 'react-icons/ci';
 
+const UserDashboard = ({ user }) => {
+  const [jobs, setJobs] = useState([])
+  const [selectedJob, setSelectedJob] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-
-// const jobCards = [
-//   {
-//     id: 1,
-//     date: '20th May, 2024',
-//     company: 'Amazon',
-//     title: 'Senior UI/UX Designer',
-//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-//     salary: '$5,000',
-//     currencyType: 'Annually',
-//     logoUrl: 'path/to/logo', // Replace with your logo path or URL
-//     isActive: false,
-//   },
-//   {
-//     id: 2,
-//     date: '20th May, 2024',
-//     company: 'Google',
-//     title: 'Senior Product Manager',
-//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-//     salary: '$5,000',
-//     currencyType: 'Annually',
-//     logoUrl: 'path/to/logo',
-//     isActive: false, // Mark this card as active for the highlighted background
-//   },
-//   {
-//     id: 3,
-//     date: '20th May, 2024',
-//     company: 'Google',
-//     title: 'Front-End Development',
-//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-//     salary: '$5,000',
-//     currencyType: 'Annually',
-//     logoUrl: 'path/to/logo',
-//     isActive: false, // Mark this card as active for the highlighted background
-//   },
-//   {
-//     id: 4,
-//     date: '20th May, 2024',
-//     company: 'Google',
-//     title: 'Senior Product Manager',
-//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-//     salary: '$5,000',
-//     currencyType: 'Annually',
-//     logoUrl: 'path/to/logo',
-//     isActive: false, // Mark this card as active for the highlighted background
-//   },
-//   {
-//     id: 5,
-//     date: '20th May, 2024',
-//     company: 'Google',
-//     title: 'Senior Product Manager',
-//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-//     salary: '$5,000',
-//     currencyType: 'Annually',
-//     logoUrl: 'path/to/logo',
-//     isActive: false, // Mark this card as active for the highlighted background
-//   },
-//   {
-//     id: 6,
-//     date: '20th May, 2024',
-//     company: 'Google',
-//     title: 'Senior Product Manager',
-//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-//     salary: '$5,000',
-//     currencyType: 'Annually',
-//     logoUrl: 'path/to/logo',
-//     isActive: false, // Mark this card as active for the highlighted background
-//   },
-//   {
-//     id: 6,
-//     date: '20th May, 2024',
-//     company: 'Google',
-//     title: 'Senior Product Manager',
-//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-//     salary: '$5,000',
-//     currencyType: 'Annually',
-//     logoUrl: 'path/to/logo',
-//     isActive: false, // Mark this card as active for the highlighted background
-//   },
-//   {
-//     id: 6,
-//     date: '20th May, 2024',
-//     company: 'Google',
-//     title: 'Senior Product Manager',
-//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-//     salary: '$5,000',
-//     currencyType: 'Annually',
-//     logoUrl: 'path/to/logo',
-//     isActive: false, // Mark this card as active for the highlighted background
-//   },
-//   {
-//     id: 6,
-//     date: '20th May, 2024',
-//     company: 'Google',
-//     title: 'Senior Product Manager',
-//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-//     salary: '$5,000',
-//     currencyType: 'Annually',
-//     logoUrl: 'path/to/logo',
-//     isActive: false, // Mark this card as active for the highlighted background
-//   },
-//   {
-//     id: 6,
-//     date: '20th May, 2024',
-//     company: 'Google',
-//     title: 'Senior Product Manager',
-//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-//     salary: '$5,000',
-//     currencyType: 'Annually',
-//     logoUrl: 'path/to/logo',
-//     isActive: false, // Mark this card as active for the highlighted background
-//   },
-//   {
-//     id: 6,
-//     date: '20th May, 2024',
-//     company: 'Google',
-//     title: 'Senior Product Manager',
-//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-//     salary: '$5,000',
-//     currencyType: 'Annually',
-//     logoUrl: 'path/to/logo',
-//     isActive: false, // Mark this card as active for the highlighted background
-//   },
-//   {
-//     id: 6,
-//     date: '20th May, 2024',
-//     company: 'Google',
-//     title: 'Senior Product Manager',
-//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-//     salary: '$5,000',
-//     currencyType: 'Annually',
-//     logoUrl: 'path/to/logo',
-//     isActive: false, // Mark this card as active for the highlighted background
-//   },
-//   {
-//     id: 6,
-//     date: '20th May, 2024',
-//     company: 'Google',
-//     title: 'Senior Product Manager',
-//     jobTypes: ['Part-Time', 'Remote', 'Senior Level'],
-//     salary: '$5,000',
-//     currencyType: 'Annually',
-//     logoUrl: 'path/to/logo',
-//     isActive: false, // Mark this card as active for the highlighted background
-//   },
-// ];
-
-const UserDashboard = ({ job }) => {
-
-
-  const [savedJobs, setSavedJobs] = useState([]);
-  const [show, setShow] = useState(false)
-
-  const [jobs, setJobs] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
+  // Fetch jobs from API
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get("https://jobestate-backend-repo-df.onrender.com/api/jobs"); // Axios will automatically proxy this
-        console.log(response.data.data)
-        setJobs(response.data.data);
-      } catch (error) {
-        setError("Failed to fetch jobs. Please try again.");
+        setLoading(true)
+        const response = await fetch('https://jobestate-23.onrender.com/api/jobs', {
+          method: 'GET',
+          credentials: 'include', // This sends cookies for authentication
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch jobs')
+        }
+        
+        const data = await response.json()
+        
+        if (data.jobs) {
+          setJobs(data.jobs)
+          // Set the first job as selected by default
+          if (data.jobs.length > 0) {
+            setSelectedJob(data.jobs[0])
+          }
+        }
+      } catch (err) {
+        setError('Failed to fetch jobs. Please try again.')
+        console.error('Error fetching jobs:', err)
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
+    }
 
-    fetchJobs();
-  }, []);
+    fetchJobs()
+  }, [])
 
-  useEffect(() => {
-    const storedJobs = JSON.parse(localStorage.getItem("savedJobs")) || [];
-    setSavedJobs(storedJobs);
-  }, []);
-
-  // Check if job is already saved
-  const isSaved = savedJobs.some((savedJob) => savedJob?.id === job?.id);
-
-
-  // Handle Save Job
-  // const handleSaveJob = () => {
-  //   let updatedJobs;
-  //   if (isSaved) {
-  //     // Remove job if already saved
-  //     updatedJobs = savedJobs.filter((savedJob) => savedJob.id !== job.id);
-  //   } else {
-  //     // Add job to saved list
-  //     updatedJobs = [...savedJobs, job];
-  //   }
-
-  //   setSavedJobs(updatedJobs);
-  //   localStorage.setItem("savedJobs", JSON.stringify(updatedJobs)); // Persist to localStorage
-  // };
-
-
-  if (loading) return <p className='ml-72 text-blue-500'>Loading jobs...</p>;
-  if (error) return <p className='ml-72 text-red-500'>{error}</p>;
-
-  const HandleShow = () => {
-    setShow(!show)
+  // Format salary range
+  const formatSalary = (salaryRange) => {
+    if (!salaryRange) return 'Salary not specified'
+    return `$${salaryRange.min?.toLocaleString() || '0'} - $${salaryRange.max?.toLocaleString() || '0'}`
   }
 
+  // Handle job selection
+  const handleJobSelect = (job) => {
+    setSelectedJob(job)
+  }
 
-  return (
-    <div className='bg-[#EEF0F2] w-full h-[930px] overflow-y-hidden lg:ml-72 '>
-      <div className='bg-white w-auto h-auto px-10 py-9 flex items-center justify-between shadow-sm'>
-        {show ? <div className='lg:hidden overflow-auto flex flex-col absolute top-16 md:top-16 left-0 gap-[40px] py-7 md:py-10 px-7 md:px-14 bg-white w-full h-auto md:h-screen transition-all duration-500 font-medium text-[15px] md:text-[20px] text-[#2b2b2b] '>
-          <div className='flex flex-col gap-10'>
-            <div className='pl-2'>
-              <img src={logo} alt="logo" className='w-[120px] md:w-[150px] lg:w-[150px]' />
-            </div>
-            <div className='w-full h-auto flex flex-col gap-4'>
-              <NavLink
-                to='/userdashboard'
-                className={({ isActive }) =>
-                  isActive ? 'bg-[#E8F1FD] text-[#1366D9] text-sm font-medium px-4 py-6 flex items-center gap-3 rounded-md' : 'bg-white text-[#5D6679] text-sm font-medium px-4 py-6 flex items-center gap-3 rounded-md'}
-
-              ><RiDashboardFill size={23} /> Dashboard</NavLink>
-              <NavLink
-                to='/userjobs'
-                className={({ isActive }) =>
-                  isActive ? 'bg-[#E8F1FD] text-[#1366D9] text-sm  font-medium px-4 py-6 flex items-center gap-3 rounded-md' : 'bg-white text-[#5D6679] text-sm font-medium px-4 py-6 flex items-center gap-3 rounded-md'}
-
-              ><BiSolidBriefcase size={23} /> Jobs</NavLink>
-              <NavLink
-                to='/userapplicationstatus'
-                className={({ isActive }) =>
-                  isActive ? 'bg-[#E8F1FD] text-[#1366D9] text-sm  font-medium px-4 py-6 flex items-center gap-3 rounded-md' : 'bg-white text-[#5D6679] text-sm font-medium px-4 py-6 flex items-center gap-3 rounded-md'}
-
-              ><GrStatusGood size={23} /> Application Status</NavLink>
-              <NavLink
-                to='/usersavedjobs'
-                className={({ isActive }) =>
-                  isActive ? 'bg-[#E8F1FD] text-[#1366D9] text-sm  font-medium px-4 py-6 flex items-center gap-3 rounded-md' : 'bg-white text-[#5D6679] text-sm font-medium px-4 py-6 flex items-center gap-3 rounded-md'}
-
-              ><BsFillBookmarkCheckFill size={23} /> Saved Jobs</NavLink>
-              <NavLink
-                to='/userblog'
-                className={({ isActive }) =>
-                  isActive ? 'bg-[#E8F1FD] text-[#1366D9] text-sm  font-medium px-4 py-6 flex items-center gap-3 rounded-md' : 'bg-white text-[#5D6679] text-sm font-medium px-4 py-6 flex items-center gap-3 rounded-md'}
-
-              ><TfiWrite size={23} /> Blog</NavLink>
-              <NavLink
-                to='/usernotification'
-                className={({ isActive }) =>
-                  isActive ? 'bg-[#E8F1FD] text-[#1366D9] text-sm  font-medium px-4 py-6 flex items-center gap-3 rounded-md' : 'bg-white text-[#5D6679] text-sm font-medium px-4 py-6 flex items-center gap-3 rounded-md'}
-
-              ><FaBell size={23} /> Notification</NavLink>
-            </div>
-          </div>
-          <div className='w-full h-auto flex flex-col gap-4 border-t-[1px] border-black pt-4'>
-            <NavLink
-              to='/userprofile'
-              className={({ isActive }) =>
-                isActive ? 'bg-[#E8F1FD] text-[#1366D9] text-sm  font-medium px-4 py-6 flex items-center gap-3 rounded-md' : 'bg-white text-[#5D6679] text-sm font-medium px-4 py-6 flex items-center gap-3 rounded-md'}
-
-            ><IoPersonCircle size={30} /> Profile</NavLink>
-            <NavLink
-              to='/usersettings'
-              className={({ isActive }) =>
-                isActive ? 'bg-[#E8F1FD] text-[#1366D9] text-sm  font-medium px-4 py-6 flex items-center gap-3 rounded-md' : 'bg-white text-[#5D6679] text-sm font-medium px-4 py-6 flex items-center gap-3 rounded-md'}
-
-            ><IoIosSettings size={30} /> Settings</NavLink>
-          </div>
-        </div> : ""}
-        <div className="flex items-center relative gap-6 xl:hidden">
-          <div onClick={HandleShow} className="flex items-center">
-            {show ? <FaTimes size={26} className="z-50 left-0 md:left-[70px]" /> : <FaBars size={26} />}
-          </div>
-        </div>
-        <h4 className='font-semibold '>Welcome Back, User</h4>
-        <div className='hidden lg:flex items-center gap-5'>
-          <h4 className='text-[#323232] font-normal hidden md:flex'>Let's Find You A New Job!</h4>
-          {/* <div className='hidden md:flex items-center gap-4 bg-[#E8F1FD] px-4 py-3 rounded-lg'>
-            Complete Your Profile
-            <div className='w-auto h-auto px-3 py-4 text-sm rounded-full bg-white border-2 border-[#1366D9] flex items-center'>
-              60%
-            </div>
-          </div> */}
+  if (loading) {
+    return (
+      <div className='mt-20 md:mt-32 w-full py-7 px-[20px] md:px-[50px] lg:px-[135px]'>
+        <div className='flex justify-center items-center h-64'>
+          <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500'></div>
         </div>
       </div>
+    )
+  }
 
+  if (error) {
+    return (
+      <div className='mt-20 md:mt-32 w-full py-7 px-[20px] md:px-[50px] lg:px-[135px]'>
+        <div className='flex justify-center items-center h-64'>
+          <p className='text-red-500 text-lg'>{error}</p>
+        </div>
+      </div>
+    )
+  }
 
-      <div className='p-10 h-full lg:h-screen'>
-        <h1 className='font-semibold text-[20px] mb-5 md:text-[30px]'>Recommended Jobs</h1>
-
-        <div className=" w-full h-auto items-center gap-y-6 lg:items-start md:grid-cols-2 lg:grid-cols-4 md:gap-x-20 md:gap-y-10  lg:gap-x-8 lg:gap-y-6">
+  return (
+    <div className='mt-20 md:mt-32 w-full py-7 px-[20px] md:px-[50px] lg:px-[135px]'>
+      <div className='flex items-start gap-3 flex-col md:flex-row justify-between w-full md:items-center bg-white'>
+        <h1 className='xl:text-5xl text-[2xl] font-semibold'>View All Jobs</h1>
+        <p className='text-gray-600'>Welcome, {user?.fullName}</p>
+      </div>
+      
+      <div className='flex justify-between mt-10 gap-8 w-full items-start'>
+        {/* Jobs List */}
+        <div className='w-full lg:w-5/12'>
           {jobs.length === 0 ? (
-            <p className='ml-60 text-red-500'>No jobs available.</p>
+            <div className='text-center py-10'>
+              <p className='text-gray-500 text-lg'>No jobs available at the moment</p>
+            </div>
           ) : (
-            <div className='grid grid-cols-4 gap-x-4 gap-y-4 w-full h-auto'>
-       {jobs.map((job) => (
-           <div
-             key={job.id}
-             className={`pt-8 pb-11 px-5 flex flex-col gap-6 border border-gray-800 rounded-[20px] w-auto shadow-sm ${
-               job.isActive ? 'bg-green-100' : 'bg-white'
-             }`}
-           >
-             <div className='flex flex-col gap-2 border-b py-4 px-1'>
-               <div className="flex justify-between items-center mb-2">
-                 <div className='w-full flex justify-between'>
-                   <span className="text-gray-500 text-sm">{job.date}</span>
-                   <button>
-                     <CiBookmark size={23}/>
-                   </button>
-                 </div>
-               </div>
-               <div className='flex justify-between items-center'>
-                 <div className='flex flex-col'>
-                   <h2 className="text-sm font-medium mb-1">{job.company_name}</h2>
-                   <h3 className="text-xl font-semibold mb-2 text-[31px] leading-9 w-56">{job.title}</h3>
-                 </div>
-               </div>
-               {/* Render job type directly */}
-               <div className="flex gap-2 mb-2">
-                 <span
-                   key={job.id} // Use a unique key for the job type
-                   className='px-2 py-1 flex items-center text-xs border rounded-full text-gray-900'>
-                   {job.job_type}
-                 </span>
-               </div>
-             </div>
-             <div className="flex justify-between items-center px-4">
-               <div>
-                 <p className="text-xl font-bold">{job.maximum_salary}k</p>
-                 <p className="text-sm text-gray-500">{job.salary_period}</p>
-               </div>
-               <Link to={`/userjobsdetails/${job.id_}`} className="px-2 py-2 md:border-2 border-[#013A8A] md:text-[12px] md:px-6 md:py-3 md:rounded-full text-[#013A8A] font-semibold xl:hover:text-white xl:hover:border-2 xl:hover:border-[#0149AD] xl:hover:bg-[#0149AD] xl:transition-all xl:duration-200">
-                 Details
-               </Link>
-             </div>
-           </div>
-         ))}
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-6 lg:max-h-[410px] lg:overflow-y-auto lg:pr-4'>
+              {jobs.map((job) => (
+                <div 
+                  key={job._id} 
+                  className={`h-auto border-[#686868] border-[1px] w-full p-6 flex flex-col gap-10 rounded-md bg-white cursor-pointer transition-all hover:shadow-md ${
+                    selectedJob?._id === job._id ? 'border-blue-500 border-2' : ''
+                  }`}
+                  onClick={() => handleJobSelect(job)}
+                >
+                  <div className='w-full h-auto flex items-start gap-3 flex-col md:flex-row md:items-center justify-between'>
+                    <div className='flex flex-col gap-1'>
+                      <p className='text-xs text-gray-500'>Company</p>
+                      <h3 className='text-2xl font-semibold'>{job.title}</h3>
+                    </div>
+                    <p className='text-[15px] font-bold text-green-600'>{formatSalary(job.salaryRange)}</p>
+                  </div>
+                  <div className='w-full h-auto flex justify-between items-center'>
+                    <p className='text-gray-600'>Location</p>
+                    <span className='px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full'>
+                      {job.status || 'Open'}
+                    </span>
+                  </div>
+                </div>
+              ))}
             </div>
           )}
         </div>
+
+        {/* Job Details */}
+        <div className='w-7/12 hidden lg:block bg-white rounded-[30px] z-0 border-[#686868] border-[1px]'>
+          <div className="h-[410px] overflow-y-auto"> 
+            {selectedJob ? (
+              <div>
+                {/* Job Header */}
+                <div className='h-auto w-full p-6 flex flex-col gap-10 bg-white rounded-t-[30px] border-[#686868] border-b-[1px] sticky top-0 z-0'>
+                  <div className='w-full h-auto flex justify-between'>
+                    <div className='flex flex-col gap-1'>
+                      <p className='text-xs text-gray-500'>Company</p>
+                      <h3 className='text-2xl font-semibold'>{selectedJob.title}</h3>
+                    </div>
+                    <p className='text-xl font-bold text-green-600'>{formatSalary(selectedJob.salaryRange)}</p>
+                  </div>
+                  <div className='w-full h-auto flex justify-between items-center'>
+                    <p className='text-gray-600'>Location</p>
+                    <button className='bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition-colors'>
+                      Apply Now
+                    </button>
+                  </div>
+                </div>
+
+                {/* Job Description */}
+                <div className='p-6 leading-8 text-gray-700'>
+                  <h4 className='text-xl font-semibold mb-4'>Job Description</h4>
+                  <p className='mb-6'>{selectedJob.description}</p>
+
+                  {/* Requirements */}
+                  {selectedJob.requirements && selectedJob.requirements.length > 0 && (
+                    <div className='mb-6'>
+                      <h4 className='text-xl font-semibold mb-3'>Requirements</h4>
+                      <ul className='list-disc list-inside space-y-2'>
+                        {selectedJob.requirements.map((requirement, index) => (
+                          <li key={index} className='text-gray-700'>{requirement}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Salary Range */}
+                  {selectedJob.salaryRange && (
+                    <div className='mb-6'>
+                      <h4 className='text-xl font-semibold mb-3'>Salary Range</h4>
+                      <p className='text-green-600 font-semibold'>
+                        {formatSalary(selectedJob.salaryRange)} per year
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Job Status */}
+                  <div className='mb-6'>
+                    <h4 className='text-xl font-semibold mb-3'>Job Status</h4>
+                    <span className={`px-3 py-1 rounded-full text-sm ${
+                      selectedJob.status === 'approved' 
+                        ? 'bg-green-100 text-green-800'
+                        : selectedJob.status === 'pending'
+                        ? 'bg-yellow-100 text-yellow-800'
+                        : 'bg-red-100 text-red-800'
+                    }`}>
+                      {selectedJob.status?.charAt(0).toUpperCase() + selectedJob.status?.slice(1) || 'Open'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className='flex justify-center items-center h-full'>
+                <p className='text-gray-500 text-lg'>Select a job to view details</p>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
+
+      {/* Mobile Job Details */}
+      {selectedJob && (
+        <div className='lg:hidden mt-6 bg-white rounded-lg border border-gray-300 p-6'>
+          <h3 className='text-2xl font-semibold mb-4'>{selectedJob.title}</h3>
+          <p className='text-gray-600 mb-4'>{selectedJob.description}</p>
+          
+          {selectedJob.requirements && selectedJob.requirements.length > 0 && (
+            <div className='mb-4'>
+              <h4 className='text-lg font-semibold mb-2'>Requirements</h4>
+              <ul className='list-disc list-inside space-y-1'>
+                {selectedJob.requirements.map((requirement, index) => (
+                  <li key={index} className='text-gray-700 text-sm'>{requirement}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          
+          <div className='flex justify-between items-center'>
+            <p className='text-green-600 font-semibold'>{formatSalary(selectedJob.salaryRange)}</p>
+            <button className='bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition-colors'>
+              Apply Now
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
 
-export default UserDashboard 
+export default UserDashboard
