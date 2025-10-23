@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { register } from "../api"; // ✅ import API
 import bg from "../Assets/img/bg.png";
 import logo from "../Assets/img/Logo - Horizontal.png";
 import { BiCheck } from "react-icons/bi";
 import { FaEye, FaEyeSlash, FaPlus } from "react-icons/fa";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
-const SignUp = () => {
+const SignUp = ({ setUser }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: "",
@@ -18,8 +17,9 @@ const SignUp = () => {
     jobDescription: "",
     skills: "",
     location: "",
-    resume: null, // optional file
-    companyLogo: null, // optional file
+    role: "user", // Default role
+    resume: null,
+    companyLogo: null,
   });
 
   const [errors, setErrors] = useState({});
@@ -31,6 +31,30 @@ const SignUp = () => {
     backgroundImage: `url(${bg})`,
     backgroundPosition: "center",
     backgroundSize: "cover",
+  };
+
+  // Register API function built directly into component
+  const register = async (userData) => {
+    try {
+      const response = await fetch('https://jobestate-23.onrender.com/api/auth/register', {
+        method: 'POST',
+        credentials: 'include', // Important for cookies
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Registration failed');
+      }
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message || 'Network error. Please try again.');
+    }
   };
 
   // ✅ simple validation
@@ -70,10 +94,37 @@ const SignUp = () => {
 
     setIsLoading(true);
     try {
-      await register(formData);
-      navigate("/userdashboard"); // ✅ server sets cookie automatically
+      const response = await register(formData);
+      
+      if (response.user) {
+        // ✅ Save user to localStorage
+        localStorage.setItem("user", JSON.stringify(response.user));
+        
+        // ✅ Update App.jsx state
+        if (setUser) {
+          setUser(response.user);
+        }
+        
+        // ✅ Redirect based on role
+        switch (response.user.role) {
+          case "user":
+            navigate("/userdashboard", { replace: true });
+            break;
+          case "employer":
+            navigate("/employerdashboard", { replace: true });
+            break;
+          case "admin":
+            navigate("/admindashboard", { replace: true });
+            break;
+          default:
+            navigate("/", { replace: true });
+        }
+      } else {
+        throw new Error("Registration failed - no user data returned");
+      }
     } catch (err) {
-      setApiError(err.response?.data?.message || "Registration failed");
+      console.error("Registration error:", err);
+      setApiError(err.message || "Registration failed. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -104,45 +155,85 @@ const SignUp = () => {
                 onSubmit={handleSubmit}
                 className="w-full flex flex-col gap-5 py-5"
               >
-                {/* File Upload */}
-                {/* File Upload */}
-                {/* <div className="md:flex-row flex-col flex md:items-center gap-6 mt-6">
-                  <div className="md:w-[100px] w-full h-[300px] flex items-center justify-center border-[1px] border-[#1155B2] md:h-[100px]">
-                    {formData.companyLogo ? (
-                      <img
-                        src={URL.createObjectURL(formData.companyLogo)}
-                        alt="Logo Preview"
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <FaPlus className="text-[#1155B2]" size={25} />
-                    )}
+                {/* Role Selection */}
+                <div className="w-full flex flex-col gap-1">
+                  <h1 className="text-[14px] text-[#012C68]">ACCOUNT TYPE</h1>
+                  <select
+                    name="role"
+                    value={formData.role}
+                    onChange={handleInputChange}
+                    className="w-full outline-none rounded-[6px] border-[1px] text-[14px] p-3 text-[#98A2B3] font-[400] border-[#E1E1E1] h-[50px]"
+                  >
+                    <option value="user">Job Seeker</option>
+                    <option value="employer">Employer</option>
+                  </select>
+                </div>
+
+                {/* File Upload Sections - Conditionally show based on role */}
+                {formData.role === "employer" && (
+                  <div className="md:flex-row flex-col flex md:items-center gap-6 mt-6">
+                    <div className="md:w-[100px] w-full h-[300px] flex items-center justify-center border-[1px] border-[#1155B2] md:h-[100px]">
+                      {formData.companyLogo ? (
+                        <img
+                          src={URL.createObjectURL(formData.companyLogo)}
+                          alt="Logo Preview"
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <FaPlus className="text-[#1155B2]" size={25} />
+                      )}
+                    </div>
+                    <div className="flex flex-col gap-4">
+                      <h1 className="text-[14px] font-[300]">
+                        Please upload square image, size less than 100KB
+                      </h1>
+                      <div className="flex items-center gap-6">
+                        <input
+                          type="file"
+                          id="companyLogo"
+                          name="companyLogo"
+                          className="hidden"
+                          onChange={handleInputChange}
+                          accept="image/*"
+                        />
+                        <label
+                          htmlFor="companyLogo"
+                          className="w-[133px] h-[42px] border-[#0149AD] text-[#0149AD] rounded-[5px] flex items-center justify-center border-[1px] cursor-pointer hover:bg-blue-50 transition-colors"
+                        >
+                          Choose File
+                        </label>
+                        <p className="text-[#A4A4A4] text-[14px] font-[300]">
+                          {formData.companyLogo?.name || ""}
+                        </p>
+                      </div>
+                    </div>
                   </div>
+                )}
+
+                {formData.role === "user" && (
                   <div className="flex flex-col gap-4">
-                    <h1 className="text-[14px] font-[300]">
-                      Please upload square image, size less than 100KB
-                    </h1>
+                    <h1 className="text-[14px] font-[300]">Resume (Optional)</h1>
                     <div className="flex items-center gap-6">
                       <input
                         type="file"
-                        id="companyLogo"
-                        name="companyLogo"
+                        id="resume"
+                        name="resume"
                         className="hidden"
                         onChange={handleInputChange}
-                        accept="image/*"
+                        accept=".pdf,.doc,.docx"
                       />
                       <label
-                        htmlFor="companyLogo"
+                        htmlFor="resume"
                         className="w-[133px] h-[42px] border-[#0149AD] text-[#0149AD] rounded-[5px] flex items-center justify-center border-[1px] cursor-pointer hover:bg-blue-50 transition-colors"
                       >
-                        Choose File
+                        Upload Resume
                       </label>
                       <p className="text-[#A4A4A4] text-[14px] font-[300]">
-                        {formData.companyLogo?.name || ""}
+                        {formData.resume?.name || "No file chosen"}
                       </p>
                     </div>
                   </div>
-                </div> */}
+                )}
 
                 {/* Full Name */}
                 <InputField
@@ -162,6 +253,7 @@ const SignUp = () => {
                   onChange={handleInputChange}
                   error={errors.email}
                   placeholder="Enter Email Address"
+                  type="email"
                 />
 
                 {/* Bio */}
@@ -183,8 +275,6 @@ const SignUp = () => {
                   onChange={handleInputChange}
                   error={errors.jobCategory}
                   placeholder="Select Job Category"
-                  icon={showPassword ? <FiChevronDown /> : <FiChevronUp />}
-                  iconClick={() => setShowPassword(!showPassword)}
                 />
 
                 {/* Job Description */}
@@ -259,10 +349,17 @@ const SignUp = () => {
                   type="submit"
                   disabled={isLoading}
                   className={`w-full flex items-center justify-center text-white rounded-[6px] h-[50px] ${
-                    isLoading ? "bg-gray-400" : "bg-[#0149AD]"
-                  }`}
+                    isLoading ? "bg-gray-400" : "bg-[#0149AD] hover:bg-[#013a8a]"
+                  } transition-colors`}
                 >
-                  {isLoading ? "Processing..." : "Create Account"}
+                  {isLoading ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                      Processing...
+                    </>
+                  ) : (
+                    "Create Account"
+                  )}
                 </button>
 
                 <div className="text-[#667185] text-center text-[14px] font-[400] mt-4">

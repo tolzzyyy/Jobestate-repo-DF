@@ -4,14 +4,6 @@ import {FaTimes, FaBars} from "react-icons/fa"
 import { NavLink } from "react-router-dom"
 import { FiBell, FiChevronLeft } from "react-icons/fi"; 
 import { CiLogout } from "react-icons/ci";
-// import { RiDashboardFill } from "react-icons/ri";
-// import { BiSolidBriefcase } from "react-icons/bi";
-// import { GrStatusGood } from "react-icons/gr";
-// import { BsFillBookmarkCheckFill } from "react-icons/bs";
-// import { TfiWrite } from "react-icons/tfi";
-// import { FaBell } from "react-icons/fa";
-// import { IoLogOut, IoPersonCircle } from "react-icons/io5";
-// import { IoIosSettings } from "react-icons/io";
 
 const notifications = [
   { id: 1, message: "📢 Hostel clearance approved", time: "2h ago" },
@@ -22,32 +14,29 @@ const notifications = [
 
 const latestThree = notifications.slice(0, 3);
 
-const UserNavbar = () => {
+const UserNavbar = ({ user, onLogout }) => {
+  const [open, setOpen] = useState(false);
+  const [logOutOpen, ] = useState(false);
+  const dropdownRef = useRef();
+  const [bellOpen, setbellOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const [userData, setUserData] = useState(null);
 
+  // Get user data from localStorage
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUserData(JSON.parse(storedUser));
+    }
+  }, []);
 
-const [open, setOpen] = useState(false);
-// const [show, setShow] = useState(false);
-const [logOutOpen, ] = useState(false);
-const dropdownRef = useRef();
-const [bellOpen, setbellOpen] = useState(false);
-// const [userData, setUserData] = useState(null);
-const [profileOpen, setProfileOpen] = useState(false); // NEW STATE
-
-
-
-const HandleShow  = () => {
-setOpen(!open)
-}
-
-  // const handlebellOpen = () => {
-  //   setbellOpen(!bellOpen);
-  // };
-
+  const HandleShow = () => {
+    setOpen(!open)
+  }
 
   const bellRef = useRef();
 
-
-    // Close dropdown when clicked outside
+  // Close dropdown when clicked outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (bellRef.current && !bellRef.current.contains(e.target)) {
@@ -58,15 +47,29 @@ setOpen(!open)
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-    const handleLogout = () => {
+  const handleLogout = () => {
     localStorage.removeItem('user');
-    window.location.href = '/signin'; // Or use navigate if you have react-router
+    if (onLogout) {
+      onLogout(); // Call the logout function from App.js
+    } else {
+      window.location.href = '/signin';
+    }
   };
 
+  // Get initials for profile picture
+  const getInitials = (name) => {
+    if (!name) return 'U';
+    return name
+      .split(' ')
+      .map(word => word.charAt(0))
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  };
 
   return (
     <>
-    <nav className='flex px-[20px] fixed h-[80px] z-50  w-full md:flex md:justify-between md:px-[50px] md:py-[60px] xl:flex justify-between xl:py-7 xl:px-[135px] xl:h-[130px] items-center bg-white'>
+    <nav className='flex px-[20px] fixed h-[80px] z-50 w-full md:flex md:justify-between md:px-[50px] md:py-[60px] xl:flex justify-between xl:py-7 xl:px-[135px] xl:h-[130px] items-center bg-white'>
         <div>
             <img src={logo} alt="logo" className='w-[120px] md:w-[150px] lg:w-[170px]'/> 
         </div>
@@ -75,25 +78,16 @@ setOpen(!open)
             to='/userdashboard'
             className={({isActive}) =>
             isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
-            
             >Home</NavLink>
-            {/* <NavLink
-            to='/findjobs'
-            className={({isActive}) =>
-            isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
-            
-            >Find Jobs</NavLink> */}
             <NavLink
             to='/userjobs'
             className={({isActive}) =>
             isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
-            
             >Jobs</NavLink>
             <NavLink
             to='/userblog'
             className={({isActive}) =>
             isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
-            
             >Blog</NavLink>
         </div>
         <div className="flex items-center relative gap-6 xl:hidden">
@@ -101,29 +95,29 @@ setOpen(!open)
             {open ? <FaTimes size={26} className="z-50 left-0 md:left-[70px]" /> : <FaBars size={26} />}
           </div>
         </div>
-          <div className="relative items-center lg:flex hidden gap-3" ref={bellRef}>
-            <div 
-              onClick={() => setbellOpen(!bellOpen)} 
-              className="w-15 h-15 flex items-center justify-center rounded-full bg-[#FAFAFA]">
-              <FiBell size={25}/>
-            </div>
-
-            
-              <div className="flex relative gap-3 items-center">
-                <div className="w-15 h-15 flex items-center justify-center rounded-full bg-none">
-                  {/* <img  alt="" className="w-full"/> */}
-                </div>
-                <div>
-                  <h3 className="text-lg">username</h3>
-                  <p className="text-xs text-[#A3A3A3]">role</p>
-                </div>
-                <div className="cursor-pointer" onClick={() => setProfileOpen(true)} ref={dropdownRef}>
-                  <FiChevronLeft />
-                </div>
-              </div>
-            
-
+        
+        {/* User Info Section */}
+        <div className="relative items-center lg:flex hidden gap-3" ref={bellRef}>
+          <div 
+            onClick={() => setbellOpen(!bellOpen)} 
+            className="w-15 h-15 flex items-center justify-center rounded-full bg-[#FAFAFA] cursor-pointer"
+          >
+            <FiBell size={25}/>
           </div>
+
+          <div className="flex relative gap-3 items-center">
+            <div className="w-12 h-12 flex items-center justify-center rounded-full bg-blue-500 text-white font-semibold">
+              {getInitials(userData?.fullName)}
+            </div>
+            <div>
+              <h3 className="text-lg">{userData?.fullName || 'User'}</h3>
+              <p className="text-xs text-[#A3A3A3] capitalize">{userData?.role || 'user'}</p>
+            </div>
+            <div className="cursor-pointer" onClick={() => setProfileOpen(true)} ref={dropdownRef}>
+              <FiChevronLeft />
+            </div>
+          </div>
+        </div>
 
         {/* Mobile Menu */}
         <div
@@ -143,15 +137,15 @@ setOpen(!open)
             Home
           </NavLink>
           <NavLink
-            to="/"
-                        className={({isActive}) =>
+            to="/userjobs"
+            className={({isActive}) =>
             isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
             onClick={() => setOpen(false)}
           >
             Jobs
           </NavLink>
           <NavLink
-            to="/"
+            to="/userblog"
             className={({isActive}) =>
             isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
             onClick={() => setOpen(false)}
@@ -159,13 +153,29 @@ setOpen(!open)
             Blog
           </NavLink>
           <NavLink
-            to="/"
+            to="/userprofile"
             className={({isActive}) =>
             isActive ? 'text-[#013A8A] font-semibold' : 'text-[#2b2b2b] font-normal'}
             onClick={() => setOpen(false)}
           >
             Profile
           </NavLink>
+          
+          {/* Mobile User Info */}
+          {userData && (
+            <div className="flex w-full px-[30px] flex-col items-center gap-5 mt-8">
+              <div className="flex gap-3 items-center">
+                <div className="w-12 h-12 flex items-center justify-center rounded-full bg-blue-500 text-white font-semibold">
+                  {getInitials(userData.fullName)}
+                </div>
+                <div>
+                  <h3 className="text-lg">{userData.fullName || 'User'}</h3>
+                  <p className="text-xs text-[#A3A3A3] capitalize">{userData.role || 'user'}</p>
+                </div>
+              </div>
+            </div>
+          )}
+          
           <NavLink
             to="/"
             className="text-[#000000B2] text-[12px] flex items-center gap-2"
@@ -173,109 +183,92 @@ setOpen(!open)
           >
             <CiLogout /> Logout
           </NavLink>
-
-          {/* {userData && (
-            <div className="flex w-full px-[30px] flex-col items-center gap-5 mt-8">
-              <div className="flex gap-3 items-center">
-                <div className="w-15 h-15 flex items-center justify-center rounded-full bg-none">
-                  <img src={userFace} alt="" className="w-full"/>
-                </div>
-                <div>
-                  <h3 className="text-lg">{userData.firstName || 'User'}</h3>
-                  <p className="text-xs text-[#A3A3A3]">Software Engineering</p>
-                </div>
-                <div className="hidden lg:flex">
-                  <FiChevronDown />
-                </div>
-              </div>
-            </div>
-          )} */}
         </div>
 
-
-      {/* Dropdown */}
-      {bellOpen && (
-        <div className="absolute top-24 right-5 lg:right-28 w-80 bg-white shadow-lg rounded-lg p-6 z-[9999]">
-          <p className="font-semibold text-gray-800 mb-4">Notifications</p>
-          <ul className="text-sm text-gray-600 space-y-4">
-            {latestThree.map((note) => (
-              <li key={note.id} className="flex justify-between">
-                <span>{note.message}</span>
-                <span className="text-xs text-gray-400">{note.time}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {/* Dropdown */}
-      {logOutOpen && (
-        <div className="absolute top-24 right-5 lg:right-28 w-40 bg-white shadow-lg rounded-lg p-4 z-[9999]">
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-2 w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
-          >
-            <CiLogout /> Logout
-          </button>
-        </div>
-      )}
-    </nav>
-
-
-      {/* Profile Sidebar */}
-      <div
-        className={`fixed top-0 right-0 h-full bg-white shadow-lg z-[9999] w-[30%] max-w-[400px] transform transition-transform duration-500 ease-in-out 
-        ${profileOpen ? "translate-x-0" : "translate-x-full"}`}
-      >
-        <div className="p-6 flex flex-col h-full">
-          {/* Header */}
-          <div className="flex justify-between items-center border-b pb-4">
-            <h2 className="text-xl font-semibold">Profile</h2>
-            <button onClick={() => setProfileOpen(false)} className="text-gray-500 hover:text-black">
-              <FaTimes size={20}/>
-            </button>
+        {/* Notifications Dropdown */}
+        {bellOpen && (
+          <div className="absolute top-24 right-5 lg:right-28 w-80 bg-white shadow-lg rounded-lg p-6 z-[9999]">
+            <p className="font-semibold text-gray-800 mb-4">Notifications</p>
+            <ul className="text-sm text-gray-600 space-y-4">
+              {latestThree.map((note) => (
+                <li key={note.id} className="flex justify-between">
+                  <span>{note.message}</span>
+                  <span className="text-xs text-gray-400">{note.time}</span>
+                </li>
+              ))}
+            </ul>
           </div>
+        )}
 
-          {/* Profile Info */}
-          <div className="mt-6 flex flex-col items-center">
-            <div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center text-3xl font-bold text-gray-600">
-              JD
-            </div>
-            <h3 className="mt-4 text-lg font-semibold">John Doe</h3>
-            <p className="text-sm text-gray-500">Software Engineer</p>
-          </div>
-
-          {/* Options */}
-          <div className="mt-8 space-y-4 flex-1">
-            <button className="w-full px-4 py-2 text-left rounded-lg hover:bg-gray-100">
-              <p className='text-xs text-gray-500 mb-2'>INDUSTRY</p>
-              <h2 className='text-2xl'>---</h2>
-            </button>
-            <button className="w-full px-4 py-2 text-left rounded-lg hover:bg-gray-100">
-              <p className='text-xs text-gray-500 mb-2'>JOB TITLE</p>
-              <h2 className='text-2xl'>---</h2>
-            </button>
-            <button className="w-full px-4 py-2 text-left rounded-lg hover:bg-gray-100">
-              <p className='text-xs text-gray-500 mb-2'>SPECIALIZATION</p>
-              <h2 className='text-2xl'>---</h2>
-            </button>
-            <button className="w-full px-4 py-2 text-left rounded-lg hover:bg-gray-100">
-              <p className='text-xs text-gray-500 mb-2'>BIO</p>
-              <h2 className='text-2xl'>---</h2>
-            </button>
-          </div>
-
-          {/* Logout */}
-          <div>
-            <button onClick={handleLogout} className="w-full px-4 py-2 flex items-center gap-2 text-red-600 rounded-lg hover:bg-gray-100">
+        {/* Logout Dropdown */}
+        {logOutOpen && (
+          <div className="absolute top-24 right-5 lg:right-28 w-40 bg-white shadow-lg rounded-lg p-4 z-[9999]">
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-2 w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+            >
               <CiLogout /> Logout
             </button>
           </div>
+        )}
+    </nav>
+
+    {/* Profile Sidebar */}
+    <div
+      className={`fixed top-0 right-0 h-full bg-white shadow-lg z-[9999] w-[30%] max-w-[400px] transform transition-transform duration-500 ease-in-out 
+      ${profileOpen ? "translate-x-0" : "translate-x-full"}`}
+    >
+      <div className="p-6 flex flex-col h-full">
+        {/* Header */}
+        <div className="flex justify-between items-center border-b pb-4">
+          <h2 className="text-xl font-semibold">Profile</h2>
+          <button onClick={() => setProfileOpen(false)} className="text-gray-500 hover:text-black">
+            <FaTimes size={20}/>
+          </button>
+        </div>
+
+        {/* Profile Info */}
+        <div className="mt-6 flex flex-col items-center">
+          <div className="w-24 h-24 rounded-full bg-blue-500 flex items-center justify-center text-3xl font-bold text-white">
+            {getInitials(userData?.fullName)}
+          </div>
+          <h3 className="mt-4 text-lg font-semibold">{userData?.fullName || 'User'}</h3>
+          <p className="text-sm text-gray-500 capitalize">{userData?.role || 'user'}</p>
+          <p className="text-sm hidden md:flex text-gray-500 mt-1">{userData?.email || ''}</p>
+        </div>
+
+        {/* User Details */}
+        <div className="mt-8 space-y-4 flex-1">
+          <div className="w-full px-4 py-2 rounded-lg">
+            <p className='text-xs text-gray-500 mb-2'>INDUSTRY</p>
+            <h2 className='text-2xl'>{userData?.jobCategory || '---'}</h2>
+          </div>
+          <div className="w-full px-4 py-2 rounded-lg">
+            <p className='text-xs text-gray-500 mb-2'>JOB TITLE</p>
+            <h2 className='text-2xl'>{userData?.jobDescription || '---'}</h2>
+          </div>
+          <div className="w-full px-4 py-2 rounded-lg">
+            <p className='text-xs text-gray-500 mb-2'>SPECIALIZATION</p>
+            <h2 className='text-2xl'>{userData?.skills || '---'}</h2>
+          </div>
+          <div className="w-full px-4 py-2 rounded-lg">
+            <p className='text-xs text-gray-500 mb-2'>BIO</p>
+            <h2 className='text-2xl text-sm leading-relaxed'>{userData?.bio || '---'}</h2>
+          </div>
+          <div className="w-full px-4 py-2 rounded-lg">
+            <p className='text-xs text-gray-500 mb-2'>LOCATION</p>
+            <h2 className='text-2xl'>{userData?.location || '---'}</h2>
+          </div>
+        </div>
+
+        {/* Logout */}
+        <div>
+          <button onClick={handleLogout} className="w-full px-4 py-2 flex items-center gap-2 text-red-600 rounded-lg hover:bg-gray-100">
+            <CiLogout /> Logout
+          </button>
         </div>
       </div>
-
-
-
+    </div>
     </>
   )
 }

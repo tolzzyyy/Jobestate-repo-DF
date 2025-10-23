@@ -1,7 +1,6 @@
 // SignIn.jsx
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { login } from "../api"; // your login API function
 import bg from "../Assets/img/bg.png";
 import logo from "../Assets/img/Logo - Horizontal.png";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -22,19 +21,46 @@ const SignIn = ({ setUser }) => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (error) setError(null);
+  };
+
+  // Login API function
+  const login = async (loginData) => {
+    try {
+      const response = await fetch("https://jobestate-23.onrender.com/api/auth/login", {
+        method: "POST",
+        credentials: 'include', // 🔑 IMPORTANT: This sends/receives cookies
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(loginData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Login failed");
+      }
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message || "Network error. Please try again.");
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
     setLoading(true);
+    
     try {
-      const res = await login(formData); // should return { user, token }
+      const res = await login(formData);
 
-      if (res?.user && res?.token) {
-        // ✅ Save to localStorage so refresh keeps user logged in
+      console.log("Login response:", res); // For debugging
+
+      if (res?.user) {
+        // ✅ Save user info to localStorage (but NOT token - it's in HttpOnly cookie)
         localStorage.setItem("user", JSON.stringify(res.user));
-        localStorage.setItem("token", res.token);
 
         // ✅ Update App.jsx state
         setUser(res.user);
@@ -42,20 +68,23 @@ const SignIn = ({ setUser }) => {
         // ✅ Redirect by role
         switch (res.user.role) {
           case "user":
-            navigate("/userdashboard");
+            navigate("/userdashboard", { replace: true });
             break;
           case "employer":
-            navigate("/employerdashboard");
+            navigate("/employerdashboard", { replace: true });
             break;
           case "admin":
-            navigate("/admindashboard");
+            navigate("/admindashboard", { replace: true });
             break;
           default:
-            navigate("/");
+            navigate("/", { replace: true });
         }
+      } else {
+        throw new Error("Invalid response from server");
       }
     } catch (err) {
-      setError("Invalid email or password");
+      console.error("Login error:", err);
+      setError(err.message || "Invalid email or password. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -95,6 +124,7 @@ const SignIn = ({ setUser }) => {
                     value={formData.email}
                     onChange={handleChange}
                     required
+                    disabled={loading}
                   />
                 </div>
 
@@ -109,11 +139,13 @@ const SignIn = ({ setUser }) => {
                     value={formData.password}
                     onChange={handleChange}
                     required
+                    disabled={loading}
                   />
                   <button
                     type="button"
                     className="absolute right-3 top-9 text-gray-500"
                     onClick={() => setShowPassword(!showPassword)}
+                    disabled={loading}
                   >
                     {showPassword ? <FaEyeSlash /> : <FaEye />}
                   </button>
@@ -122,7 +154,12 @@ const SignIn = ({ setUser }) => {
                 {/* Remember Me + Forgot Password */}
                 <div className="flex items-center w-full justify-between">
                   <div className="flex gap-1 items-center">
-                    <input type="checkbox" name="checkbox" id="checkbox" />
+                    <input 
+                      type="checkbox" 
+                      name="checkbox" 
+                      id="checkbox" 
+                      disabled={loading}
+                    />
                     <label
                       className="text-[14px] text-[#101928]"
                       htmlFor="checkbox"
@@ -142,16 +179,25 @@ const SignIn = ({ setUser }) => {
 
                 {/* Error */}
                 {error && (
-                  <p className="text-red-500 text-sm text-center">{error}</p>
+                  <div className="w-full p-3 bg-red-50 border border-red-200 rounded-[6px]">
+                    <p className="text-red-600 text-sm text-center">{error}</p>
+                  </div>
                 )}
 
                 {/* Submit */}
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-[#0149AD] text-white rounded-[6px] h-[50px] disabled:opacity-50"
+                  className="w-full bg-[#0149AD] text-white rounded-[6px] h-[50px] disabled:opacity-50 flex items-center justify-center"
                 >
-                  {loading ? "Logging in..." : "Log In"}
+                  {loading ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                      Logging in...
+                    </>
+                  ) : (
+                    "Log In"
+                  )}
                 </button>
 
                 {/* OR Divider */}
@@ -162,7 +208,11 @@ const SignIn = ({ setUser }) => {
                 </div>
 
                 {/* Google (placeholder button) */}
-                <button className="w-full bg-white flex items-center justify-center gap-4 border-[#D3D8E0] border-[1px] text-black rounded-[6px] h-[50px]">
+                <button 
+                  type="button"
+                  disabled={loading}
+                  className="w-full bg-white flex items-center justify-center gap-4 border-[#D3D8E0] border-[1px] text-black rounded-[6px] h-[50px] disabled:opacity-50"
+                >
                   <img className="w-[20px]" alt="" /> Continue with Google
                 </button>
 

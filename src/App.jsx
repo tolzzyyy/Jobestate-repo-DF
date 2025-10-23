@@ -1,5 +1,5 @@
 // App.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 // Import components
@@ -32,15 +32,28 @@ import ApproveJobs from "./components/ApproveJobs";
 
 const App = () => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true); // Add loading state
   const location = useLocation();
 
-  // 🔒 Protect routes
+  // ✅ ADD THIS: Check for existing user on page load
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+    setLoading(false);
+  }, []);
+
+  // ✅ UPDATE THIS: Add loading check to protected routes
   const ProtectedRoute = ({ children, requiredRole }) => {
+    if (loading) {
+      return <div>Loading...</div>; // Show loading while checking auth
+    }
+
     if (!user) {
       return <Navigate to="/signin" replace />;
     }
     if (requiredRole && user.role !== requiredRole) {
-      // send them to their dashboard if wrong role
       switch (user.role) {
         case "user":
           return <Navigate to="/userdashboard" replace />;
@@ -55,8 +68,12 @@ const App = () => {
     return children;
   };
 
-  // 🚪 Public routes
+  // ✅ UPDATE THIS: Add loading check to public routes
   const PublicRoute = ({ children }) => {
+    if (loading) {
+      return <div>Loading...</div>; // Show loading while checking auth
+    }
+
     if (user) {
       switch (user.role) {
         case "user":
@@ -111,6 +128,15 @@ const App = () => {
     return <Navbar />;
   };
 
+  // ✅ ADD THIS: Show loading while checking authentication
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="overflow-hidden">
       {renderNavbar()}
@@ -137,7 +163,7 @@ const App = () => {
           path="/signup"
           element={
             <PublicRoute>
-              <SignUp />
+              <SignUp setUser={setUser} />
             </PublicRoute>
           }
         />
@@ -153,7 +179,7 @@ const App = () => {
           path="/Employersignup"
           element={
             <PublicRoute>
-              <EmployerSignUp />
+              <EmployerSignUp setUser={setUser} />
             </PublicRoute>
           }
         />
